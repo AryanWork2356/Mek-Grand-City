@@ -12,7 +12,7 @@ const CONFIG = {
   ENDPOINT: 'https://script.google.com/macros/s/AKfycbwBJFXvNfNPWOijci1xywO7ak8thKQRVTredTndVbhNIT-VtPHlQ7t4S9eA4s6oRCZ4og/exec',
 
   /* Used for the fallback only */
-  WHATSAPP: '919356316014'
+  WHATSAPP: '919821702210'
 };
 
 (function () {

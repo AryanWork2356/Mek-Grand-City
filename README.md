@@ -57,7 +57,7 @@ their structured data.
 
 ### Phone number
 
-It appears in several places. Find and replace `9356316014` across
+It appears in several places. Find and replace the current number across
 `index.html`, and update `WHATSAPP` in `js/main.js`.
 
 ### Adding a section
