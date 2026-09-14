@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-labelledby="title-homes desc-homes">
+  <title id="title-homes">Illustrative 2 &amp; 3 BHK floor plan, Grand Meridian City</title>
+  <desc id="desc-homes">Indicative layout only. Actual floor plans available on request.</desc>
+
+  <rect width="800" height="560" fill="#F8F5EF"/>
+
+  <!-- outer walls -->
+  <g fill="none" stroke="#18292F" stroke-width="6" stroke-linejoin="round">
+    <rect x="60" y="60" width="680" height="440"/>
+  </g>
+
+  <!-- interior walls -->
+  <g fill="none" stroke="#18292F" stroke-width="4">
+    <line x1="60"  y1="250" x2="330" y2="250"/>
+    <line x1="330" y1="60"  x2="330" y2="500"/>
+    <line x1="330" y1="380" x2="500" y2="380"/>
+    <line x1="500" y1="250" x2="500" y2="500"/>
+    <line x1="500" y1="250" x2="740" y2="250"/>
+    <line x1="600" y1="60"  x2="600" y2="250"/>
+  </g>
+
+  <!-- door swings -->
+  <g fill="none" stroke="#9FB0AE" stroke-width="2">
+    <path d="M330 300 A 40 40 0 0 1 370 340"/>
+    <path d="M500 420 A 36 36 0 0 1 464 456"/>
+    <path d="M600 250 A 34 34 0 0 1 566 216"/>
+    <path d="M180 60  A 30 30 0 0 1 210 90" transform="translate(0,0)"/>
+  </g>
+
+  <!-- entrance -->
+  <rect x="160" y="54" width="60" height="12" fill="#DFA01C"/>
+
+  <!-- room labels -->
+  <g font-family="Archivo, Arial, sans-serif" fill="#16262B">
+    <text x="195" y="165" font-size="22" font-weight="600" text-anchor="middle">Living / Dining</text>
+    <text x="195" y="190" font-size="15" fill="#6B7A78" text-anchor="middle">14'6" x 18'0"</text>
+
+    <text x="195" y="380" font-size="20" font-weight="600" text-anchor="middle">Kitchen</text>
+    <text x="195" y="404" font-size="15" fill="#6B7A78" text-anchor="middle">8'6" x 10'0"</text>
+
+    <text x="415" y="200" font-size="20" font-weight="600" text-anchor="middle">Bedroom 1</text>
+    <text x="415" y="224" font-size="15" fill="#6B7A78" text-anchor="middle">10'6" x 12'0"</text>
+
+    <text x="415" y="440" font-size="20" font-weight="600" text-anchor="middle">Bedroom 2</text>
+    <text x="415" y="464" font-size="15" fill="#6B7A78" text-anchor="middle">10'0" x 11'6"</text>
+
+    <text x="620" y="160" font-size="18" font-weight="600" text-anchor="middle">Bath</text>
+    <text x="670" y="380" font-size="20" font-weight="600" text-anchor="middle">Bedroom 3</text>
+    <text x="670" y="404" font-size="15" fill="#6B7A78" text-anchor="middle">10'0" x 10'6"</text>
+  </g>
+
+  <!-- balcony hatching -->
+  <g stroke="#DFA01C" stroke-width="3">
+    <line x1="60" y1="80"  x2="60" y2="230"/>
+    <line x1="52" y1="80"  x2="60" y2="80"/>
+    <line x1="52" y1="230" x2="60" y2="230"/>
+  </g>
+
+  <!-- north arrow -->
+  <g transform="translate(740,80)" fill="#18292F">
+    <polygon points="0,-22 8,6 0,-2 -8,6"/>
+    <text x="0" y="26" font-family="Archivo, Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6B7A78">N</text>
+  </g>
+
+  <text x="400" y="536" font-family="Archivo, Arial, sans-serif" font-size="14" fill="#6B7A78" text-anchor="middle">
+    Indicative layout — actual sanctioned plan available on request
+  </text>
+</svg>

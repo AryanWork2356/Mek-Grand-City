@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-labelledby="title-offices desc-offices">
+  <title id="title-offices">Illustrative office floor plate, MEK Grand Central</title>
+  <desc id="desc-offices">Indicative layout only. Actual floor plans available on request.</desc>
+
+  <rect width="800" height="560" fill="#EBE4D8"/>
+
+  <!-- outer walls -->
+  <g fill="none" stroke="#18292F" stroke-width="6" stroke-linejoin="round">
+    <rect x="60" y="60" width="680" height="440"/>
+  </g>
+
+  <!-- glass frontage -->
+  <rect x="60" y="60" width="680" height="14" fill="#3B8078"/>
+
+  <!-- core / lift lobby -->
+  <g fill="none" stroke="#18292F" stroke-width="4">
+    <rect x="360" y="230" width="80" height="100"/>
+    <line x1="230" y1="90"  x2="230" y2="470"/>
+    <line x1="570" y1="90"  x2="570" y2="470"/>
+  </g>
+
+  <!-- column grid -->
+  <g fill="#18292F">
+    <rect x="90"  y="90"  width="14" height="14"/>
+    <rect x="296" y="90"  width="14" height="14"/>
+    <rect x="490" y="90"  width="14" height="14"/>
+    <rect x="696" y="90"  width="14" height="14"/>
+    <rect x="90"  y="446" width="14" height="14"/>
+    <rect x="296" y="446" width="14" height="14"/>
+    <rect x="490" y="446" width="14" height="14"/>
+    <rect x="696" y="446" width="14" height="14"/>
+  </g>
+
+  <!-- labels -->
+  <g font-family="Archivo, Arial, sans-serif" fill="#16262B">
+    <text x="145" y="270" font-size="20" font-weight="600" text-anchor="middle">Boutique</text>
+    <text x="145" y="294" font-size="20" font-weight="600" text-anchor="middle">office</text>
+    <text x="145" y="320" font-size="14" fill="#6B7A78" text-anchor="middle">467 sq ft</text>
+
+    <text x="400" y="200" font-size="16" font-weight="600" text-anchor="middle">Lift lobby</text>
+    <text x="400" y="360" font-size="16" font-weight="600" text-anchor="middle">Shared core</text>
+
+    <text x="655" y="270" font-size="20" font-weight="600" text-anchor="middle">Column-free</text>
+    <text x="655" y="294" font-size="20" font-weight="600" text-anchor="middle">floor plate</text>
+    <text x="655" y="320" font-size="14" fill="#6B7A78" text-anchor="middle">up to 5,453 sq ft</text>
+  </g>
+
+  <!-- north arrow -->
+  <g transform="translate(740,110)" fill="#18292F">
+    <polygon points="0,-22 8,6 0,-2 -8,6"/>
+    <text x="0" y="26" font-family="Archivo, Arial, sans-serif" font-size="13" text-anchor="middle" fill="#6B7A78">N</text>
+  </g>
+
+  <text x="400" y="536" font-family="Archivo, Arial, sans-serif" font-size="14" fill="#6B7A78" text-anchor="middle">
+    Indicative layout — actual sanctioned plan available on request
+  </text>
+</svg>
