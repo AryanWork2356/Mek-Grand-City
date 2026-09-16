@@ -284,21 +284,39 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
   padding:20px;
 }
 .popup-overlay[hidden]{display:none;}
-.popup-card{
-  position:relative;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;
+/* .popup-shell is the outer, non-clipping wrapper: it positions the close
+   button so the button is never cut off by the card's own overflow/scroll
+   box (that clipping was why the "×" looked cut in half before). */
+.popup-shell{
+  position:relative;width:100%;max-width:440px;
   animation:popup-in .32s cubic-bezier(.2,.7,.3,1);
+}
+.popup-card{
+  width:100%;max-height:94vh;overflow-y:auto;overflow-x:hidden;
   border-radius:10px;
   background:linear-gradient(145deg,var(--marigold),var(--teal));
   padding:1.5px;
   box-shadow:0 40px 100px rgba(0,0,0,.6);
+  /* Thin, theme-coloured scrollbar instead of the bulky default OS one —
+     this only ever shows on short viewports where the form genuinely
+     can't fit; most visitors never see it. */
+  scrollbar-width:thin;scrollbar-color:var(--marigold) transparent;
 }
+.popup-card::-webkit-scrollbar{width:6px;height:0;}
+.popup-card::-webkit-scrollbar-track{background:transparent;}
+.popup-card::-webkit-scrollbar-thumb{background:var(--marigold-dim);border-radius:100px;}
+.popup-card::-webkit-scrollbar-thumb:hover{background:var(--marigold);}
 /* The gradient lives on the wrapper; the card itself sits 1.5px inset so
    only a thin luminous edge shows, like a premium invitation card. */
 .popup-card .formcard{
-  margin:0;border-radius:9px;
+  margin:0;border-radius:9px;padding:28px 26px;
   background:var(--slate-deep);color:var(--text-light);
   position:relative;overflow:hidden;
 }
+.popup-card .formcard-note{margin-bottom:16px;}
+.popup-card .lead-form label{margin-bottom:4px;}
+.popup-card .lead-form input,
+.popup-card .lead-form select{padding:10px 12px;margin-bottom:10px;}
 .popup-card .formcard::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(227,169,40,.16),transparent 65%);
@@ -317,7 +335,7 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 .popup-card .msg-ok{background:var(--teal-dim);color:var(--text-light);border-color:var(--teal);}
 .popup-card .msg-err{background:#3A1E1E;color:#F4C4C4;border-color:#8A3A3A;}
 .popup-close{
-  position:absolute;top:-16px;right:-16px;z-index:1;
+  position:absolute;top:-16px;right:-16px;z-index:2;
   width:36px;height:36px;border-radius:50%;
   background:var(--slate-black,#0A1114);color:var(--text-light);
   border:2px solid var(--slate-deep);font-size:1.4rem;line-height:1;
@@ -330,7 +348,7 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
   to{opacity:1;transform:none;}
 }
 @media (prefers-reduced-motion:reduce){
-  .popup-card{animation:none;}
+  .popup-shell{animation:none;}
 }
 @media (max-width:480px){
   .popup-close{top:-12px;right:-4px;}
@@ -362,17 +380,24 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 }
 .identity-row{
   position:relative;display:flex;flex-wrap:wrap;
-  align-items:baseline;justify-content:center;gap:12px 18px;
+  align-items:center;justify-content:center;gap:12px 18px;
 }
+.identity-term{display:flex;flex-direction:column;align-items:center;gap:3px;}
 .identity-part{
   font-family:var(--display);font-size:clamp(1.1rem,2.6vw,1.5rem);
   letter-spacing:.01em;line-height:1.15;
 }
 .identity-part--home{color:var(--marigold-lt);}
 .identity-part--office{color:var(--teal-lt);}
+.identity-tag{
+  font-family:var(--body);font-size:.68rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.identity-tag--home{color:var(--marigold);}
+.identity-tag--office{color:var(--teal);}
 .identity-op{
+  align-self:center;
   color:var(--text-faint);font-size:1rem;font-family:var(--body);
-  transform:translateY(-1px);
 }
 .identity-part--sum{
   color:var(--text-light);font-weight:600;
@@ -387,4 +412,118 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 @media (max-width:560px){
   .identity-banner{padding:22px var(--gutter) 26px;}
   .identity-row{gap:8px 12px;}
+}
+
+/* ---------- Hallmarks showcase ----------
+   A modern, asymmetric alternative to the reference screenshot's plain
+   two-column icon+text list next to one photo. Instead of a uniform grid:
+     - a 12-column masonry-like layout where most cards sit compact but two
+       "hero" cards (the biggest, most quotable numbers) span two columns
+       and two rows, carrying an oversized ghost numeral behind the icon —
+       the same display-type/outlined-numeral device used for .project-tag
+       elsewhere on the page, reused here at card scale instead of section
+       scale;
+     - hand-authored line-art SVG icons (24x24-ish viewBoxes, currentColor
+       strokes) rather than a flat colourful icon-pack, so they read as an
+       extension of the eyebrow/type system already established;
+     - a staggered scroll-reveal: the whole block is one [data-reveal]
+       target (existing IntersectionObserver wiring in js/enhancements.js
+       needs no changes), and each card gets its own transition-delay via
+       nth-child so cards settle in one after another instead of all at
+       once — a more "advanced" motion read than a flat fade.
+   Residential uses the marigold accent system; commercial swaps to teal
+   via the .hallmarks--office variant, mirroring how .project.light/.dark
+   already split the two accent colours. */
+.hallmarks{
+  position:relative;z-index:1;margin-top:56px;padding-top:44px;
+  border-top:1px solid var(--slate-line-soft);
+}
+.dark .hallmarks{border-top-color:var(--slate-line);}
+.hallmarks-head{margin-bottom:24px;}
+.hallmarks-head .eyebrow{margin-bottom:14px;}
+.hallmarks-head h3{max-width:26ch;}
+
+/* Horizontal scroll strip of bold stat tiles — same scroll-snap mechanics
+   as the infrastructure timeline (.timeline[data-timeline]) but its own
+   component: solid accent-tinted tiles rather than a dated list, each
+   pairing one big number/label with a short line of supporting text. */
+.h-scroller{
+  overflow-x:auto;scroll-snap-type:x proximity;
+  padding:6px var(--gutter) 22px;margin:0 calc(var(--gutter) * -1);
+  scrollbar-color:var(--marigold) transparent;
+}
+.hallmarks--office .h-scroller{scrollbar-color:var(--teal) transparent;}
+.h-scroller::-webkit-scrollbar{height:6px;}
+.h-scroller::-webkit-scrollbar-thumb{background:var(--slate-line);border-radius:100px;}
+.h-strip{
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(72%,240px);
+  gap:14px;list-style:none;padding:0;margin:0;
+  width:max-content;min-width:100%;
+}
+.h-tile{
+  scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:14px;
+  background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate);
+  border:1px solid var(--slate-line-soft);border-radius:8px;
+  padding:24px 22px;
+  transition:transform .22s cubic-bezier(.2,.7,.3,1),border-color .22s ease,box-shadow .22s ease;
+}
+.dark .h-tile{background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate-soft);border-color:var(--slate-line);}
+.hallmarks--office .h-tile{
+  background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate);
+}
+.dark .hallmarks--office .h-tile{background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate-soft);}
+
+.h-icon{display:inline-flex;width:30px;height:30px;color:var(--marigold);flex-shrink:0;}
+.h-icon svg{width:100%;height:100%;}
+.hallmarks--office .h-icon{color:var(--teal-lt);}
+
+.h-num{
+  font-family:var(--display);font-size:clamp(2.1rem,5vw,2.7rem);line-height:1;
+  color:var(--marigold-lt);white-space:nowrap;
+}
+.hallmarks--office .h-num{color:var(--teal-lt);}
+.h-num--frac{font-size:clamp(1.5rem,3.6vw,1.9rem);}
+.h-num--small{font-size:clamp(1.3rem,3.2vw,1.6rem);}
+
+.h-text{font-size:.94rem;color:var(--text-mute);line-height:1.4;}
+
+/* Hover/focus: lift + glow, matching .hotspot / .view-btn / .pricing row
+   elsewhere on the page. */
+@media (hover:hover){
+  .h-tile:hover{
+    transform:translateY(-4px);
+    border-color:rgba(227,169,40,.5);
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  .hallmarks--office .h-tile:hover{border-color:rgba(127,194,183,.55);}
+}
+.h-tile:focus-within{border-color:var(--marigold);outline:none;}
+.hallmarks--office .h-tile:focus-within{border-color:var(--teal);}
+
+.h-hint{font-size:.78rem;color:var(--text-mute);margin-top:-8px;}
+
+/* Staggered reveal: the parent .hallmarks block is the single [data-reveal]
+   target (so JS/IntersectionObserver wiring needs no change); once it
+   gains .is-visible each tile fades/rises in turn via nth-child delay. */
+@media (prefers-reduced-motion:no-preference){
+  .h-tile{opacity:0;transform:translateY(18px);
+    transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1),
+               border-color .22s ease,box-shadow .22s ease;
+  }
+  .hallmarks.is-visible .h-tile{opacity:1;transform:none;}
+  .hallmarks.is-visible .h-tile:nth-child(1){transition-delay:.05s;}
+  .hallmarks.is-visible .h-tile:nth-child(2){transition-delay:.12s;}
+  .hallmarks.is-visible .h-tile:nth-child(3){transition-delay:.19s;}
+  .hallmarks.is-visible .h-tile:nth-child(4){transition-delay:.26s;}
+  .hallmarks.is-visible .h-tile:nth-child(5){transition-delay:.33s;}
+  .hallmarks.is-visible .h-tile:nth-child(6){transition-delay:.4s;}
+  .hallmarks.is-visible .h-tile:nth-child(7){transition-delay:.47s;}
+}
+.no-js .h-tile{opacity:1;transform:none;}
+
+@media (max-width:640px){
+  .hallmarks{margin-top:44px;padding-top:36px;}
+  .h-strip{grid-auto-columns:78%;}
+  .h-tile{padding:20px 18px;}
 }
