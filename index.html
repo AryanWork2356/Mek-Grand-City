@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en-IN" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,10 +30,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/styles.css">
+
+<!-- ============================================================
+     PLACEHOLDER DATA NOTICE
+     The floor-plan hotspot tooltips added below (search
+     "class="hotspot"" in this file) show room dimensions that are
+     ILLUSTRATIVE ONLY, copied from the text already printed on
+     assets/img/floor-plan-homes.svg and floor-plan-offices.svg.
+     They are not measured/sanctioned figures. Replace the
+     `data-dim` and `data-note` attributes on each .hotspot button
+     with real numbers before relying on this page commercially.
+     ============================================================ -->
+
+<link rel="stylesheet" href="css/enhancements.css">
 </head>
 
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 
 <!-- ================= HEADER ================= -->
 <header class="site-head" id="siteHead">
@@ -54,16 +70,30 @@
 
     <a class="btn btn-gold head-cta" href="tel:+919821702210">98217 02210</a>
   </div>
+
+  <!-- View focus toggle: CSS-only show/hide (nothing removed from the DOM,
+       so this cannot affect SEO/crawlable content — see js/enhancements.js) -->
+  <div class="view-toggle" role="group" aria-label="Focus the page on one project">
+    <button type="button" class="view-btn is-active" data-view="all" aria-pressed="true">All</button>
+    <button type="button" class="view-btn" data-view="homes" aria-pressed="false">Homes</button>
+    <button type="button" class="view-btn" data-view="offices" aria-pressed="false">Offices</button>
+  </div>
 </header>
 
 <main id="main">
 
 <!-- ================= HERO ================= -->
 <section class="hero">
-  <div class="hero-bg">
+  <div class="hero-bg" id="heroBg" data-parallax>
     <img src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-meridian-city-reviews-banner1.webp"
          alt="Grand Meridian City residential towers, Mumbra" fetchpriority="high">
   </div>
+  <!-- CSS-only motion stand-ins for a hero video: an animated diagonal
+       light sweep and a fine noise/grain texture, both purely decorative
+       and hidden from assistive tech. See .hero-sweep/.hero-grain in
+       css/styles.css and the prefers-reduced-motion guard there. -->
+  <div class="hero-sweep" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
 
   <div class="wrap hero-in">
     <div class="hero-copy">
@@ -81,10 +111,10 @@
       </div>
 
       <dl class="hero-stats">
-        <div><dt>Homes from</dt><dd>₹99 L</dd></div>
-        <div><dt>Offices from</dt><dd>₹77 L</dd></div>
-        <div><dt>Across</dt><dd>13.54 acres</dd></div>
-        <div><dt>Possession</dt><dd>Dec 2031</dd></div>
+        <div><dt>Homes from</dt><dd data-count data-prefix="₹" data-target="99" data-suffix=" L">₹99 L</dd></div>
+        <div><dt>Offices from</dt><dd data-count data-prefix="₹" data-target="77" data-suffix=" L">₹77 L</dd></div>
+        <div><dt>Across</dt><dd data-count data-target="13.54" data-decimals="2" data-suffix=" acres">13.54 acres</dd></div>
+        <div><dt>Possession in</dt><dd class="countdown" data-countdown="2031-12-01T00:00:00+05:30">Dec 2031</dd></div>
       </dl>
     </div>
 
@@ -140,17 +170,69 @@
   </div>
 </section>
 
+<!-- ================= AT A GLANCE (animated stat counters) ================= -->
+<section class="glance" data-reveal>
+  <div class="wrap glance-in">
+    <div class="glance-stat">
+      <dd data-count data-target="347" data-suffix="">0</dd>
+      <dt>Homes across two towers</dt>
+    </div>
+    <div class="glance-stat">
+      <dd data-count data-target="38" data-prefix="G+">0</dd>
+      <dt>Floors, Grand Meridian City</dt>
+    </div>
+    <div class="glance-stat">
+      <dd data-count data-target="5453" data-suffix=" sq ft">0</dd>
+      <dt>Largest office floor plate</dt>
+    </div>
+    <div class="glance-stat">
+      <dd data-count data-target="13.54" data-decimals="2" data-suffix=" acres">0</dd>
+      <dt>Combined land, both projects</dt>
+    </div>
+  </div>
+</section>
+
 <!-- ================= RESIDENTIAL ================= -->
-<section class="project light" id="homes">
+<section class="project light" id="homes" data-project="homes" data-reveal>
   <div class="wrap project-in">
+    <!-- This photo is hotlinked from imperialbuildcon.in under a "master-plan"
+         filename but actually shows a detailed 3 BHK unit floor plan, not a
+         site master plan (towers/roads/landscaping) — verified visually.
+         Alt/caption below describe what the image actually is; replace with
+         a real master plan or unit plan per assets/img/README.txt. -->
     <div class="project-media">
       <img src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-city-mumbra-master-plan.webp"
-           alt="Grand Meridian City master plan" loading="lazy">
-      <img src="assets/img/floor-plan-homes.svg"
-           alt="Illustrative 2 and 3 BHK floor plan, Grand Meridian City" loading="lazy">
+           alt="Illustrative 3 BHK unit floor plan, Grand Meridian City" loading="lazy">
+      <div class="floorplan-wrap">
+        <img src="assets/img/floor-plan-homes.svg"
+             alt="Illustrative 2 and 3 BHK floor plan, Grand Meridian City" loading="lazy">
+        <button type="button" class="hotspot" style="left:24.4%;top:40.2%" data-dim="14'6&quot; x 18'0&quot;" data-note="Living / Dining — placeholder dimension, confirm with sales">
+          <span class="sr-only">Living / Dining room details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:24.4%;top:82.1%" data-dim="8'6&quot; x 10'0&quot;" data-note="Kitchen — placeholder dimension, confirm with sales">
+          <span class="sr-only">Kitchen details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:51.9%;top:17.9%" data-dim="10'6&quot; x 12'0&quot;" data-note="Bedroom 1 — placeholder dimension, confirm with sales">
+          <span class="sr-only">Bedroom 1 details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:43.8%;top:85.7%" data-dim="10'0&quot; x 11'6&quot;" data-note="Bedroom 2 — placeholder dimension, confirm with sales">
+          <span class="sr-only">Bedroom 2 details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:83.8%;top:36.6%" data-dim="Standard fixture" data-note="Bath — placeholder detail, confirm with sales">
+          <span class="sr-only">Bath details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:83.8%;top:80.4%" data-dim="10'0&quot; x 10'6&quot;" data-note="Bedroom 3 — placeholder dimension, confirm with sales">
+          <span class="sr-only">Bedroom 3 details</span>
+        </button>
+      </div>
+      <p class="cta-inline cta-inline-media">
+        <a href="#enquire">Enquire about this floor plan &rarr;</a>
+      </p>
     </div>
 
     <div class="project-body">
+      <span class="project-tag" aria-hidden="true">01</span>
+      <p class="eyebrow">Grand Meridian City &middot; Residential</p>
       <h2>Homes for the buyer Thane priced out</h2>
       <p class="lede">
         A gated enclave off Old Mumbai Pune Road. Two towers, thirty-eight floors, 347 vastu-compliant homes on
@@ -176,28 +258,157 @@
         <li><span>Possession</span> December 2031</li>
       </ul>
 
-      <p class="amenities">
-        Inside the gates: round-the-clock camera surveillance and trained security, a fitted
-        gymnasium, landscaped gardens and walking paths, an enclosed children's play area,
-        rainwater harvesting, and lifts sized for a thirty-eight floor tower.
-      </p>
+      <div class="amenity-groups">
+        <div class="amenity-group">
+          <h3>Safety &amp; security</h3>
+          <ul>
+            <li>Round-the-clock camera surveillance</li>
+            <li>Trained on-site security</li>
+          </ul>
+        </div>
+        <div class="amenity-group">
+          <h3>Wellness &amp; recreation</h3>
+          <ul>
+            <li>Fitted gymnasium</li>
+            <li>Landscaped gardens and walking paths</li>
+            <li>Enclosed children's play area</li>
+          </ul>
+        </div>
+        <div class="amenity-group">
+          <h3>Convenience &amp; sustainability</h3>
+          <ul>
+            <li>Rainwater harvesting</li>
+            <li>Lifts sized for a thirty-eight floor tower</li>
+          </ul>
+        </div>
+      </div>
 
       <a class="btn btn-ink" href="#enquire">Check what is available in your budget</a>
+
+      <p class="cta-inline">
+        <a href="#enquire">Get the full price sheet for Grand Meridian City &rarr;</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- WHY CHOOSE: RESIDENTIAL ----------
+       Every claim below already appears elsewhere on this page: RERA number
+       and gated-community facts from this section above, launch-pricing
+       window from the hero flag/closing section, Atal Setu/airport/Metro
+       facts from #corridor, distance figures from #distances, and the
+       combined residential+commercial framing from the hero copy/callout. -->
+  <div class="wrap">
+    <div class="why-choose">
+      <p class="eyebrow">Why choose Grand Meridian City</p>
+      <h3>Built for the corridor Mumbai just got closer to</h3>
+      <p>
+        347 vastu-compliant 2 and 3 BHK homes on 8.74 acres, priced from &#8377;99 Lakhs at a moment
+        when Atal Setu has already cut the run to south Mumbai to about twenty minutes and Metro
+        Line 5 is due to reach this corridor by December 2026. That is infrastructure most of Thane
+        priced in years ago &mdash; here, it is arriving while launch pricing is still open.
+      </p>
+      <p>
+        The gated enclave sits 1.5 km from Mumbra railway station and the Old Mumbai Pune Road, with
+        schools, hospitals and the main market all under 3 km. It is MahaRERA registered
+        (PR1330002600936) and verifiable before you pay anything, and it shares its address corridor
+        with MEK Grand Central &mdash; so the same half kilometre that gets you home can also get you
+        to work.
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- FOCUSED DETAIL: RESIDENTIAL ----------
+       Shown always in normal document flow; when the view toggle is set to
+       "Homes" it becomes the headline content (see body[data-view="homes"]
+       rules in css/enhancements.css). Every figure below is sourced from
+       elsewhere on this same page — nothing here is a new fact:
+         - RERA number: FAQ "Are the projects MahaRERA registered?" /
+           JSON-LD ApartmentComplex block.
+         - Towers/floors, land, possession: .spec list above.
+         - Unit configs + carpet areas + prices: .pricing table above.
+         - Launch window: hero-flag ("Launch pricing open until June 2026").
+         - "Under construction now": FAQ "When do I get possession?".
+       No payment-plan percentages exist anywhere on the page, so none are
+       invented here — see the note near the enquiry CTA instead. -->
+  <div class="wrap">
+    <div class="focus-detail" data-focus-detail>
+      <p class="eyebrow">Grand Meridian City &middot; In detail</p>
+      <h3>Specifications and timeline</h3>
+
+      <div class="focus-grid">
+        <table class="specs-table">
+          <caption class="sr-only">Grand Meridian City specifications</caption>
+          <tbody>
+            <tr><th scope="row">MahaRERA number</th><td>PR1330002600936</td></tr>
+            <tr><th scope="row">Land parcel</th><td>8.74 acres</td></tr>
+            <tr><th scope="row">Towers</th><td>Two, ground plus 38 floors</td></tr>
+            <tr><th scope="row">Total homes</th><td>347</td></tr>
+            <tr><th scope="row">Configurations</th><td>2 BHK (749 sq ft) &middot; 3 BHK (997 sq ft)</td></tr>
+            <tr><th scope="row">Launch price from</th><td>&#8377;99 Lakhs</td></tr>
+            <tr><th scope="row">Possession</th><td>December 2031</td></tr>
+          </tbody>
+        </table>
+
+        <ol class="project-timeline">
+          <li class="is-done"><span class="pt-when">June 2026</span><span class="pt-what">Launch pricing open</span></li>
+          <li class="is-current"><span class="pt-when">Now</span><span class="pt-what">Under construction</span></li>
+          <li><span class="pt-when">December 2031</span><span class="pt-what">Possession</span></li>
+        </ol>
+      </div>
+
+      <p class="focus-note">Payment plan details available on request &mdash; call the sales desk or use the form below.</p>
     </div>
   </div>
 </section>
 
+<!-- ================= PULL-QUOTE / STAT CALLOUT ================= -->
+<!-- Full-bleed editorial break between the two projects, per the redesign
+     brief (asymmetric layout section requires "oversized pull-quotes or
+     stat callouts between sections"). Figures restated here already
+     appear in the glance strip and project sections above — nothing new
+     is introduced, just re-emphasised. -->
+<section class="callout" data-reveal>
+  <div class="callout-in">
+    <blockquote>
+      Two developments, <span>one MahaRERA-registered group</span>, on the same half kilometre of
+      Old Mumbai Pune Road.
+    </blockquote>
+    <dl class="callout-stats">
+      <div><dd data-count data-target="13.54" data-decimals="2" data-suffix=" acres">13.54 acres</dd><dt>Combined land</dt></div>
+      <div><dd data-count data-target="347" data-suffix="">347</dd><dt>Homes across two towers</dt></div>
+      <div><dd data-count data-target="5453" data-suffix=" sq ft">5,453 sq ft</dd><dt>Largest office floor plate</dt></div>
+    </dl>
+  </div>
+</section>
+
 <!-- ================= COMMERCIAL ================= -->
-<section class="project dark" id="offices">
+<section class="project dark" id="offices" data-project="offices" data-reveal>
   <div class="wrap project-in flip">
     <div class="project-media">
-      <img src="assets/img/floor-plan-offices.svg"
-           alt="Illustrative office floor plate, MEK Grand Central" loading="lazy">
+      <div class="floorplan-wrap">
+        <img src="assets/img/floor-plan-offices.svg"
+             alt="Illustrative office floor plate, MEK Grand Central" loading="lazy">
+        <button type="button" class="hotspot" style="left:18.1%;top:21.4%" data-dim="467 sq ft" data-note="Boutique office — placeholder area, confirm with sales">
+          <span class="sr-only">Boutique office details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:50%;top:50%" data-dim="Shared lift lobby" data-note="Lift lobby — placeholder detail, confirm with sales">
+          <span class="sr-only">Lift lobby details</span>
+        </button>
+        <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 5,453 sq ft" data-note="Column-free floor plate — placeholder area, confirm with sales">
+          <span class="sr-only">Column-free floor plate details</span>
+        </button>
+      </div>
+      <!-- Hotlinked from grand-central-mumbra.com's pricing section; it is a
+           generic stock photo of two people at a meeting table, not a
+           photo of the building itself — verified visually. Captioned
+           accordingly rather than claimed as the commercial building. -->
       <img src="https://grand-central-mumbra.com/wp-content/uploads/2026/06/mek-grand-central-price-section-03.webp"
-           alt="MEK Grand Central commercial building" loading="lazy">
+           alt="Business meeting, illustrative" loading="lazy">
     </div>
 
     <div class="project-body">
+      <span class="project-tag" aria-hidden="true">02</span>
+      <p class="eyebrow">MEK Grand Central &middot; Commercial</p>
       <h2>A business address, before the corridor prices one in</h2>
       <p class="lede">
         Premium office space is genuinely scarce along Old Mumbai Pune Road. Most of what trades here is
@@ -219,60 +430,170 @@
         </tbody>
       </table>
 
-      <p class="amenities">
-        Built to specification: high-speed lifts, a double-height arrival lobby, layered access
-        control, round-the-clock power backup, fire detection and suppression throughout, planned
-        staff and visitor parking, shared conference rooms and an executive lounge.
-      </p>
+      <div class="amenity-groups">
+        <div class="amenity-group">
+          <h3>Business infrastructure</h3>
+          <ul>
+            <li>High-speed lifts</li>
+            <li>Double-height arrival lobby</li>
+            <li>Shared conference rooms</li>
+            <li>Executive lounge</li>
+          </ul>
+        </div>
+        <div class="amenity-group">
+          <h3>Safety &amp; access</h3>
+          <ul>
+            <li>Layered access control</li>
+            <li>Fire detection and suppression throughout</li>
+          </ul>
+        </div>
+        <div class="amenity-group">
+          <h3>Operations &amp; convenience</h3>
+          <ul>
+            <li>Round-the-clock power backup</li>
+            <li>Planned staff and visitor parking</li>
+          </ul>
+        </div>
+      </div>
 
       <a class="btn btn-gold" href="#enquire">Request the commercial deck</a>
+
+      <p class="cta-inline">
+        <a href="#enquire">Enquire about floor plates and availability &rarr;</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- WHY CHOOSE: COMMERCIAL ----------
+       Every claim below already appears elsewhere on this page: scarcity of
+       purpose-built commercial stock and column-free/glass-frontage facts
+       from this section above, RERA number likewise, launch-pricing window
+       from the hero flag/closing section, Atal Setu/airport/Metro facts
+       from #corridor, distance figures from #distances, and the combined
+       residential+commercial framing from the hero copy/callout. -->
+  <div class="wrap">
+    <div class="why-choose">
+      <p class="eyebrow">Why choose MEK Grand Central</p>
+      <h3>A commercial address the corridor doesn't actually have yet</h3>
+      <p>
+        Most office stock on Old Mumbai Pune Road is converted residential space. MEK Grand Central
+        is purpose-built commercial on 4.8 acres &mdash; column-free floor plates up to 5,453 sq ft,
+        a glass frontage that doubles as signage, and clear MahaRERA title (PC1330002600951) &mdash;
+        starting from &#8377;77.06 Lakhs while launch pricing holds until June 2026.
+      </p>
+      <p>
+        It sits on the same corridor as the Mumbai&ndash;Pune Expressway (3.5 km) and Mumbra
+        railway station (1.5 km), with Atal Setu already shortening the run to south Mumbai and
+        Metro Line 5 due by December 2026. Pair it with a home at Grand Meridian City on the same
+        half kilometre and the commute between the two disappears entirely.
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- FOCUSED DETAIL: COMMERCIAL ----------
+       Mirrors the residential focus block. Sourced entirely from facts
+       already on this page:
+         - RERA number: FAQ / JSON-LD Place block for MEK Grand Central.
+         - Land parcel, column-free/glass-frontage facts: project-body lede
+           above.
+         - Unit types + carpet areas + prices: .pricing table above.
+         - Largest floor plate (5,453 sq ft): glance strip / callout stats.
+         - Launch window, construction status: same FAQ entries as homes. -->
+  <div class="wrap">
+    <div class="focus-detail" data-focus-detail>
+      <p class="eyebrow">MEK Grand Central &middot; In detail</p>
+      <h3>Specifications and timeline</h3>
+
+      <div class="focus-grid">
+        <table class="specs-table">
+          <caption class="sr-only">MEK Grand Central specifications</caption>
+          <tbody>
+            <tr><th scope="row">MahaRERA number</th><td>PC1330002600951</td></tr>
+            <tr><th scope="row">Land parcel</th><td>4.8 acres</td></tr>
+            <tr><th scope="row">Unit types</th><td>Boutique &middot; Executive &middot; Premium &middot; Corporate &middot; Full floor plate</td></tr>
+            <tr><th scope="row">Carpet area range</th><td>467 &ndash; 5,453 sq ft</td></tr>
+            <tr><th scope="row">Launch price from</th><td>&#8377;77.06 Lakhs</td></tr>
+            <tr><th scope="row">Possession</th><td>December 2031</td></tr>
+          </tbody>
+        </table>
+
+        <ol class="project-timeline">
+          <li class="is-done"><span class="pt-when">June 2026</span><span class="pt-what">Launch pricing open</span></li>
+          <li class="is-current"><span class="pt-when">Now</span><span class="pt-what">Under construction</span></li>
+          <li><span class="pt-when">December 2031</span><span class="pt-what">Possession</span></li>
+        </ol>
+      </div>
+
+      <p class="focus-note">Payment plan details available on request &mdash; call the sales desk or use the form below.</p>
     </div>
   </div>
 </section>
 
 <!-- ================= DISTANCE LEDGER ================= -->
-<section class="ledger" id="distances">
+<section class="ledger" id="distances" data-reveal>
   <div class="wrap">
+    <p class="eyebrow">Connectivity</p>
     <h2>Everything that matters, measured</h2>
     <p class="lede ledger-lede">
       Connectivity is usually sold to you as a row of icons. Here are the actual numbers, from the
       site gates, so you can judge them yourself.
     </p>
 
-    <div class="ledger-grid">
-      <div class="ledger-col">
+    <!-- Interactive controls (progressively enhance the static grid below via
+         js/enhancements.js; the full data stays in the markup either way,
+         so nothing here depends on JavaScript for search engines to read it) -->
+    <div class="ledger-controls" data-ledger-controls hidden>
+      <div class="ledger-filters" role="group" aria-label="Filter by category">
+        <button type="button" class="chip is-active" data-filter="all">All</button>
+        <button type="button" class="chip" data-filter="transit">Trains and highways</button>
+        <button type="button" class="chip" data-filter="health">Schools and hospitals</button>
+        <button type="button" class="chip" data-filter="retail">Everyday and retail</button>
+      </div>
+      <label class="ledger-sort">
+        Sort by
+        <select data-sort>
+          <option value="default">Nearest first (default)</option>
+          <option value="distance">Distance, low to high</option>
+          <option value="time">Travel time, low to high</option>
+          <option value="name">Name, A to Z</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="ledger-grid" data-ledger-grid>
+      <div class="ledger-col" data-category="transit">
         <h3>Trains and highways</h3>
         <ul>
-          <li><span class="place">Mumbra railway station</span><span class="dist">1.5 km</span><span class="mins">5 min</span></li>
-          <li><span class="place">Old Mumbai–Pune highway</span><span class="dist">1.5 km</span><span class="mins">4 min</span></li>
-          <li><span class="place">Mumbai–Pune Expressway</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
-          <li><span class="place">Diva junction</span><span class="dist">4.2 km</span><span class="mins">12 min</span></li>
-          <li><span class="place">Eastern Express Highway</span><span class="dist">8.0 km</span><span class="mins">20 min</span></li>
-          <li><span class="place">Mumbai airport</span><span class="dist">32 km</span><span class="mins">55 min</span></li>
+          <li data-km="1.5" data-min="5"><span class="place">Mumbra railway station</span><span class="dist">1.5 km</span><span class="mins">5 min</span></li>
+          <li data-km="1.5" data-min="4"><span class="place">Old Mumbai–Pune highway</span><span class="dist">1.5 km</span><span class="mins">4 min</span></li>
+          <li data-km="3.5" data-min="10"><span class="place">Mumbai–Pune Expressway</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
+          <li data-km="4.2" data-min="12"><span class="place">Diva junction</span><span class="dist">4.2 km</span><span class="mins">12 min</span></li>
+          <li data-km="8.0" data-min="20"><span class="place">Eastern Express Highway</span><span class="dist">8.0 km</span><span class="mins">20 min</span></li>
+          <li data-km="32" data-min="55"><span class="place">Mumbai airport</span><span class="dist">32 km</span><span class="mins">55 min</span></li>
         </ul>
       </div>
 
-      <div class="ledger-col">
+      <div class="ledger-col" data-category="health">
         <h3>Schools and hospitals</h3>
         <ul>
-          <li><span class="place">Bilal Hospital</span><span class="dist">1.0 km</span><span class="mins">3 min</span></li>
-          <li><span class="place">Symbiosis Convent High School</span><span class="dist">1.2 km</span><span class="mins">4 min</span></li>
-          <li><span class="place">MS College of Arts and Science</span><span class="dist">2.0 km</span><span class="mins">7 min</span></li>
-          <li><span class="place">Kalsekar Hospital</span><span class="dist">2.5 km</span><span class="mins">8 min</span></li>
-          <li><span class="place">Prime Criticare Hospital</span><span class="dist">3.0 km</span><span class="mins">9 min</span></li>
-          <li><span class="place">Royal College</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
+          <li data-km="1.0" data-min="3"><span class="place">Bilal Hospital</span><span class="dist">1.0 km</span><span class="mins">3 min</span></li>
+          <li data-km="1.2" data-min="4"><span class="place">Symbiosis Convent High School</span><span class="dist">1.2 km</span><span class="mins">4 min</span></li>
+          <li data-km="2.0" data-min="7"><span class="place">MS College of Arts and Science</span><span class="dist">2.0 km</span><span class="mins">7 min</span></li>
+          <li data-km="2.5" data-min="8"><span class="place">Kalsekar Hospital</span><span class="dist">2.5 km</span><span class="mins">8 min</span></li>
+          <li data-km="3.0" data-min="9"><span class="place">Prime Criticare Hospital</span><span class="dist">3.0 km</span><span class="mins">9 min</span></li>
+          <li data-km="3.5" data-min="10"><span class="place">Royal College</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
         </ul>
       </div>
 
-      <div class="ledger-col">
+      <div class="ledger-col" data-category="retail">
         <h3>Everyday and retail</h3>
         <ul>
-          <li><span class="place">Mumbra main market</span><span class="dist">0.8 km</span><span class="mins">2 min</span></li>
-          <li><span class="place">Grand Central Park</span><span class="dist">1.7 km</span><span class="mins">5 min</span></li>
-          <li><span class="place">Reti Bunder promenade</span><span class="dist">2.2 km</span><span class="mins">7 min</span></li>
-          <li><span class="place">Gold Digital Cinema</span><span class="dist">4.8 km</span><span class="mins">12 min</span></li>
-          <li><span class="place">Korum Mall, Thane</span><span class="dist">11.2 km</span><span class="mins">22 min</span></li>
-          <li><span class="place">Viviana Mall, Thane</span><span class="dist">13 km</span><span class="mins">28 min</span></li>
+          <li data-km="0.8" data-min="2"><span class="place">Mumbra main market</span><span class="dist">0.8 km</span><span class="mins">2 min</span></li>
+          <li data-km="1.7" data-min="5"><span class="place">Grand Central Park</span><span class="dist">1.7 km</span><span class="mins">5 min</span></li>
+          <li data-km="2.2" data-min="7"><span class="place">Reti Bunder promenade</span><span class="dist">2.2 km</span><span class="mins">7 min</span></li>
+          <li data-km="4.8" data-min="12"><span class="place">Gold Digital Cinema</span><span class="dist">4.8 km</span><span class="mins">12 min</span></li>
+          <li data-km="11.2" data-min="22"><span class="place">Korum Mall, Thane</span><span class="dist">11.2 km</span><span class="mins">22 min</span></li>
+          <li data-km="13" data-min="28"><span class="place">Viviana Mall, Thane</span><span class="dist">13 km</span><span class="mins">28 min</span></li>
         </ul>
       </div>
     </div>
@@ -280,59 +601,77 @@
 </section>
 
 <!-- ================= CORRIDOR ================= -->
-<section class="corridor" id="corridor">
+<section class="corridor" id="corridor" data-reveal>
   <div class="wrap">
+    <p class="eyebrow">Why here</p>
     <h2>The infrastructure argument stopped being a promise</h2>
     <p class="lede">
       Mumbra was priced as a fringe address while its connectivity was still on paper. Most of it
       has since been built. The pricing has not fully caught up, and that gap is the whole case.
     </p>
 
-    <ol class="timeline">
-      <li>
-        <p class="when">Open since January 2024</p>
-        <h3>Atal Setu</h3>
-        <p>India's longest sea bridge cut the run between Navi Mumbai and south Mumbai to about
-           twenty minutes, pulling this whole eastern belt closer to the island city.</p>
-      </li>
-      <li>
-        <p class="when">Flying since December 2025</p>
-        <h3>Navi Mumbai airport</h3>
-        <p>Domestic operations began in December 2025, with international flights scheduled from
-           July 2026. A second aviation hub on this side of the harbour.</p>
-      </li>
-      <li>
-        <p class="when">Phase 5A due December 2026</p>
-        <h3>Metro Line 5</h3>
-        <p>The Thane to Bhiwandi to Kalyan line takes daily pressure off the Central railway and
-           reprices everything along its corridor.</p>
-      </li>
-    </ol>
+    <div class="timeline-scroller" data-timeline-scroller>
+      <div class="timeline-track" role="progressbar" aria-hidden="true" data-timeline-track>
+        <div class="timeline-track-fill" data-timeline-fill></div>
+      </div>
+      <ol class="timeline" data-timeline>
+        <li>
+          <p class="when">Open since January 2024</p>
+          <h3>Atal Setu</h3>
+          <p>India's longest sea bridge cut the run between Navi Mumbai and south Mumbai to about
+             twenty minutes, pulling this whole eastern belt closer to the island city.</p>
+        </li>
+        <li>
+          <p class="when">Flying since December 2025</p>
+          <h3>Navi Mumbai airport</h3>
+          <p>Domestic operations began in December 2025, with international flights scheduled from
+             July 2026. A second aviation hub on this side of the harbour.</p>
+        </li>
+        <li>
+          <p class="when">Phase 5A due December 2026</p>
+          <h3>Metro Line 5</h3>
+          <p>The Thane to Bhiwandi to Kalyan line takes daily pressure off the Central railway and
+             reprices everything along its corridor.</p>
+        </li>
+      </ol>
+      <div class="timeline-hint" aria-hidden="true">Scroll to move through the timeline →</div>
+    </div>
   </div>
 </section>
 
 <!-- ================= GALLERY ================= -->
-<section class="gallery light" id="gallery">
+<section class="gallery light" id="gallery" data-reveal>
   <div class="wrap">
+    <p class="eyebrow">Gallery</p>
     <h2>Inside both addresses</h2>
-    <p class="lede">Artist's impressions of the residential podium, the commercial lobby and the shared decks.</p>
+    <p class="lede">Artist's impressions of the residential podium and the shared decks.</p>
 
+    <!-- Captions below describe what each hotlinked placeholder photo actually
+         shows (verified visually), not the filename it was borrowed under —
+         several of the source files were misnamed relative to their content
+         (e.g. "bedroom.webp" is a garden seating photo, "gym.webp" is a pool,
+         "kids-pool.webp" is a gym, "jogging.webp" is a playground,
+         "meeting-lounge.webp" is a banquet hall unrelated to either project,
+         and the "commercial lobby" file is a retail-arcade shot with no
+         connection to an office building). Captions are kept to amenities
+         already listed in the project copy above — nothing here claims an
+         amenity (pool, retail arcade, banquet hall) that isn't actually in
+         the spec. Five tiles removed rather than mis-captioned; grid is 4
+         equal tiles so the layout stays full with no dangling row. Replace
+         with real photography per assets/img/README.txt. -->
     <div class="gal">
-      <figure class="wide"><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-mumbra-lobby.webp" alt="Residential lobby"><figcaption>Residential lobby</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-bedroom.webp" alt="Bedroom interior"><figcaption>Bedroom</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-mumbra-gym.webp" alt="Fitness centre"><figcaption>Fitness centre</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Children's pool"><figcaption>Children's pool</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-jogging.webp" alt="Jogging track"><figcaption>Jogging track</figcaption></figure>
-      <figure><img loading="lazy" src="https://grand-central-mumbra.com/wp-content/uploads/2026/07/grand-central-mumbra-lobby-06.webp" alt="Commercial lobby"><figcaption>Commercial lobby</figcaption></figure>
-      <figure class="wide"><img loading="lazy" src="https://grand-central-mumbra.com/wp-content/uploads/2026/07/grand-central-mumbra-meeting-lounge-5.webp" alt="Meeting lounge"><figcaption>Meeting lounge</figcaption></figure>
-      <figure><img loading="lazy" src="https://grand-central-mumbra.com/wp-content/uploads/2026/07/grand-central-mumbra-connect-hub-4.webp" alt="Connect hub"><figcaption>Connect hub</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-mumbra-lobby.webp" alt="Grand Meridian City tower exterior"><figcaption>Tower exterior</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-bedroom.webp" alt="Landscaped garden seating area"><figcaption>Landscaped gardens</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Fitted gymnasium"><figcaption>Fitness centre</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-jogging.webp" alt="Children's play area"><figcaption>Children's play area</figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- ================= FAQ ================= -->
-<section class="faq light" id="questions">
+<section class="faq light" id="questions" data-reveal>
   <div class="wrap">
+    <p class="eyebrow">Questions</p>
     <h2>Questions buyers ask first</h2>
 
     <div class="faq-list">
@@ -375,9 +714,10 @@
 </section>
 
 <!-- ================= CLOSING ENQUIRY ================= -->
-<section class="closing" id="enquire">
+<section class="closing" id="enquire" data-reveal>
   <div class="wrap closing-in">
     <div>
+      <p class="eyebrow">Get in touch</p>
       <h2>Launch pricing does not survive the launch</h2>
       <p class="lede">
         Both projects are pre-launch through June 2026. First-allocation buyers take the best
@@ -434,7 +774,7 @@
 </section>
 
 <!-- ================= MAPS ================= -->
-<section class="maps">
+<section class="maps" data-reveal>
   <div class="wrap">
     <h2>Both sites, minutes apart</h2>
     <div class="map-grid">
@@ -502,6 +842,7 @@
 </div>
 
 <script src="js/main.js" defer></script>
+<script src="js/enhancements.js" defer></script>
 
 <!-- Structured data: helps Google show your FAQ answers directly in results -->
 <script type="application/ld+json">

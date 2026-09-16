@@ -13,8 +13,14 @@ replace these before launch):
   floor plan             Grand Meridian City
   office floor plan      MEK Grand Central
   commercial building    MEK Grand Central
-  gallery (8 images)     residential lobby, bedroom, gym, kids pool, jogging
-                          track, commercial lobby, meeting lounge, connect hub
+  gallery (4 images)     tower exterior, landscaped gardens, fitness centre,
+                          children's play area — all residential; the
+                          commercial gallery photos were dropped (see
+                          index.html gallery comment) because the hotlinked
+                          placeholders didn't show what their filenames
+                          claimed (a banquet hall, a retail arcade) — swap in
+                          real MEK Grand Central interiors here when available
+                          and re-add commercial tiles to the gallery grid
 
 Keep filenames lowercase, no spaces (use hyphens), and export as .webp where
 possible for faster loading. Compress before uploading — TinyPNG or Squoosh
