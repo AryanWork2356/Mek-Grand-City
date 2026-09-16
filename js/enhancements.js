@@ -389,7 +389,7 @@
     update();
   })();
 
-  /* ---------------- Enquiry popup: opens 20s after page load, every visit ---------------- */
+  /* ---------------- Enquiry popup: opens 10s after page load, every visit ---------------- */
   (function enquiryPopup() {
     var overlay = document.getElementById('enquiry-popup');
     if (!overlay) return;
@@ -442,7 +442,7 @@
       });
     }
 
-    window.setTimeout(openPopup, 20000);
+    window.setTimeout(openPopup, 10000);
   })();
 
 })();
