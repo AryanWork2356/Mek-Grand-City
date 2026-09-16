@@ -8,7 +8,7 @@
      SEO — edit these four things when the domain changes.
      This is the part that Odoo's embed block could never reach.
      ============================================================ -->
-<title>MEK Grand City ; La Majeste Group</title>
+<title>MEK Grand City - La Majeste Group</title>
 <meta name="description" content="2 and 3 BHK homes from ₹99 Lakhs and offices from ₹77 Lakhs in Mumbra, Thane. MahaRERA registered, possession December 2031. Launch pricing open.">
 <link rel="canonical" href="https://www.mekgrandcity.com/">
 <meta name="robots" content="index, follow">
@@ -53,9 +53,9 @@
 
 <!-- ================= HEADER ================= -->
 <header class="site-head" id="siteHead">
-  <div class="wrap head-in">
+  <div class="head-in">
     <a class="brand" href="#main">
-      <img class="brand-mark" src="ImgVids/logo-88gxEqAy.webp" alt="" width="40" height="40">
+      <img class="brand-mark" src="ImgVids/Logo3-transparent.png" alt="" width="46" height="42">
       <span class="brand-text">
         <span class="brand-name">MEK Grand City <span class="brand-loc">· Mumbra, Thane</span></span>
         <span class="brand-sub">La Majeste Group</span>
@@ -276,14 +276,14 @@
 </section>
 
 <!-- ================= RESIDENTIAL ================= -->
-<section class="project light" id="homes" data-project="homes" data-reveal>
+<section class="project light" id="homes" data-project="homes">
   <div class="wrap project-in">
     <!-- This photo is hotlinked from imperialbuildcon.in under a "master-plan"
          filename but actually shows a detailed 3 BHK unit floor plan, not a
          site master plan (towers/roads/landscaping) — verified visually.
          Alt/caption below describe what the image actually is; replace with
          a real master plan or unit plan per assets/img/README.txt. -->
-    <div class="project-media">
+    <div class="project-media" data-reveal="left">
       <img src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-city-mumbra-master-plan.webp"
            alt="Illustrative 3 BHK unit floor plan, Grand Meridian City" loading="lazy">
       <div class="floorplan-wrap">
@@ -313,7 +313,7 @@
       </p>
     </div>
 
-    <div class="project-body">
+    <div class="project-body" data-reveal="right">
       <span class="project-tag" aria-hidden="true">01</span>
       <p class="eyebrow">Grand Meridian City &middot; Residential</p>
       <h2>Homes for the buyer Thane priced out</h2>
@@ -371,6 +371,101 @@
       <p class="cta-inline">
         <a href="#enquire">Get the full price sheet for Grand Meridian City &rarr;</a>
       </p>
+    </div>
+  </div>
+
+  <!-- ---------- AMENITIES SHOWCASE: RESIDENTIAL ----------
+       Tabbed re-presentation of the exact same three .amenity-group blocks
+       above (identical category names/items — nothing new invented, no
+       facts changed). The static .amenity-groups list stays in the DOM
+       untouched for no-JS/SEO; this component gives the same content a
+       richer, image-paired treatment matching the "category tabs swap a
+       list + a photo" interaction pattern.
+       Image pairing: "Wellness & recreation" is the only category with a
+       genuinely matching photo (the gymnasium shot from the gallery below,
+       whose alt/caption already correctly describe it) — its item list
+       literally names "Fitted gymnasium" first. "Safety & security" and
+       "Convenience & sustainability" have no dedicated photo anywhere on
+       the page (no camera/security or rainwater-harvesting/lift photos
+       exist), so per the brief those two get an oversized outlined-numeral
+       treatment (the same ghost-numeral device as .project-tag) instead of
+       a forced/mismatched image. -->
+  <div class="wrap">
+    <div class="amen-tabs" data-amen-tabs data-reveal>
+      <p class="eyebrow">Grand Meridian City &middot; Amenities</p>
+      <h3>Everything the address includes</h3>
+
+      <div class="amen-tablist" role="tablist" aria-label="Grand Meridian City amenity categories">
+        <button type="button" class="amen-tab is-active" role="tab" id="amen-home-tab-0" aria-selected="true" aria-controls="amen-home-panel-0">
+          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>
+          <span class="amen-tab-label">Safety &amp;<br>Security</span>
+        </button>
+        <button type="button" class="amen-tab" role="tab" id="amen-home-tab-1" aria-selected="false" aria-controls="amen-home-panel-1" tabindex="-1">
+          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M24 6c3 5 3 8 0 12-3-4-3-7 0-12z"/><path d="M24 18c6-2 10 0 12 5-6 2-10 0-12-5zM24 18c-6-2-10 0-12 5 6 2 10 0 12-5z"/><path d="M24 18v24"/><path d="M15 36c3-3 6-3 9 0 3-3 6-3 9 0"/></svg>
+          <span class="amen-tab-label">Wellness &amp;<br>Recreation</span>
+        </button>
+        <button type="button" class="amen-tab" role="tab" id="amen-home-tab-2" aria-selected="false" aria-controls="amen-home-panel-2" tabindex="-1">
+          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="7" y="6" width="14" height="36"/><rect x="27" y="14" width="14" height="28"/><path d="M11 13h6M11 19h6M11 25h6M11 31h6M11 37h6M31 21h6M31 27h6M31 33h6"/></svg>
+          <span class="amen-tab-label">Convenience &amp;<br>Sustainability</span>
+        </button>
+      </div>
+
+      <div class="amen-panels">
+        <div class="amen-panel is-active" role="tabpanel" id="amen-home-panel-0" aria-labelledby="amen-home-tab-0">
+          <div class="amen-panel-in">
+            <div class="amen-list" data-reveal="left">
+              <div class="amenity-group">
+                <h4>Safety &amp; security</h4>
+                <ul>
+                  <li>Round-the-clock camera surveillance</li>
+                  <li>Trained on-site security</li>
+                </ul>
+              </div>
+            </div>
+            <div class="amen-visual amen-visual--numeral" aria-hidden="true" data-reveal="right">
+              <span class="amen-numeral">24&times;7</span>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="amen-panel" role="tabpanel" id="amen-home-panel-1" aria-labelledby="amen-home-tab-1" hidden>
+          <div class="amen-panel-in">
+            <div class="amen-list" data-reveal="left">
+              <div class="amenity-group">
+                <h4>Wellness &amp; recreation</h4>
+                <ul>
+                  <li>Fitted gymnasium</li>
+                  <li>Landscaped gardens and walking paths</li>
+                  <li>Enclosed children's play area</li>
+                </ul>
+              </div>
+            </div>
+            <figure class="amen-visual amen-visual--photo amen-visual--cinematic" data-reveal="right">
+              <img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Fitted gymnasium">
+              <figcaption>Fitted gymnasium</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="amen-panel" role="tabpanel" id="amen-home-panel-2" aria-labelledby="amen-home-tab-2" hidden>
+          <div class="amen-panel-in">
+            <div class="amen-list" data-reveal="left">
+              <div class="amenity-group">
+                <h4>Convenience &amp; sustainability</h4>
+                <ul>
+                  <li>Rainwater harvesting</li>
+                  <li>Lifts sized for a thirty-eight floor tower</li>
+                </ul>
+              </div>
+            </div>
+            <div class="amen-visual amen-visual--numeral" aria-hidden="true" data-reveal="right">
+              <span class="amen-numeral">G+38</span>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="6" width="14" height="36"/><rect x="27" y="14" width="14" height="28"/><path d="M11 13h6M11 19h6M11 25h6M11 31h6M11 37h6M31 21h6M31 27h6M31 33h6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -536,9 +631,9 @@
 </section>
 
 <!-- ================= COMMERCIAL ================= -->
-<section class="project dark" id="offices" data-project="offices" data-reveal>
+<section class="project dark" id="offices" data-project="offices">
   <div class="wrap project-in flip">
-    <div class="project-media">
+    <div class="project-media" data-reveal="right">
       <div class="floorplan-wrap">
         <img src="assets/img/floor-plan-offices.svg"
              alt="Illustrative office floor plate, MEK Grand Central" loading="lazy">
@@ -560,7 +655,7 @@
            alt="Business meeting, illustrative" loading="lazy">
     </div>
 
-    <div class="project-body">
+    <div class="project-body" data-reveal="left">
       <span class="project-tag" aria-hidden="true">02</span>
       <p class="eyebrow">MEK Grand Central &middot; Commercial</p>
       <h2>A business address, before the corridor prices one in</h2>
@@ -615,6 +710,98 @@
       <p class="cta-inline">
         <a href="#enquire">Enquire about floor plates and availability &rarr;</a>
       </p>
+    </div>
+  </div>
+
+  <!-- ---------- AMENITIES SHOWCASE: COMMERCIAL ----------
+       Same reusable .amen-tabs component as the residential instance, teal
+       variant, driven by the same three .amenity-group blocks above
+       (identical category names/items). No dedicated commercial amenity
+       photograph exists anywhere on the page — the only image in this
+       project's .project-media is a generic "business meeting" stock photo
+       (already captioned as illustrative, not the building), and the only
+       other commercial image is the office floor-plate SVG diagram, which
+       shows unit layout, not lobby/access/power-backup amenities. Using
+       either for a specific category here would imply something the photo
+       doesn't show, so per the brief all three commercial tabs use the
+       outlined-numeral treatment instead of a forced/mismatched photo. -->
+  <div class="wrap">
+    <div class="amen-tabs amen-tabs--office" data-amen-tabs data-reveal>
+      <p class="eyebrow">MEK Grand Central &middot; Amenities</p>
+      <h3>Everything the address includes</h3>
+
+      <div class="amen-tablist" role="tablist" aria-label="MEK Grand Central amenity categories">
+        <button type="button" class="amen-tab is-active" role="tab" id="amen-office-tab-0" aria-selected="true" aria-controls="amen-office-panel-0">
+          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 42V17c0-6 7-11 16-11s16 5 16 11v25"/><path d="M8 42h32"/><path d="M20 42V24a4 4 0 0 1 8 0v18"/><path d="M14 30v12M34 30v12"/></svg>
+          <span class="amen-tab-label">Business<br>Infrastructure</span>
+        </button>
+        <button type="button" class="amen-tab" role="tab" id="amen-office-tab-1" aria-selected="false" aria-controls="amen-office-panel-1" tabindex="-1">
+          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>
+          <span class="amen-tab-label">Safety &amp;<br>Access</span>
+        </button>
+        <button type="button" class="amen-tab" role="tab" id="amen-office-tab-2" aria-selected="false" aria-controls="amen-office-panel-2" tabindex="-1">
+          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M26 4 10 28h10l-4 16 20-26H26z"/></svg>
+          <span class="amen-tab-label">Operations &amp;<br>Convenience</span>
+        </button>
+      </div>
+
+      <div class="amen-panels">
+        <div class="amen-panel is-active" role="tabpanel" id="amen-office-panel-0" aria-labelledby="amen-office-tab-0">
+          <div class="amen-panel-in">
+            <div class="amen-list" data-reveal="right">
+              <div class="amenity-group">
+                <h4>Business infrastructure</h4>
+                <ul>
+                  <li>High-speed lifts</li>
+                  <li>Double-height arrival lobby</li>
+                  <li>Shared conference rooms</li>
+                  <li>Executive lounge</li>
+                </ul>
+              </div>
+            </div>
+            <div class="amen-visual amen-visual--numeral" aria-hidden="true" data-reveal="left">
+              <span class="amen-numeral">Glass lobby</span>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 42V17c0-6 7-11 16-11s16 5 16 11v25"/><path d="M8 42h32"/><path d="M20 42V24a4 4 0 0 1 8 0v18"/><path d="M14 30v12M34 30v12"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="amen-panel" role="tabpanel" id="amen-office-panel-1" aria-labelledby="amen-office-tab-1" hidden>
+          <div class="amen-panel-in">
+            <div class="amen-list" data-reveal="right">
+              <div class="amenity-group">
+                <h4>Safety &amp; access</h4>
+                <ul>
+                  <li>Layered access control</li>
+                  <li>Fire detection and suppression throughout</li>
+                </ul>
+              </div>
+            </div>
+            <div class="amen-visual amen-visual--numeral" aria-hidden="true" data-reveal="left">
+              <span class="amen-numeral">Secure</span>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="amen-panel" role="tabpanel" id="amen-office-panel-2" aria-labelledby="amen-office-tab-2" hidden>
+          <div class="amen-panel-in">
+            <div class="amen-list" data-reveal="right">
+              <div class="amenity-group">
+                <h4>Operations &amp; convenience</h4>
+                <ul>
+                  <li>Round-the-clock power backup</li>
+                  <li>Planned staff and visitor parking</li>
+                </ul>
+              </div>
+            </div>
+            <div class="amen-visual amen-visual--numeral" aria-hidden="true" data-reveal="left">
+              <span class="amen-numeral">24&times;7</span>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M26 4 10 28h10l-4 16 20-26H26z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -126,16 +126,27 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--slate-line);
 }
-.head-in{display:flex;align-items:center;gap:28px;height:74px;}
+/* Full-width header bar (deliberately NOT wrapped in .wrap like the rest
+   of the page) — the brand logo sits close to the true left edge with
+   just a small breathing-room gap, and nav/CTA go to the true right edge,
+   independent of the page's centred max-width content column. */
+.head-in{
+  display:flex;align-items:center;gap:28px;height:78px;
+  padding:0 20px 0 28px;
+}
 .brand{display:flex;align-items:center;gap:12px;}
-.brand-mark{display:block;width:40px;height:40px;object-fit:contain;flex-shrink:0;}
+.brand-mark{display:block;width:auto;height:42px;object-fit:contain;flex-shrink:0;}
 .brand-text{display:block;}
 .brand-name{display:block;font-family:var(--display);font-size:1.34rem;line-height:1.1;white-space:nowrap;color:var(--marigold);}
-.brand-loc{font-size:.85em;color:var(--marigold);}
+.brand-loc{color:var(--marigold);}
 .brand-sub{display:block;font-size:.76rem;letter-spacing:.1em;color:var(--text-light);font-style:italic;white-space:nowrap;}
 @media (max-width:1080px){
+  .brand-mark{height:36px;}
   .brand-name{font-size:1.18rem;}
-  .brand-mark{width:34px;height:34px;}
+}
+@media (max-width:560px){
+  .head-in{padding:0 14px 0 16px;}
+  .brand-mark{height:30px;}
 }
 @media (max-width:560px){
   .brand-mark{width:30px;height:30px;}

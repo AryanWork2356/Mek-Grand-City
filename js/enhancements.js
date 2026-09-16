@@ -389,6 +389,56 @@
     update();
   })();
 
+  /* ---------------- Amenities showcase: category tabs swap list + visual ---------------- */
+  (function amenTabs() {
+    var groups = document.querySelectorAll('[data-amen-tabs]');
+    if (!groups.length) return;
+
+    groups.forEach(function (group) {
+      var tabs = Array.prototype.slice.call(group.querySelectorAll('.amen-tab'));
+      var panels = Array.prototype.slice.call(group.querySelectorAll('.amen-panel'));
+      if (!tabs.length || !panels.length) return;
+
+      function activate(index, focusTab) {
+        tabs.forEach(function (tab, i) {
+          var active = i === index;
+          tab.classList.toggle('is-active', active);
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          tab.tabIndex = active ? 0 : -1;
+        });
+        panels.forEach(function (panel, i) {
+          var active = i === index;
+          panel.classList.toggle('is-active', active);
+          panel.hidden = !active;
+        });
+        if (focusTab) tabs[index].focus();
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener('click', function () { activate(index, false); });
+
+        // Standard ARIA tabs keyboard pattern: left/right (and home/end)
+        // move focus between tabs and activate the newly focused one.
+        tab.addEventListener('keydown', function (event) {
+          var newIndex = null;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            newIndex = (index + 1) % tabs.length;
+          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            newIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (event.key === 'Home') {
+            newIndex = 0;
+          } else if (event.key === 'End') {
+            newIndex = tabs.length - 1;
+          }
+          if (newIndex !== null) {
+            event.preventDefault();
+            activate(newIndex, true);
+          }
+        });
+      });
+    });
+  })();
+
   /* ---------------- Enquiry popup: opens 10s after page load, every visit ---------------- */
   (function enquiryPopup() {
     var overlay = document.getElementById('enquiry-popup');

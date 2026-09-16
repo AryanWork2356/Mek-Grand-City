@@ -152,6 +152,15 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
     transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);
   }
   [data-reveal].is-visible{opacity:1;transform:none;}
+
+  /* Opt-in horizontal variants — same attribute, same JS (an attribute
+     selector matches regardless of value, and js/enhancements.js's
+     reveal() only ever toggles .is-visible), just a different starting
+     transform so paired elements can enter from opposite sides. */
+  [data-reveal="left"]{transform:translateX(-40px);}
+  [data-reveal="left"].is-visible{transform:none;}
+  [data-reveal="right"]{transform:translateX(40px);}
+  [data-reveal="right"].is-visible{transform:none;}
 }
 /* If JavaScript never runs (blocked, fails to load, disabled), content must
    not stay invisible — js/enhancements.js is what adds .is-visible. */
@@ -526,4 +535,144 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
   .hallmarks{margin-top:44px;padding-top:36px;}
   .h-strip{grid-auto-columns:78%;}
   .h-tile{padding:20px 18px;}
+}
+
+/* ---------- Amenities showcase (tabbed list + image) ----------
+   Adapts the "category tabs swap a list + a photo" interaction pattern
+   from a reference competitor site, rebuilt with this site's own dark
+   palette/type system and this project's actual amenity data (which is
+   much smaller than the reference's — three real categories, two or three
+   items each, at most one genuinely matching photo). Tab buttons reuse the
+   pill/active-state language of .view-btn/.chip; each panel re-presents
+   the same .amenity-group markup already used in the static list above
+   (same h3->h4 content, just re-parented), so nothing here is a new fact.
+   Residential uses marigold; commercial swaps to teal via .amen-tabs--office,
+   mirroring .hallmarks/.hallmarks--office. */
+.amen-tabs{
+  position:relative;z-index:1;margin-top:56px;padding-top:44px;
+  border-top:1px solid var(--slate-line-soft);
+}
+.dark .amen-tabs{border-top-color:var(--slate-line);}
+.amen-tabs .eyebrow{margin-bottom:14px;}
+.amen-tabs h3{max-width:26ch;margin-bottom:24px;}
+
+.amen-tablist{
+  display:flex;flex-wrap:wrap;gap:8px;
+  border-bottom:1px solid var(--slate-line-soft);
+  margin-bottom:28px;padding-bottom:14px;
+}
+.dark .amen-tablist{border-bottom-color:var(--slate-line);}
+/* Icon-above-label pill/box, per the Hiranandani-style reference: a small
+   line-art icon over a two-line bold label. Active tab is a solid
+   accent-filled box with dark text; inactive tabs stay outlined/muted,
+   consistent with .view-btn's resting/active language above. */
+.amen-tab{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:transparent;border:1px solid var(--slate-line);border-radius:14px;
+  color:var(--text-mute);font-family:var(--body);font-size:.78rem;font-weight:700;
+  line-height:1.25;padding:14px 16px 12px;cursor:pointer;min-width:128px;
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+.amen-tab-icon{width:26px;height:26px;flex-shrink:0;}
+.amen-tab-label{text-align:center;}
+.amen-tab:hover{color:var(--text-light);border-color:var(--marigold);}
+.amen-tabs--office .amen-tab:hover{border-color:var(--teal);}
+.amen-tab.is-active{background:var(--marigold);color:#16262B;border-color:var(--marigold);}
+.amen-tabs--office .amen-tab.is-active{background:var(--teal);color:#0A1114;border-color:var(--teal);}
+.amen-tab:focus-visible{outline:2px solid var(--marigold-lt);outline-offset:2px;}
+.amen-tabs--office .amen-tab:focus-visible{outline-color:var(--teal-lt);}
+
+/* Panels: list + visual side by side, reference-like proportions on
+   desktop, stacked on mobile. Only the active panel is visible — the
+   [hidden] attribute (not just CSS) keeps inactive panels out of the
+   no-JS/SEO-relevant flow question moot, since .no-js below forces every
+   panel visible regardless of [hidden]. */
+.amen-panel[hidden]{display:none;}
+.amen-panel-in{
+  display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
+}
+.amen-panel .amenity-group h4{
+  font-family:var(--body);font-size:.78rem;font-weight:700;color:var(--marigold);
+  text-transform:uppercase;letter-spacing:.06em;margin:0 0 14px;padding-bottom:9px;
+  border-bottom:1px solid var(--slate-line-soft);
+}
+.dark .amen-panel .amenity-group h4{border-bottom-color:var(--slate-line);}
+.amen-tabs--office .amen-panel .amenity-group h4{color:var(--teal-lt);}
+.amen-list .amenity-group ul{display:grid;gap:12px;list-style:none;padding:0;margin:0;}
+.amen-list .amenity-group li{
+  font-size:1rem;color:var(--text-light);padding-left:22px;position:relative;
+}
+.amen-list .amenity-group li::before{
+  content:"";position:absolute;left:0;top:.55em;width:11px;height:2px;background:var(--marigold);
+}
+.amen-tabs--office .amen-list .amenity-group li::before{background:var(--teal-lt);}
+
+.amen-visual{
+  position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/3;
+  background:var(--slate);border:1px solid var(--slate-line-soft);
+}
+.dark .amen-visual{border-color:var(--slate-line);}
+.amen-visual--photo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) brightness(.86);margin:0;}
+
+/* Cinematic treatment: the one amenity tab with a genuine photo pairing
+   (residential Wellness & recreation -> gymnasium) gets a larger, more
+   confident full-bleed presentation than the numeral-fallback tabs, closer
+   to the reference's full-bleed image + small bottom-corner caption. The
+   caption text is the image's own existing alt/caption ("Fitted
+   gymnasium") — nothing invented. */
+.amen-visual--cinematic{
+  aspect-ratio:16/11;border-radius:10px;
+  box-shadow:0 30px 70px rgba(0,0,0,.4);
+}
+@media (min-width:761px){
+  .amen-visual--cinematic{aspect-ratio:4/3.1;}
+}
+.amen-visual--cinematic img{filter:saturate(.96) brightness(.92);}
+.amen-visual--cinematic::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,rgba(10,17,20,.78) 0%,rgba(10,17,20,.15) 42%,transparent 66%);
+}
+.amen-visual--cinematic figcaption{
+  position:absolute;left:16px;bottom:14px;z-index:1;
+  font-family:var(--body);font-size:.86rem;font-weight:700;color:var(--text-light);
+  padding:6px 14px;border-radius:100px;
+  background:rgba(10,17,20,.55);backdrop-filter:blur(2px);
+}
+.amen-visual--numeral{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate);
+}
+.dark .amen-visual--numeral{background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate-soft);}
+.amen-tabs--office .amen-visual--numeral{background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate);}
+.dark .amen-tabs--office .amen-visual--numeral{background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate-soft);}
+.amen-numeral{
+  font-family:var(--display);font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1.5px var(--marigold-lt);text-align:center;
+}
+.amen-tabs--office .amen-numeral{-webkit-text-stroke-color:var(--teal-lt);}
+.amen-visual--numeral svg{width:44px;height:44px;color:var(--marigold);flex-shrink:0;}
+.amen-tabs--office .amen-visual--numeral svg{color:var(--teal-lt);}
+
+/* Crossfade/slide on panel swap, driven by JS toggling .is-active + the
+   [hidden] attribute together (see js/enhancements.js amenTabs()). */
+@media (prefers-reduced-motion:no-preference){
+  .amen-panel{
+    opacity:0;transform:translateY(10px);
+    transition:opacity .32s cubic-bezier(.2,.7,.3,1),transform .32s cubic-bezier(.2,.7,.3,1);
+  }
+  .amen-panel.is-active{opacity:1;transform:none;}
+}
+.no-js .amen-panel{opacity:1;transform:none;}
+/* No-JS fallback: show every panel stacked, simply, rather than only the
+   first (js/enhancements.js is what normally hides the inactive ones). */
+.no-js .amen-panel[hidden]{display:block;}
+.no-js .amen-tablist{display:none;}
+.no-js .amen-panel + .amen-panel{margin-top:32px;padding-top:32px;border-top:1px solid var(--slate-line-soft);}
+
+@media (max-width:760px){
+  .amen-tabs{margin-top:44px;padding-top:36px;}
+  .amen-panel-in{grid-template-columns:1fr;gap:22px;}
+  .amen-visual{aspect-ratio:16/10;}
+  .amen-tab{min-width:0;flex:1 1 0;padding:10px 8px 9px;font-size:.7rem;}
+  .amen-tab-icon{width:22px;height:22px;}
 }
