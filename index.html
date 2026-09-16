@@ -8,7 +8,7 @@
      SEO — edit these four things when the domain changes.
      This is the part that Odoo's embed block could never reach.
      ============================================================ -->
-<title>Grand Meridian City &amp; MEK Grand Central, Mumbra — LA MAJESTE GROUP (MEK)</title>
+<title>MEK Grand City ; La Majeste Group</title>
 <meta name="description" content="2 and 3 BHK homes from ₹99 Lakhs and offices from ₹77 Lakhs in Mumbra, Thane. MahaRERA registered, possession December 2031. Launch pricing open.">
 <link rel="canonical" href="https://www.mekgrandcity.com/">
 <meta name="robots" content="index, follow">
@@ -55,8 +55,8 @@
 <header class="site-head" id="siteHead">
   <div class="wrap head-in">
     <a class="brand" href="#main">
-      <span class="brand-name">La Majeste Group</span>
-      <span class="brand-sub">MEK · Mumbra</span>
+      <span class="brand-name">MEK Grand City · Mumbra, Thane</span>
+      <span class="brand-sub">La Majeste Group</span>
     </a>
 
     <nav class="nav" aria-label="Sections">
@@ -80,7 +80,73 @@
   </div>
 </header>
 
+<!-- ================= ENQUIRY POPUP (opens automatically after 20s on
+     every visit — see js/enhancements.js. Reuses the exact same
+     .lead-form markup/classes as the hero and closing forms, so
+     js/main.js's existing querySelectorAll('form.lead-form') wires up
+     its validation and submission with no extra code.) ================= -->
+<div class="popup-overlay" id="enquiry-popup" hidden>
+  <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <button type="button" class="popup-close" aria-label="Close">&times;</button>
+    <div class="formcard" id="formcard-popup">
+      <h2 class="formcard-title" id="popup-title">Still deciding?</h2>
+      <p class="formcard-note">Get the full price sheet before you browse further — floor plans, payment schedule and what is still unsold.</p>
+
+      <div class="msg msg-ok" data-role="ok" hidden>
+        Thank you. Your enquiry has been received and our team will contact you shortly.
+      </div>
+      <div class="msg msg-err" data-role="err" hidden>
+        That did not send. Please call <a href="tel:+919821702210">98217 02210</a> or try again.
+      </div>
+
+      <form class="lead-form" data-source="Popup form" novalidate>
+        <p class="hp" aria-hidden="true">
+          <label>Do not fill this in <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <label for="p-name">Your name</label>
+        <input id="p-name" name="name" type="text" autocomplete="name" required placeholder="Full name">
+
+        <label for="p-phone">Mobile number</label>
+        <input id="p-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
+               pattern="[0-9+ ]{10,15}" required placeholder="10-digit mobile">
+
+        <label for="p-email">Email</label>
+        <input id="p-email" name="email" type="email" autocomplete="email" required placeholder="you@email.com">
+
+        <label for="p-interest">What are you looking for?</label>
+        <select id="p-interest" name="interest">
+          <option>2 BHK home, Grand Meridian City</option>
+          <option>3 BHK home, Grand Meridian City</option>
+          <option>Office space, MEK Grand Central</option>
+          <option>Retail or showroom, MEK Grand Central</option>
+          <option>Investment, open to both</option>
+        </select>
+
+        <button class="btn btn-gold btn-wide" type="submit">Send my enquiry</button>
+        <p class="fineprint">We will only contact you about these two projects.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <main id="main">
+
+<!-- ================= IDENTITY BANNER ================= -->
+<!-- States the "two projects, one address" idea as a visual equation, right
+     where a visitor lands, before the hero repeats it in prose. Every noun
+     here is already established elsewhere on the page (hero-sub, project
+     section titles) — this is presentation, not a new claim. -->
+<div class="identity-banner" data-reveal>
+  <p class="identity-eyebrow">One address, two ways in</p>
+  <p class="identity-row">
+    <span class="identity-part identity-part--home">Grand Meridian City</span>
+    <span class="identity-op" aria-hidden="true">+</span>
+    <span class="identity-part identity-part--office">MEK Grand Central</span>
+    <span class="identity-op" aria-hidden="true">=</span>
+    <span class="identity-part identity-part--sum">MEK Grand City</span>
+  </p>
+</div>
 
 <!-- ================= HERO ================= -->
 <section class="hero">

@@ -275,3 +275,89 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 @media (prefers-reduced-motion:reduce){
   .hotspot{animation:none;}
 }
+
+/* ---------- Enquiry popup (auto-opens after 20s, see js/enhancements.js) ---------- */
+.popup-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(6,10,12,.72);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.popup-overlay[hidden]{display:none;}
+.popup-card{
+  position:relative;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;
+  animation:popup-in .32s cubic-bezier(.2,.7,.3,1);
+}
+.popup-card .formcard{margin:0;}
+.popup-close{
+  position:absolute;top:-14px;right:-14px;z-index:1;
+  width:36px;height:36px;border-radius:50%;
+  background:var(--slate-black,#0A1114);color:var(--text-light);
+  border:2px solid var(--paper);font-size:1.4rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:transform .16s ease,background .16s ease;
+}
+.popup-close:hover{transform:scale(1.08);background:var(--marigold);color:#16262B;}
+@keyframes popup-in{
+  from{opacity:0;transform:translateY(18px) scale(.97);}
+  to{opacity:1;transform:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .popup-card{animation:none;}
+}
+@media (max-width:480px){
+  .popup-close{top:-10px;right:2px;}
+}
+
+/* ---------- Identity banner: "Homes + Offices = MEK Grand City" ----------
+   A quiet, confident equation rather than a plain text strip: a soft dual-
+   glow backdrop (marigold left, teal right) meeting in the middle behind a
+   pill-shaped card, each term colour-coded, the sum treated as the largest,
+   brightest element with a gold underline so the eye lands there last. */
+.identity-banner{
+  position:relative;overflow:hidden;
+  margin:0;padding:26px var(--gutter) 30px;
+  background:var(--slate-deep);
+  border-bottom:1px solid var(--slate-line);
+  text-align:center;
+}
+.identity-banner::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 46% 140% at 14% 50%, rgba(227,169,40,.16), transparent 70%),
+    radial-gradient(ellipse 46% 140% at 86% 50%, rgba(62,139,130,.16), transparent 70%);
+}
+.identity-eyebrow{
+  position:relative;margin:0 0 12px;
+  font-family:var(--body);font-size:.7rem;font-weight:700;
+  letter-spacing:var(--eyebrow-tracking,.22em);text-transform:uppercase;
+  color:var(--text-faint);
+}
+.identity-row{
+  position:relative;display:flex;flex-wrap:wrap;
+  align-items:baseline;justify-content:center;gap:12px 18px;
+}
+.identity-part{
+  font-family:var(--display);font-size:clamp(1.1rem,2.6vw,1.5rem);
+  letter-spacing:.01em;line-height:1.15;
+}
+.identity-part--home{color:var(--marigold-lt);}
+.identity-part--office{color:var(--teal-lt);}
+.identity-op{
+  color:var(--text-faint);font-size:1rem;font-family:var(--body);
+  transform:translateY(-1px);
+}
+.identity-part--sum{
+  color:var(--text-light);font-weight:600;
+  font-size:clamp(1.3rem,3.4vw,1.9rem);
+  padding:2px 4px 6px;position:relative;
+}
+.identity-part--sum::after{
+  content:"";position:absolute;left:2px;right:2px;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--marigold),var(--teal));
+  border-radius:2px;
+}
+@media (max-width:560px){
+  .identity-banner{padding:22px var(--gutter) 26px;}
+  .identity-row{gap:8px 12px;}
+}

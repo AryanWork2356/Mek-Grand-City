@@ -389,4 +389,60 @@
     update();
   })();
 
+  /* ---------------- Enquiry popup: opens 20s after page load, every visit ---------------- */
+  (function enquiryPopup() {
+    var overlay = document.getElementById('enquiry-popup');
+    if (!overlay) return;
+
+    var closeBtn = overlay.querySelector('.popup-close');
+    var lastFocused = null;
+
+    function openPopup() {
+      // Don't interrupt someone who has already reached a real form or
+      // is mid-way through submitting one.
+      if (document.querySelector('.lead-form .msg-ok:not([hidden])')) return;
+
+      lastFocused = document.activeElement;
+      overlay.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var firstField = overlay.querySelector('input, select');
+      if (firstField) firstField.focus();
+    }
+
+    function closePopup() {
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+
+    closeBtn.addEventListener('click', closePopup);
+
+    // Click on the dark backdrop (not the card itself) closes it too.
+    overlay.addEventListener('click', function (event) {
+      if (event.target === overlay) closePopup();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !overlay.hidden) closePopup();
+    });
+
+    // A successful submission inside the popup closes it automatically.
+    var popupForm = overlay.querySelector('.lead-form');
+    if (popupForm) {
+      popupForm.addEventListener('submit', function () {
+        var okBox = popupForm.closest('.formcard').querySelector('[data-role="ok"]');
+        if (!okBox) return;
+        var observer = new MutationObserver(function () {
+          if (!okBox.hidden) {
+            window.setTimeout(closePopup, 1800);
+            observer.disconnect();
+          }
+        });
+        observer.observe(okBox, { attributes: true, attributeFilter: ['hidden'] });
+      });
+    }
+
+    window.setTimeout(openPopup, 20000);
+  })();
+
 })();
