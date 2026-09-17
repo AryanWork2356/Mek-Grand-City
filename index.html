@@ -603,23 +603,32 @@
   </div>
 </section>
 
-<!-- ================= PULL-QUOTE / STAT CALLOUT ================= -->
-<!-- Full-bleed editorial break between the two projects, per the redesign
-     brief (asymmetric layout section requires "oversized pull-quotes or
-     stat callouts between sections"). Figures restated here already
-     appear in the glance strip and project sections above — nothing new
-     is introduced, just re-emphasised. -->
-<section class="callout" data-reveal>
-  <div class="callout-in">
-    <blockquote>
-      Two developments, <span>one MahaRERA-registered group</span>, on the same half kilometre of
-      Old Mumbai Pune Road.
-    </blockquote>
-    <dl class="callout-stats">
-      <div><dd data-count data-target="8.7" data-decimals="1" data-suffix=" acres">8.7 acres</dd><dt>Combined land</dt></div>
-      <div><dd data-count data-target="347" data-suffix="">347</dd><dt>Homes across two towers</dt></div>
-      <div><dd data-count data-target="5453" data-suffix=" sq ft">5,453 sq ft</dd><dt>Largest Commercial floor plate</dt></div>
-    </dl>
+<!-- ================= GALLERY ================= -->
+<section class="gallery light" id="gallery" data-reveal>
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2>Inside both addresses</h2>
+    <p class="lede">Artist's impressions of the residential podium and the shared decks.</p>
+
+    <!-- Captions below describe what each hotlinked placeholder photo actually
+         shows (verified visually), not the filename it was borrowed under —
+         several of the source files were misnamed relative to their content
+         (e.g. "bedroom.webp" is a garden seating photo, "gym.webp" is a pool,
+         "kids-pool.webp" is a gym, "jogging.webp" is a playground,
+         "meeting-lounge.webp" is a banquet hall unrelated to either project,
+         and the "commercial lobby" file is a retail-arcade shot with no
+         connection to an office building). Captions are kept to amenities
+         already listed in the project copy above — nothing here claims an
+         amenity (pool, retail arcade, banquet hall) that isn't actually in
+         the spec. Five tiles removed rather than mis-captioned; grid is 4
+         equal tiles so the layout stays full with no dangling row. Replace
+         with real photography per assets/img/README.txt. -->
+    <div class="gal">
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-mumbra-lobby.webp" alt="Grand Meridian City tower exterior"><figcaption>Tower exterior</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-bedroom.webp" alt="Landscaped garden seating area"><figcaption>Landscaped gardens</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Fitted gymnasium"><figcaption>Fitness centre</figcaption></figure>
+      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-jogging.webp" alt="Children's play area"><figcaption>Children's play area</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -896,142 +905,23 @@
   </div>
 </section>
 
-<!-- ================= DISTANCE LEDGER ================= -->
-<section class="ledger" id="distances" data-reveal>
-  <div class="wrap">
-    <p class="eyebrow">Connectivity</p>
-    <h2>Everything that matters, measured</h2>
-    <p class="lede ledger-lede">
-      Connectivity is usually sold to you as a row of icons. Here are the actual numbers, from the
-      site gates, so you can judge them yourself.
-    </p>
-
-    <!-- Interactive controls (progressively enhance the static grid below via
-         js/enhancements.js; the full data stays in the markup either way,
-         so nothing here depends on JavaScript for search engines to read it) -->
-    <div class="ledger-controls" data-ledger-controls hidden>
-      <div class="ledger-filters" role="group" aria-label="Filter by category">
-        <button type="button" class="chip is-active" data-filter="all">All</button>
-        <button type="button" class="chip" data-filter="transit">Trains and highways</button>
-        <button type="button" class="chip" data-filter="health">Schools and hospitals</button>
-        <button type="button" class="chip" data-filter="retail">Everyday and retail</button>
-      </div>
-      <label class="ledger-sort">
-        Sort by
-        <select data-sort>
-          <option value="default">Nearest first (default)</option>
-          <option value="distance">Distance, low to high</option>
-          <option value="time">Travel time, low to high</option>
-          <option value="name">Name, A to Z</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="ledger-grid" data-ledger-grid>
-      <div class="ledger-col" data-category="transit">
-        <h3>Trains and highways</h3>
-        <ul>
-          <li data-km="1.5" data-min="5"><span class="place">Mumbra railway station</span><span class="dist">1.5 km</span><span class="mins">5 min</span></li>
-          <li data-km="1.5" data-min="4"><span class="place">Old Mumbai–Pune highway</span><span class="dist">1.5 km</span><span class="mins">4 min</span></li>
-          <li data-km="3.5" data-min="10"><span class="place">Mumbai–Pune Expressway</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
-          <li data-km="4.2" data-min="12"><span class="place">Diva junction</span><span class="dist">4.2 km</span><span class="mins">12 min</span></li>
-          <li data-km="8.0" data-min="20"><span class="place">Eastern Express Highway</span><span class="dist">8.0 km</span><span class="mins">20 min</span></li>
-          <li data-km="32" data-min="55"><span class="place">Mumbai airport</span><span class="dist">32 km</span><span class="mins">55 min</span></li>
-        </ul>
-      </div>
-
-      <div class="ledger-col" data-category="health">
-        <h3>Schools and hospitals</h3>
-        <ul>
-          <li data-km="1.0" data-min="3"><span class="place">Bilal Hospital</span><span class="dist">1.0 km</span><span class="mins">3 min</span></li>
-          <li data-km="1.2" data-min="4"><span class="place">Symbiosis Convent High School</span><span class="dist">1.2 km</span><span class="mins">4 min</span></li>
-          <li data-km="2.0" data-min="7"><span class="place">MS College of Arts and Science</span><span class="dist">2.0 km</span><span class="mins">7 min</span></li>
-          <li data-km="2.5" data-min="8"><span class="place">Kalsekar Hospital</span><span class="dist">2.5 km</span><span class="mins">8 min</span></li>
-          <li data-km="3.0" data-min="9"><span class="place">Prime Criticare Hospital</span><span class="dist">3.0 km</span><span class="mins">9 min</span></li>
-          <li data-km="3.5" data-min="10"><span class="place">Royal College</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
-        </ul>
-      </div>
-
-      <div class="ledger-col" data-category="retail">
-        <h3>Everyday and retail</h3>
-        <ul>
-          <li data-km="0.8" data-min="2"><span class="place">Mumbra main market</span><span class="dist">0.8 km</span><span class="mins">2 min</span></li>
-          <li data-km="1.7" data-min="5"><span class="place">Grand Central Park</span><span class="dist">1.7 km</span><span class="mins">5 min</span></li>
-          <li data-km="2.2" data-min="7"><span class="place">Reti Bunder promenade</span><span class="dist">2.2 km</span><span class="mins">7 min</span></li>
-          <li data-km="4.8" data-min="12"><span class="place">Gold Digital Cinema</span><span class="dist">4.8 km</span><span class="mins">12 min</span></li>
-          <li data-km="11.2" data-min="22"><span class="place">Korum Mall, Thane</span><span class="dist">11.2 km</span><span class="mins">22 min</span></li>
-          <li data-km="13" data-min="28"><span class="place">Viviana Mall, Thane</span><span class="dist">13 km</span><span class="mins">28 min</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CORRIDOR ================= -->
-<section class="corridor" id="corridor" data-reveal>
-  <div class="wrap">
-    <p class="eyebrow">Why here</p>
-    <h2>The infrastructure argument stopped being a promise</h2>
-    <p class="lede">
-      Mumbra was priced as a fringe address while its connectivity was still on paper. Most of it
-      has since been built. The pricing has not fully caught up, and that gap is the whole case.
-    </p>
-
-    <div class="timeline-scroller" data-timeline-scroller>
-      <div class="timeline-track" role="progressbar" aria-hidden="true" data-timeline-track>
-        <div class="timeline-track-fill" data-timeline-fill></div>
-      </div>
-      <ol class="timeline" data-timeline>
-        <li>
-          <p class="when">Open since January 2024</p>
-          <h3>Atal Setu</h3>
-          <p>India's longest sea bridge cut the run between Navi Mumbai and south Mumbai to about
-             twenty minutes, pulling this whole eastern belt closer to the island city.</p>
-        </li>
-        <li>
-          <p class="when">Flying since December 2025</p>
-          <h3>Navi Mumbai airport</h3>
-          <p>Domestic operations began in December 2025, with international flights scheduled from
-             July 2026. A second aviation hub on this side of the harbour.</p>
-        </li>
-        <li>
-          <p class="when">Phase 5A due December 2026</p>
-          <h3>Metro Line 5</h3>
-          <p>The Thane to Bhiwandi to Kalyan line takes daily pressure off the Central railway and
-             reprices everything along its corridor.</p>
-        </li>
-      </ol>
-      <div class="timeline-hint" aria-hidden="true">Scroll to move through the timeline →</div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= GALLERY ================= -->
-<section class="gallery light" id="gallery" data-reveal>
-  <div class="wrap">
-    <p class="eyebrow">Gallery</p>
-    <h2>Inside both addresses</h2>
-    <p class="lede">Artist's impressions of the residential podium and the shared decks.</p>
-
-    <!-- Captions below describe what each hotlinked placeholder photo actually
-         shows (verified visually), not the filename it was borrowed under —
-         several of the source files were misnamed relative to their content
-         (e.g. "bedroom.webp" is a garden seating photo, "gym.webp" is a pool,
-         "kids-pool.webp" is a gym, "jogging.webp" is a playground,
-         "meeting-lounge.webp" is a banquet hall unrelated to either project,
-         and the "commercial lobby" file is a retail-arcade shot with no
-         connection to an office building). Captions are kept to amenities
-         already listed in the project copy above — nothing here claims an
-         amenity (pool, retail arcade, banquet hall) that isn't actually in
-         the spec. Five tiles removed rather than mis-captioned; grid is 4
-         equal tiles so the layout stays full with no dangling row. Replace
-         with real photography per assets/img/README.txt. -->
-    <div class="gal">
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-mumbra-lobby.webp" alt="Grand Meridian City tower exterior"><figcaption>Tower exterior</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-bedroom.webp" alt="Landscaped garden seating area"><figcaption>Landscaped gardens</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Fitted gymnasium"><figcaption>Fitness centre</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-jogging.webp" alt="Children's play area"><figcaption>Children's play area</figcaption></figure>
-    </div>
+<!-- ================= PULL-QUOTE / STAT CALLOUT ================= -->
+<!-- Full-bleed editorial break between the two projects, per the redesign
+     brief (asymmetric layout section requires "oversized pull-quotes or
+     stat callouts between sections"). Figures restated here already
+     appear in the glance strip and project sections above — nothing new
+     is introduced, just re-emphasised. -->
+<section class="callout" data-reveal>
+  <div class="callout-in">
+    <blockquote>
+      Two developments, <span>one MahaRERA-registered group</span>, on the same half kilometre of
+      Old Mumbai Pune Road.
+    </blockquote>
+    <dl class="callout-stats">
+      <div><dd data-count data-target="8.7" data-decimals="1" data-suffix=" acres">8.7 acres</dd><dt>Combined land</dt></div>
+      <div><dd data-count data-target="347" data-suffix="">347</dd><dt>Homes across two towers</dt></div>
+      <div><dd data-count data-target="5453" data-suffix=" sq ft">5,453 sq ft</dd><dt>Largest Commercial floor plate</dt></div>
+    </dl>
   </div>
 </section>
 
@@ -1225,6 +1115,116 @@
         </div>
 
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DISTANCE LEDGER ================= -->
+<section class="ledger" id="distances" data-reveal>
+  <div class="wrap">
+    <p class="eyebrow">Connectivity</p>
+    <h2>Everything that matters, measured</h2>
+    <p class="lede ledger-lede">
+      Connectivity is usually sold to you as a row of icons. Here are the actual numbers, from the
+      site gates, so you can judge them yourself.
+    </p>
+
+    <!-- Interactive controls (progressively enhance the static grid below via
+         js/enhancements.js; the full data stays in the markup either way,
+         so nothing here depends on JavaScript for search engines to read it) -->
+    <div class="ledger-controls" data-ledger-controls hidden>
+      <div class="ledger-filters" role="group" aria-label="Filter by category">
+        <button type="button" class="chip is-active" data-filter="all">All</button>
+        <button type="button" class="chip" data-filter="transit">Trains and highways</button>
+        <button type="button" class="chip" data-filter="health">Schools and hospitals</button>
+        <button type="button" class="chip" data-filter="retail">Everyday and retail</button>
+      </div>
+      <label class="ledger-sort">
+        Sort by
+        <select data-sort>
+          <option value="default">Nearest first (default)</option>
+          <option value="distance">Distance, low to high</option>
+          <option value="time">Travel time, low to high</option>
+          <option value="name">Name, A to Z</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="ledger-grid" data-ledger-grid>
+      <div class="ledger-col" data-category="transit">
+        <h3>Trains and highways</h3>
+        <ul>
+          <li data-km="1.5" data-min="5"><span class="place">Mumbra railway station</span><span class="dist">1.5 km</span><span class="mins">5 min</span></li>
+          <li data-km="1.5" data-min="4"><span class="place">Old Mumbai–Pune highway</span><span class="dist">1.5 km</span><span class="mins">4 min</span></li>
+          <li data-km="3.5" data-min="10"><span class="place">Mumbai–Pune Expressway</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
+          <li data-km="4.2" data-min="12"><span class="place">Diva junction</span><span class="dist">4.2 km</span><span class="mins">12 min</span></li>
+          <li data-km="8.0" data-min="20"><span class="place">Eastern Express Highway</span><span class="dist">8.0 km</span><span class="mins">20 min</span></li>
+          <li data-km="32" data-min="55"><span class="place">Mumbai airport</span><span class="dist">32 km</span><span class="mins">55 min</span></li>
+        </ul>
+      </div>
+
+      <div class="ledger-col" data-category="health">
+        <h3>Schools and hospitals</h3>
+        <ul>
+          <li data-km="1.0" data-min="3"><span class="place">Bilal Hospital</span><span class="dist">1.0 km</span><span class="mins">3 min</span></li>
+          <li data-km="1.2" data-min="4"><span class="place">Symbiosis Convent High School</span><span class="dist">1.2 km</span><span class="mins">4 min</span></li>
+          <li data-km="2.0" data-min="7"><span class="place">MS College of Arts and Science</span><span class="dist">2.0 km</span><span class="mins">7 min</span></li>
+          <li data-km="2.5" data-min="8"><span class="place">Kalsekar Hospital</span><span class="dist">2.5 km</span><span class="mins">8 min</span></li>
+          <li data-km="3.0" data-min="9"><span class="place">Prime Criticare Hospital</span><span class="dist">3.0 km</span><span class="mins">9 min</span></li>
+          <li data-km="3.5" data-min="10"><span class="place">Royal College</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
+        </ul>
+      </div>
+
+      <div class="ledger-col" data-category="retail">
+        <h3>Everyday and retail</h3>
+        <ul>
+          <li data-km="0.8" data-min="2"><span class="place">Mumbra main market</span><span class="dist">0.8 km</span><span class="mins">2 min</span></li>
+          <li data-km="1.7" data-min="5"><span class="place">Grand Central Park</span><span class="dist">1.7 km</span><span class="mins">5 min</span></li>
+          <li data-km="2.2" data-min="7"><span class="place">Reti Bunder promenade</span><span class="dist">2.2 km</span><span class="mins">7 min</span></li>
+          <li data-km="4.8" data-min="12"><span class="place">Gold Digital Cinema</span><span class="dist">4.8 km</span><span class="mins">12 min</span></li>
+          <li data-km="11.2" data-min="22"><span class="place">Korum Mall, Thane</span><span class="dist">11.2 km</span><span class="mins">22 min</span></li>
+          <li data-km="13" data-min="28"><span class="place">Viviana Mall, Thane</span><span class="dist">13 km</span><span class="mins">28 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CORRIDOR ================= -->
+<section class="corridor" id="corridor" data-reveal>
+  <div class="wrap">
+    <p class="eyebrow">Why here</p>
+    <h2>The infrastructure argument stopped being a promise</h2>
+    <p class="lede">
+      Mumbra was priced as a fringe address while its connectivity was still on paper. Most of it
+      has since been built. The pricing has not fully caught up, and that gap is the whole case.
+    </p>
+
+    <div class="timeline-scroller" data-timeline-scroller>
+      <div class="timeline-track" role="progressbar" aria-hidden="true" data-timeline-track>
+        <div class="timeline-track-fill" data-timeline-fill></div>
+      </div>
+      <ol class="timeline" data-timeline>
+        <li>
+          <p class="when">Open since January 2024</p>
+          <h3>Atal Setu</h3>
+          <p>India's longest sea bridge cut the run between Navi Mumbai and south Mumbai to about
+             twenty minutes, pulling this whole eastern belt closer to the island city.</p>
+        </li>
+        <li>
+          <p class="when">Flying since December 2025</p>
+          <h3>Navi Mumbai airport</h3>
+          <p>Domestic operations began in December 2025, with international flights scheduled from
+             July 2026. A second aviation hub on this side of the harbour.</p>
+        </li>
+        <li>
+          <p class="when">Phase 5A due December 2026</p>
+          <h3>Metro Line 5</h3>
+          <p>The Thane to Bhiwandi to Kalyan line takes daily pressure off the Central railway and
+             reprices everything along its corridor.</p>
+        </li>
+      </ol>
+      <div class="timeline-hint" aria-hidden="true">Scroll to move through the timeline →</div>
     </div>
   </div>
 </section>
