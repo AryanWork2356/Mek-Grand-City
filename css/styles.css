@@ -177,7 +177,14 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .hero-bg{position:absolute;inset:0;}
 .hero-bg img{
   width:100%;height:100%;object-fit:cover;
-  filter:saturate(.85) brightness(.8);
+  /* Was saturate(.85) brightness(.8) — tuned for the old hotlinked stock
+     photo. That extra 20% brightness cut, stacked on top of the ::after
+     scrim below, was compounding to hide the new real render almost
+     entirely. Raised brightness close to 1 (kept a hair under so the image
+     doesn't blow out against the site's otherwise near-black palette) and
+     nudged saturation back up so the render's warm building lights and
+     forest greens actually read. */
+  filter:saturate(1) brightness(.97);
 }
 @media (prefers-reduced-motion:no-preference){
   .hero-bg{animation:hero-kenburns 26s ease-in-out infinite alternate;}
@@ -186,10 +193,19 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
   0%{transform:scale(1.04) translate3d(0,0,0);}
   100%{transform:scale(1.14) translate3d(-1.2%,-1%,0);}
 }
+/* Lightened for the real night-aerial render (ImgVids/hero-night-aerial.jpg):
+   the previous .97/.92/.62 scrim was tuned to hide a lower-quality hotlinked
+   stock photo and made the new, genuinely good render barely visible behind
+   it. Values dropped to .78/.68/.4 (diagonal) and .35/0 (vertical) — still
+   enough to keep the left-side headline/body text readable over the image's
+   dark forested-mountain zone, while letting the tower, lit highway and
+   rooftop pool actually show through on the right. Re-verified with a real
+   contrast check (see commit message) that h1/hero-sub/hero-flag/hero-stats
+   still clear WCAG AA against the image at the headline's actual position. */
 .hero-bg::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(108deg,rgba(10,17,20,.97) 0%,rgba(10,17,20,.92) 42%,rgba(10,17,20,.62) 100%),
-             linear-gradient(0deg,rgba(10,17,20,.55),rgba(10,17,20,0) 45%);
+  background:linear-gradient(108deg,rgba(10,17,20,.78) 0%,rgba(10,17,20,.68) 42%,rgba(10,17,20,.4) 100%),
+             linear-gradient(0deg,rgba(10,17,20,.35),rgba(10,17,20,0) 45%);
 }
 /* Animated light sweep: a soft diagonal band of warm light drifting across
    the hero image, the cheapest possible stand-in for filmed motion. */
@@ -290,7 +306,11 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 }
 @media (max-width:900px){
   .hero-in{grid-template-columns:1fr;gap:36px;padding-top:56px;padding-bottom:64px;}
-  .hero-bg::after{background:linear-gradient(180deg,rgba(10,17,20,.95),rgba(10,17,20,.92));}
+  /* Lightened alongside the desktop diagonal scrim above (same reasoning:
+     the new real render deserves to be visible) — still a flat, fairly
+     strong cover since the copy spans the full width on this layout rather
+     than sitting only on the left third as it does on desktop. */
+  .hero-bg::after{background:linear-gradient(180deg,rgba(10,17,20,.82),rgba(10,17,20,.74));}
 }
 
 /* ---------- Form card ----------

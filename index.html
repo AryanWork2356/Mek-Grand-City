@@ -91,6 +91,22 @@
   </div>
 </header>
 
+<!-- MahaRERA verification badge: QR links to the official portal
+     (verified to decode correctly), the number shown updates with the
+     Homes/Offices/All focus toggle via CSS, same mechanism used
+     elsewhere on the page for [data-project] visibility. Deliberately
+     OUTSIDE the header element — it has backdrop-filter, which creates
+     a new containing block, so a position:fixed child inside it doesn't
+     actually anchor to the viewport as intended. -->
+<div class="rera-badge">
+  <img src="assets/img/rera-qr.png" alt="Scan to verify on the MahaRERA portal" width="46" height="46">
+  <span class="rera-badge-text">
+    <span class="rera-badge-num" data-project="homes">PR1330002600936</span>
+    <span class="rera-badge-num" data-project="offices">PC1330002600951</span>
+    <span class="rera-badge-label">MahaRERA<br>maharera.maharashtra.gov.in</span>
+  </span>
+</div>
+
 <!-- ================= ENQUIRY POPUP (opens automatically after 20s on
      every visit — see js/enhancements.js. Reuses the exact same
      .lead-form markup/classes as the hero and closing forms, so
@@ -170,8 +186,8 @@
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-bg" id="heroBg" data-parallax>
-    <img src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-meridian-city-reviews-banner1.webp"
-         alt="Grand Meridian City residential towers, Mumbra" fetchpriority="high">
+    <img src="ImgVids/hero-night-aerial.jpg"
+         alt="Night aerial view of the Grand Meridian City tower and retail podium with rooftop pool deck, Mumbra" fetchpriority="high">
   </div>
   <!-- CSS-only motion stand-ins for a hero video: an animated diagonal
        light sweep and a fine noise/grain texture, both purely decorative
@@ -279,14 +295,17 @@
 <!-- ================= RESIDENTIAL ================= -->
 <section class="project light" id="homes" data-project="homes">
   <div class="wrap project-in">
-    <!-- This photo is hotlinked from imperialbuildcon.in under a "master-plan"
-         filename but actually shows a detailed 3 BHK unit floor plan, not a
-         site master plan (towers/roads/landscaping) — verified visually.
-         Alt/caption below describe what the image actually is; replace with
-         a real master plan or unit plan per assets/img/README.txt. -->
+    <!-- Replaced the hotlinked mis-captioned "master-plan" image with the
+         user's real front-view render of the actual tower rising above its
+         retail podium — the building FORM (tower over podium) is accurate
+         to this project. FLAG: the shop signage visible in this render
+         (Burberry, Louis Vuitton, etc.) is placeholder/template branding,
+         not confirmed real tenants — see the commit message and final
+         report. Kept because the signage is small/distant in this framing
+         and the caption below makes no tenant claim. -->
     <div class="project-media" data-reveal="left">
-      <img src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-city-mumbra-master-plan.webp"
-           alt="Illustrative 3 BHK unit floor plan, Grand Meridian City" loading="lazy">
+      <img src="ImgVids/front-view-tower-podium.webp"
+           alt="Grand Meridian City tower rising above its retail podium, daytime render" loading="lazy">
       <div class="floorplan-wrap">
         <img src="assets/img/floor-plan-homes.svg"
              alt="Illustrative 2 and 3 BHK floor plan, Grand Meridian City" loading="lazy">
@@ -376,42 +395,23 @@
   </div>
 
   <!-- ---------- AMENITIES SHOWCASE: RESIDENTIAL ----------
-       REPLACED the tab-switching UI (list + one photo, click to switch)
-       with a static photo grid per direct, confirmed user choice: "Yes,
-       switch to a photo grid" — multiple amenity cards visible at once
-       instead of one category at a time. The static .amenity-groups list
-       above stays in the DOM untouched for no-JS/SEO; this grid re-presents
-       the exact same facts (nothing new invented) as individual cards.
-
-       Honesty rule enforced exactly as before: only a card whose image
-       genuinely, specifically matches its caption is a photo card. This
-       project's "Wellness & recreation" category is the only one with real
-       matching photography, but it actually has THREE — not just the one
-       gym shot used in the old single-photo tab panel — because the
-       gallery section below (#gallery) independently already verified and
-       correctly captioned two more images against these same list items:
-         - "Fitted gymnasium"  -> meridian-mumbra-kids-pool.webp (used in
-           the old amen-tabs cinematic panel; alt/caption already correct)
-         - "Landscaped gardens and walking paths" -> meridian-mumbra-
-           bedroom.webp (gallery alt "Landscaped garden seating area")
-         - "Enclosed children's play area" -> meridian-mumbra-jogging.webp
-           (gallery alt "Children's play area")
-       That is all three "Wellness & recreation" list items, each with its
-       own real photo, so each becomes its own card rather than one photo
-       standing in for the whole category.
-       "Safety & security" and "Convenience & sustainability" still have no
-       dedicated photo anywhere on the page (no camera/security or
-       rainwater-harvesting/lift photos exist), so they keep the existing
-       outlined-numeral icon-card treatment instead of a forced/mismatched
-       image — unchanged from the old tab panels, just re-parented into
-       grid cells instead of tab panels.
-       Layout: asymmetric bento — the gymnasium photo (first-listed amenity,
-       most "hero"-worthy interior shot) spans larger; the other two photos
-       and two icon cards fill in around it. Hover zooms the photo slightly
-       (transform:scale) and a staggered scroll-reveal brings cards in one
-       after another, mirroring the .h-tile stagger pattern used for the
-       hallmark grid above. All respects prefers-reduced-motion via the
-       shared rules in css/enhancements.css. -->
+       REBUILT as a uniform icon-grid per direct user instruction, replacing
+       the earlier photo/bento layout: a circular line-icon above a short
+       label, in a bordered card, 4 columns wide on desktop — one consistent
+       design system reused for both projects (marigold here, teal for
+       commercial below), not a mixed photo/icon layout. Every item below
+       was explicitly confirmed by the user as a real amenity; near-duplicate
+       phrasings from the reference material (e.g. "Gymnasium"/"Fitness
+       Centre", "Jogging Track" appearing twice) were consolidated into one
+       canonical tile each — see the commit message for the full dedup list.
+       "Rainwater harvesting" is kept from the project's pre-existing
+       amenity copy above (not dropped, since it is an already-established
+       real feature) even though it wasn't on the new reference list. Icons
+       are hand-authored inline SVG, 48x48 viewBox, 1.6px stroke,
+       currentColor — matching the hallmark tiles' existing style; the
+       security-shield and power-bolt icons are reused verbatim from the
+       hallmark/commercial icon set already on this page rather than
+       redrawn. -->
   <div class="wrap">
     <div class="amen-grid-wrap" id="amenities" data-reveal>
       <div class="amenities-head">
@@ -419,43 +419,45 @@
         <h3>Everything the address includes</h3>
       </div>
 
-      <ul class="amen-grid">
-        <li class="amen-card amen-card--photo amen-card--hero">
-          <figure>
-            <img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Fitted gymnasium">
-            <figcaption>Fitted gymnasium</figcaption>
-          </figure>
+      <ul class="amen-icon-grid">
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 30V14M34 30V14M8 24h32"/><circle cx="14" cy="12" r="2.4"/><circle cx="34" cy="12" r="2.4"/><path d="M8 24l-3 12M40 24l3 12M14 30l-4 10M34 30l4 10"/></svg><h4>Gymnasium</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 42V22l16-10 16 10v20"/><path d="M8 42h32"/><path d="M18 42V29h12v13"/><path d="M18 22h12"/></svg><h4>Clubhouse</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 38c8-14 14-14 18-22 4 8 10 8 18 22"/><path d="M6 38h36"/><circle cx="24" cy="10" r="3"/></svg><h4>Landscaped Gardens &amp; Jogging Track</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="35" r="5"/><circle cx="37" cy="35" r="5"/><path d="M11 35l9-19h8l-6 12M20 16h8M28 35H15l6-12"/></svg><h4>Cycling Track</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="9" r="3.2"/><path d="M24 15v11l-9 16M24 26l9 16M15 21l9-3 9 3"/></svg><h4>Outdoor Fitness Zone</h4></li>
+        <li class="amen-tile amen-tile--photo">
+          <img src="ImgVids/amenity-sports-court-wide.jpg" alt="Rooftop sports court on the amenity deck, Grand Meridian City" loading="lazy">
+          <h4>Rooftop Sports Court</h4>
         </li>
-        <li class="amen-card amen-card--photo">
-          <figure>
-            <img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-bedroom.webp" alt="Landscaped gardens and walking paths">
-            <figcaption>Landscaped gardens &amp; walking paths</figcaption>
-          </figure>
+        <li class="amen-tile amen-tile--photo">
+          <img src="ImgVids/amenity-sports-play-deck.jpg" alt="Children's play deck on the rooftop amenity level, Grand Meridian City" loading="lazy">
+          <h4>Children&rsquo;s Play Area</h4>
         </li>
-        <li class="amen-card amen-card--photo">
-          <figure>
-            <img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-jogging.webp" alt="Enclosed children's play area">
-            <figcaption>Enclosed children's play area</figcaption>
-          </figure>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="12" r="5"/><path d="M14 40c0-8 4-13 10-13s10 5 10 13"/><path d="M15 40h18"/><path d="M18 24c2 2 10 2 12 0" stroke-dasharray="2 3"/></svg><h4>Senior Citizen Area</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg><h4>24&times;7 Security &amp; Surveillance</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M26 4 10 28h10l-4 16 20-26H26z"/></svg><h4>Power Backup</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="24" r="15"/><path d="M24 9v6M24 33v6M9 24h6M33 24h6"/><circle cx="24" cy="24" r="4"/></svg><h4>Yoga &amp; Pilates Deck</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="14" width="36" height="24" rx="2"/><path d="M6 22h36M16 14v-4h16v4"/></svg><h4>Multipurpose Hall</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5c6 7 3 10 6 14 3-2 4-6 4-6 3 5 4 9 4 13 0 8-6 14-14 14S10 34 10 26c0-8 5-12 6-16 1 3 2 5 4 5 1-4 2-7 4-10z"/></svg><h4>Fire Safety Systems</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="12" width="36" height="26" rx="2"/><path d="M14 38v-6h8v6M28 38v-6h8v6"/><path d="M6 22h36"/></svg><h4>Dedicated Parking</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="24" cy="10" r="3.4"/><path d="M17 44l3-14h8l3 14"/><path d="M14 22c3 3 17 3 20 0"/><path d="M31 16h9v6h-9z"/></svg><h4>Valet Parking</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="16" y="4" width="16" height="40" rx="2"/><path d="M22 14l2-3 2 3M22 34l2 3 2-3"/></svg><h4>High-Speed Elevators</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 30a14 14 0 0 1 28 0"/><path d="M8 30h32v6H8z"/><path d="M22 40h4"/></svg><h4>Concierge Services</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 26 24 12l18 14"/><path d="M10 26v16h28V26"/><path d="M18 42V30h12v12"/></svg><h4>Elegant Drop-Off Court</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 34v-9a5 5 0 0 1 5-5h18a5 5 0 0 1 5 5v9"/><path d="M8 34h32v6H8z"/><path d="M14 20v-4M34 20v-4"/></svg><h4>Visitor Lounge</h4></li>
+        <li class="amen-tile amen-tile--photo">
+          <img src="ImgVids/amenity-family-lawn.jpg" alt="Landscaped party and family lawn with pergola and swing seating, Grand Meridian City" loading="lazy">
+          <h4>Party &amp; Family Lawn</h4>
         </li>
-        <li class="amen-card amen-card--icon">
-          <span class="amen-card-numeral" aria-hidden="true">24&times;7</span>
-          <svg class="amen-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>
-          <h4>Safety &amp; security</h4>
-          <ul>
-            <li>Round-the-clock camera surveillance</li>
-            <li>Trained on-site security</li>
-          </ul>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="15" cy="16" r="4"/><circle cx="33" cy="16" r="4"/><path d="M6 34c0-6 4-9 9-9s9 3 9 9M24 34c0-6 4-9 9-9s9 3 9 9"/></svg><h4>Community &amp; Social Lounge</h4></li>
+        <li class="amen-tile amen-tile--photo">
+          <img src="ImgVids/amenity-pool.webp" alt="Covered swimming pool interior, Grand Meridian City" loading="lazy">
+          <h4>Swimming Pool</h4>
         </li>
-        <li class="amen-card amen-card--icon">
-          <span class="amen-card-numeral" aria-hidden="true">G+38</span>
-          <svg class="amen-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="7" y="6" width="14" height="36"/><rect x="27" y="14" width="14" height="28"/><path d="M11 13h6M11 19h6M11 25h6M11 31h6M11 37h6M31 21h6M31 27h6M31 33h6"/></svg>
-          <h4>Convenience &amp; sustainability</h4>
-          <ul>
-            <li>Rainwater harvesting</li>
-            <li>Lifts sized for a thirty-eight floor tower</li>
-          </ul>
-        </li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="11" y="14" width="26" height="15" rx="2"/><path d="M9 34c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 7.5 0 5 2.5 7.5 0"/><circle cx="24" cy="10" r="2.2"/></svg><h4>Kids&rsquo; Pool</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 12c-4-3-11-3-14 0v24c3-3 10-3 14 0V12zM24 12c4-3 11-3 14 0v24c-3-3-10-3-14 0V12z"/></svg><h4>Reading &amp; Lounge Area</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="16" width="36" height="18" rx="6"/><path d="M15 22v6M12 25h6"/><circle cx="29" cy="23" r="1.6" fill="currentColor" stroke="none"/><circle cx="34" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg><h4>Games Room</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5c6 8 12 16 12 23a12 12 0 0 1-24 0c0-7 6-15 12-23z"/></svg><h4>Rainwater Harvesting</h4></li>
       </ul>
     </div>
   </div>
@@ -483,6 +485,47 @@
         with MEK Grand Central &mdash; so the same half kilometre that gets you home can also get you
         to work.
       </p>
+    </div>
+  </div>
+
+  <!-- ---------- WHY INVEST: RESIDENTIAL ----------
+       New checkmarked bullet list per direct user instruction, positioned
+       right after the existing "Why choose" narrative above. Every bullet
+       cites a fact already established elsewhere on this page — see the
+       inline data-fact-source on each item — rather than any new claim,
+       award or superlative. No stock image used, per the user's explicit
+       instruction to skip the reference's building-render photo and keep
+       this text-forward. -->
+  <div class="wrap">
+    <div class="why-invest" data-reveal>
+      <p class="eyebrow">Why invest &middot; Grand Meridian City</p>
+      <h3>The case, in six facts</h3>
+      <ul class="check-list">
+        <li data-fact-source="proof section / specs-table: MahaRERA PR1330002600936">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>MahaRERA registered, not just promised.</strong> PR1330002600936 is verifiable on the MahaRERA portal before you pay anything &mdash; the same registration cited in the specs table above.</span>
+        </li>
+        <li data-fact-source="#corridor: Atal Setu live since January 2024, Metro Line 5 due December 2026">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>Two infrastructure upgrades landing at once.</strong> Atal Setu already cut the run to south Mumbai to about twenty minutes, and Metro Line 5 is due to reach this corridor by December 2026.</span>
+        </li>
+        <li data-fact-source="hero-flag / pricing table: launch price ₹92 Lakh 2BHK, open until June 2026">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>Launch pricing is a window, not a fixture.</strong> 2 BHK homes start at &#8377;92 Lakh and 3 BHK at &#8377;1.31 Crore while launch pricing holds &mdash; only until June 2026.</span>
+        </li>
+        <li data-fact-source="spec list: Land 8.7 acres">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>8.7 gated acres, not a tower on a plot.</strong> Two towers of ground plus 38 floors sit inside a landscaped, walled enclave rather than a standalone high-rise.</span>
+        </li>
+        <li data-fact-source="#distances ledger: Mumbra station 1.5 km, main market 0.8 km, schools/hospitals under 3 km">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>Everything measured, nothing rounded up.</strong> Mumbra station is 1.5 km, the main market 0.8 km, and schools and hospitals all sit under 3 km &mdash; the actual distances from the site gates.</span>
+        </li>
+        <li data-fact-source="identity-banner / why-choose: shared corridor with MEK Grand Central">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>A home and a workplace on the same corridor.</strong> Grand Meridian City shares its 8.7-acre address with MEK Grand Central, so the same half kilometre can serve both ends of your day.</span>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -608,26 +651,36 @@
   <div class="wrap">
     <p class="eyebrow">Gallery</p>
     <h2>Inside both addresses</h2>
-    <p class="lede">Artist's impressions of the residential podium and the shared decks.</p>
+    <p class="lede">Real renders of the site, its views and its shared amenity decks.</p>
 
-    <!-- Captions below describe what each hotlinked placeholder photo actually
-         shows (verified visually), not the filename it was borrowed under —
-         several of the source files were misnamed relative to their content
-         (e.g. "bedroom.webp" is a garden seating photo, "gym.webp" is a pool,
-         "kids-pool.webp" is a gym, "jogging.webp" is a playground,
-         "meeting-lounge.webp" is a banquet hall unrelated to either project,
-         and the "commercial lobby" file is a retail-arcade shot with no
-         connection to an office building). Captions are kept to amenities
-         already listed in the project copy above — nothing here claims an
-         amenity (pool, retail arcade, banquet hall) that isn't actually in
-         the spec. Five tiles removed rather than mis-captioned; grid is 4
-         equal tiles so the layout stays full with no dangling row. Replace
-         with real photography per assets/img/README.txt. -->
+    <!-- Replaced the previous hotlinked placeholder photos with the user's
+         supplied real project renders/photos (ImgVids/Res+Commercial/),
+         verified visually against what each actually shows:
+           - complex-aerial-full.jpg: daytime aerial of the full tower +
+             podium + amenity deck (pool, sports court, play area together),
+             used as the wide feature tile.
+           - view-mountain.jpg / view-creek.jpg: real aerial photographs of
+             Mumbra's surrounding geography with "Mountain View" / "Creek
+             View" captions baked into the source images themselves — used
+             verbatim, matching the existing hero-sub copy's mountain/creek
+             view claims.
+           - amenity-sports-court-wide.jpg: the rooftop sports court +
+             kids' play area + lawn deck above the retail podium.
+         Grid stays 4 tiles (1 wide + 3 standard) so there is no dangling
+         row, per .gal/.gal figure.wide in css/styles.css. -->
     <div class="gal">
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/grand-mumbra-lobby.webp" alt="Grand Meridian City tower exterior"><figcaption>Tower exterior</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-bedroom.webp" alt="Landscaped garden seating area"><figcaption>Landscaped gardens</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-kids-pool.webp" alt="Fitted gymnasium"><figcaption>Fitness centre</figcaption></figure>
-      <figure><img loading="lazy" src="https://imperialbuildcon.in/wp-content/uploads/2026/07/meridian-mumbra-jogging.webp" alt="Children's play area"><figcaption>Children's play area</figcaption></figure>
+      <figure class="wide"><img loading="lazy" src="ImgVids/complex-aerial-full.jpg" alt="Full aerial view of the tower, retail podium and rooftop amenity deck, Grand Meridian City"><figcaption>The complex from above &mdash; tower, podium and amenity deck</figcaption></figure>
+      <figure><img loading="lazy" src="ImgVids/view-mountain.jpg" alt="Aerial photo of Mumbra town and hills, captioned Mountain View"><figcaption>Mountain View</figcaption></figure>
+      <!-- ImgVids/view-creek.jpg is pre-cropped (not the original file) to a
+           middle horizontal band of the source photo: the original also has
+           its own baked-in "A Rare Vista to Treasure for a Lifetime" /
+           "Creek View" captions top-left and bottom-left, which duplicated/
+           overlapped this figure's own figcaption once object-fit:cover
+           cropped the wide source down to the grid's 4:3 tile. The cropped
+           file keeps the creek bend, mangroves and far-bank city clearly in
+           frame with neither baked-in caption. -->
+      <figure><img loading="lazy" src="ImgVids/view-creek.jpg" alt="Aerial photo of a river creek bend with mangroves, near Mumbra"><figcaption>Creek View</figcaption></figure>
+      <figure><img loading="lazy" src="ImgVids/amenity-sports-court-wide.jpg" alt="Rooftop amenity deck with sports court, lawn and children's play area above the retail podium"><figcaption>Rooftop amenity deck</figcaption></figure>
     </div>
   </div>
 </section>
@@ -717,17 +770,13 @@
   </div>
 
   <!-- ---------- AMENITIES SHOWCASE: COMMERCIAL ----------
-       Same photo-grid conversion as the residential instance, teal variant,
-       driven by the same three .amenity-group blocks above (identical
-       category names/items). No dedicated commercial amenity photograph
-       exists anywhere on the page — the only image in this project's
-       .project-media is a generic "business meeting" stock photo (already
-       captioned as illustrative, not the building), and the only other
-       commercial image is the office floor-plate SVG diagram, which shows
-       unit layout, not lobby/access/power-backup amenities. Using either
-       for a specific category here would imply something the photo doesn't
-       show, so — same honesty rule as residential — all three commercial
-       categories stay icon+numeral cards, no forced/mismatched photo. -->
+       Same icon-grid component as the residential instance (teal variant
+       via .amen-grid-wrap--office), reusing the exact 12 commercial
+       amenities the user confirmed as the complete, final list for MEK
+       Grand Central — nothing added beyond these 12, nothing dropped.
+       Security-shield and power-bolt icons are reused verbatim from the
+       icons already established elsewhere on this page (hallmark strip /
+       residential amenity grid) rather than redrawn. -->
   <div class="wrap">
     <div class="amen-grid-wrap amen-grid-wrap--office" data-reveal>
       <div class="amenities-head">
@@ -735,36 +784,19 @@
         <h3>Everything the address includes</h3>
       </div>
 
-      <ul class="amen-grid amen-grid--office amen-grid--icons-only">
-        <li class="amen-card amen-card--icon">
-          <span class="amen-card-numeral" aria-hidden="true">Glass lobby</span>
-          <svg class="amen-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 42V17c0-6 7-11 16-11s16 5 16 11v25"/><path d="M8 42h32"/><path d="M20 42V24a4 4 0 0 1 8 0v18"/><path d="M14 30v12M34 30v12"/></svg>
-          <h4>Business infrastructure</h4>
-          <ul>
-            <li>High-speed lifts</li>
-            <li>Double-height arrival lobby</li>
-            <li>Shared conference rooms</li>
-            <li>Executive lounge</li>
-          </ul>
-        </li>
-        <li class="amen-card amen-card--icon">
-          <span class="amen-card-numeral" aria-hidden="true">Secure</span>
-          <svg class="amen-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>
-          <h4>Safety &amp; access</h4>
-          <ul>
-            <li>Layered access control</li>
-            <li>Fire detection and suppression throughout</li>
-          </ul>
-        </li>
-        <li class="amen-card amen-card--icon">
-          <span class="amen-card-numeral" aria-hidden="true">24&times;7</span>
-          <svg class="amen-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M26 4 10 28h10l-4 16 20-26H26z"/></svg>
-          <h4>Operations &amp; convenience</h4>
-          <ul>
-            <li>Round-the-clock power backup</li>
-            <li>Planned staff and visitor parking</li>
-          </ul>
-        </li>
+      <ul class="amen-icon-grid amen-icon-grid--office">
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="16" y="4" width="16" height="40" rx="2"/><path d="M22 14l2-3 2 3M22 34l2 3 2-3"/></svg><h4>High-Speed Elevators</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 42V17c0-6 7-11 16-11s16 5 16 11v25"/><path d="M8 42h32"/><path d="M20 42V24a4 4 0 0 1 8 0v18"/><path d="M14 30v12M34 30v12"/></svg><h4>Grand Entrance Lobby</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5l16 6v11c0 11-7 18-16 21C15 40 8 33 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg><h4>Multi-Tier Security</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M26 4 10 28h10l-4 16 20-26H26z"/></svg><h4>24&times;7 Power Backup</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 5c6 7 3 10 6 14 3-2 4-6 4-6 3 5 4 9 4 13 0 8-6 14-14 14S10 34 10 26c0-8 5-12 6-16 1 3 2 5 4 5 1-4 2-7 4-10z"/></svg><h4>Advanced Fire Fighting Systems</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="12" width="36" height="26" rx="2"/><path d="M14 38v-6h8v6M28 38v-6h8v6"/><path d="M6 22h36"/></svg><h4>Ample Vehicle Parking</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="9" width="30" height="30" rx="2"/><path d="M24 9v30M9 24h30"/><path d="M16.5 16.5l15 15M31.5 16.5l-15 15" stroke-dasharray="1 4"/></svg><h4>Vastu-Compliant Layouts</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M24 33a20 20 0 0 1 20-9M24 33A20 20 0 0 0 4 24M24 33a13 13 0 0 1 13-15M24 33a13 13 0 0 0-13-15M24 33a6 6 0 0 1 6-9M24 33a6 6 0 0 0-6-9"/><circle cx="24" cy="36" r="2.2" fill="currentColor" stroke="none"/></svg><h4>High-Speed Wi-Fi Zoning</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="14" width="32" height="20" rx="2"/><circle cx="16" cy="24" r="2"/><circle cx="24" cy="24" r="2"/><circle cx="32" cy="24" r="2"/></svg><h4>Dedicated Conference Zones</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 34v-9a5 5 0 0 1 5-5h18a5 5 0 0 1 5 5v9"/><path d="M8 34h32v6H8z"/><path d="M14 20v-4M34 20v-4"/></svg><h4>Executive Lounge Areas</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="8" width="36" height="32" rx="1"/><circle cx="6" cy="8" r="2.1" fill="currentColor" stroke="none"/><circle cx="42" cy="8" r="2.1" fill="currentColor" stroke="none"/><circle cx="6" cy="40" r="2.1" fill="currentColor" stroke="none"/><circle cx="42" cy="40" r="2.1" fill="currentColor" stroke="none"/><path d="M13 24h22" stroke-dasharray="2.5 3.5"/></svg><h4>Wide Column-Free Layouts</h4></li>
+        <li class="amen-tile"><svg class="amen-tile-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 42V17c0-6 7-11 16-11s16 5 16 11v25"/><path d="M8 42h32"/><path d="M14 20h5v6h-5zM29 20h5v6h-5zM14 30h5v6h-5zM29 30h5v6h-5z"/></svg><h4>High-Visibility Glass Facade</h4></li>
       </ul>
     </div>
   </div>
@@ -793,6 +825,45 @@
         Metro Line 5 due by December 2026. Pair it with a home at Grand Meridian City on the same
         half kilometre and the commute between the two disappears entirely.
       </p>
+    </div>
+  </div>
+
+  <!-- ---------- WHY INVEST: COMMERCIAL ----------
+       New checkmarked bullet list per direct user instruction, mirroring
+       the residential one above (teal accent via .why-invest--office).
+       Every bullet cites a fact already established elsewhere on this
+       page — see the inline data-fact-source on each item. No stock image,
+       per the user's explicit instruction. -->
+  <div class="wrap">
+    <div class="why-invest why-invest--office" data-reveal>
+      <p class="eyebrow">Why invest &middot; MEK Grand Central</p>
+      <h3>The case, in six facts</h3>
+      <ul class="check-list">
+        <li data-fact-source="project-body lede: purpose-built commercial vs converted residential stock">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>Purpose-built commercial, not converted flats.</strong> Most office stock on Old Mumbai Pune Road is repurposed residential space &mdash; this is commercial by design, from the ground up.</span>
+        </li>
+        <li data-fact-source="proof section / specs-table: MahaRERA PC1330002600951">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>MahaRERA registered, not just promised.</strong> PC1330002600951 is verifiable on the MahaRERA portal before you pay anything &mdash; the same registration cited in the specs table above.</span>
+        </li>
+        <li data-fact-source="specs-table: carpet area range 467-5,453 sq ft, column-free">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>Column-free space up to a full floor plate.</strong> Units run from a 467 sq ft boutique office to a 5,453 sq ft column-free floor plate, so the layout scales with the business.</span>
+        </li>
+        <li data-fact-source="hero-flag / pricing table: launch price ₹3.5 Cr boutique office, open until June 2026">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>Launch pricing is a window, not a fixture.</strong> Boutique offices start at &#8377;3.5 Crore while launch pricing holds &mdash; only until June 2026.</span>
+        </li>
+        <li data-fact-source="#distances ledger: Mumbai-Pune Expressway 3.5 km / 10 min; #corridor: Atal Setu, Metro Line 5">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>On the corridor, not off it.</strong> The Mumbai&ndash;Pune Expressway is 3.5 km away, with Atal Setu already shortening the run to south Mumbai and Metro Line 5 due by December 2026.</span>
+        </li>
+        <li data-fact-source="why-choose: shared address with Grand Meridian City">
+          <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+          <span><strong>A workplace and a home on the same corridor.</strong> Pair an office here with a home at Grand Meridian City, on the same 8.7-acre address, and the commute between the two disappears.</span>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -1267,8 +1338,7 @@
       </details>
       <details>
         <summary>Can I visit the site?</summary>
-        <p>Yes, seven days a week. Pickup can be arranged from Mumbra or Thane station. Call
-           98217 02210 to book a slot.</p>
+        <p>Yes, seven days a week. Call 98217 02210 to book a slot.</p>
       </details>
     </div>
   </div>
@@ -1464,7 +1534,7 @@
         { "@type": "Question", "name": "Can I get a home loan on this?",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes. MahaRERA-registered projects are eligible for standard home and commercial loan products." } },
         { "@type": "Question", "name": "Can I visit the site?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, seven days a week. Pickup can be arranged from Mumbra or Thane station. Call 98217 02210 to book a slot." } }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, seven days a week. Call 98217 02210 to book a slot." } }
       ]
     }
   ]
