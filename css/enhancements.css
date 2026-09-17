@@ -553,8 +553,32 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
   border-top:1px solid var(--slate-line-soft);
 }
 .dark .amen-tabs{border-top-color:var(--slate-line);}
-.amen-tabs .eyebrow{margin-bottom:14px;}
-.amen-tabs h3{max-width:26ch;margin-bottom:24px;}
+
+/* Amenities showcase heading: a proper masthead for the section rather
+   than a plain small eyebrow + h3 — a wide-tracked "Amenities" label with
+   a short accent rule, the project name as a secondary line, and a larger
+   serif headline, consistent with how .corridor/.ledger headers in
+   css/styles.css pair an eyebrow with a big display heading, but with
+   more considered spacing before the tab buttons start. */
+.amenities-head{margin-bottom:36px;max-width:52ch;}
+.amenities-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--body);font-size:.78rem;font-weight:700;
+  letter-spacing:var(--eyebrow-tracking);text-transform:uppercase;
+  color:var(--text-mute);margin-bottom:16px;
+}
+.amenities-eyebrow::before{
+  content:"";display:block;width:28px;height:2px;flex-shrink:0;
+  background:var(--marigold);
+}
+.amen-tabs--office .amenities-eyebrow::before{background:var(--teal-lt);}
+.amenities-eyebrow::after{
+  content:"Amenities";color:var(--marigold);font-weight:700;
+}
+.amen-tabs--office .amenities-eyebrow::after{color:var(--teal-lt);}
+.amenities-head h3{
+  max-width:22ch;margin-bottom:0;font-size:clamp(1.7rem,3.2vw,2.3rem);
+}
 
 .amen-tablist{
   display:flex;flex-wrap:wrap;gap:8px;
@@ -671,6 +695,7 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 
 @media (max-width:760px){
   .amen-tabs{margin-top:44px;padding-top:36px;}
+  .amenities-head{margin-bottom:28px;}
   .amen-panel-in{grid-template-columns:1fr;gap:22px;}
   .amen-visual{aspect-ratio:16/10;}
   .amen-tab{min-width:0;flex:1 1 0;padding:10px 8px 9px;font-size:.7rem;}
