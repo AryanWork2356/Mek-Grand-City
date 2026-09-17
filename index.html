@@ -9,7 +9,7 @@
      This is the part that Odoo's embed block could never reach.
      ============================================================ -->
 <title>MEK Grand City - La Majeste Group</title>
-<meta name="description" content="2 and 3 BHK homes from ₹92 Lakhs and offices from ₹3.5 Crore in Mumbra, Thane. MahaRERA registered, possession December 2031. Launch pricing open.">
+<meta name="description" content="2 and 3 BHK homes from ₹92 Lakhs and offices from ₹1.75 Crore in Mumbra, Thane. MahaRERA registered, possession December 2031. Launch pricing open.">
 <link rel="canonical" href="https://www.mekgrandcity.com/">
 <meta name="robots" content="index, follow">
 
@@ -180,6 +180,25 @@
   <div class="hero-sweep" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
 
+  <!-- MahaRERA verification badge: QR links to the official portal
+       (verified to decode correctly), the number shown updates with
+       the Homes/Offices/All focus toggle via CSS, same mechanism used
+       elsewhere on the page for [data-project] visibility. Positioned
+       within the hero (top-right), NOT inside the header — the header
+       has backdrop-filter, which creates a new containing block, so a
+       position:fixed/absolute child there doesn't anchor to the
+       viewport/section as intended and can overlap the header's own
+       nav/phone button. Absolute here anchors correctly to .hero
+       (position:relative) and scrolls away with the page normally. -->
+  <div class="rera-badge rera-badge--hero">
+    <img src="assets/img/rera-qr.png" alt="Scan to verify on the MahaRERA portal" width="40" height="40">
+    <span class="rera-badge-text">
+      <span class="rera-badge-num" data-project="homes">PR1330002600936</span>
+      <span class="rera-badge-num" data-project="offices">PC1330002600951</span>
+      <span class="rera-badge-label">MahaRERA<br>maharera.maharashtra.gov.in</span>
+    </span>
+  </div>
+
   <div class="wrap hero-in">
     <div class="hero-copy">
       <p class="hero-flag">Launch pricing open until June 2026</p>
@@ -197,29 +216,13 @@
 
       <dl class="hero-stats">
         <div><dt>Homes from</dt><dd class="price-drop"><del>₹1.22 Cr</del><strong>₹92 Lakh</strong></dd></div>
-        <div><dt>Offices from</dt><dd class="price-drop"><del>₹4.6 Crore</del><strong>₹3.5 Cr</strong></dd></div>
+        <div><dt>Offices from</dt><dd class="price-drop"><del>₹2.3 Crore</del><strong>₹1.75 Cr</strong></dd></div>
         <div><dt>Across</dt><dd data-count data-target="8.7" data-decimals="1" data-suffix=" acres">8.7 acres</dd></div>
       </dl>
     </div>
 
     <!-- ---------- LEAD FORM 1 ---------- -->
     <div class="hero-form-col">
-      <!-- MahaRERA verification badge: QR links to the official portal
-           (verified to decode correctly), the number shown updates with
-           the Homes/Offices/All focus toggle via CSS, same mechanism
-           used elsewhere on the page for [data-project] visibility.
-           Sits above the form card and scrolls with the page — a fixed
-           position previously covered the header's Contact link and
-           never scrolled away, which is wrong for a supporting element
-           like this. -->
-      <div class="rera-badge">
-        <img src="assets/img/rera-qr.png" alt="Scan to verify on the MahaRERA portal" width="40" height="40">
-        <span class="rera-badge-text">
-          <span class="rera-badge-num" data-project="homes">PR1330002600936</span>
-          <span class="rera-badge-num" data-project="offices">PC1330002600951</span>
-          <span class="rera-badge-label">MahaRERA<br>maharera.maharashtra.gov.in</span>
-        </span>
-      </div>
     <div class="formcard" id="formcard-hero">
       <h2 class="formcard-title">Get the full price sheet</h2>
       <p class="formcard-note">Floor plans, payment schedule and what is still unsold.</p>
@@ -750,7 +753,7 @@
           <tr><th scope="col">Unit</th><th scope="col">Carpet area</th><th scope="col">Launch price</th></tr>
         </thead>
         <tbody>
-          <tr><td>Boutique office</td><td>467 sq ft</td><td class="price-drop"><del>₹4.6 Crore</del><strong>₹3.5 Cr</strong></td></tr>
+          <tr><td>Boutique office</td><td>467 sq ft</td><td class="price-drop"><del>₹2.3 Crore</del><strong>₹1.75 Cr</strong></td></tr>
           <tr><td>Executive suite</td><td>764 sq ft</td><td>₹1.26 Crore</td></tr>
           <tr><td>Premium office</td><td>2,588 sq ft</td><td>₹4.27 Crore</td></tr>
           <tr><td>Corporate office</td><td>4,062 sq ft</td><td>₹6.70 Crore</td></tr>
@@ -851,7 +854,7 @@
         Most office stock on Old Mumbai Pune Road is converted residential space. MEK Grand Central
         is purpose-built commercial on 8.7 acres shared with Grand Meridian City &mdash; column-free
         floor plates up to 5,453 sq ft, a glass frontage that doubles as signage, and clear MahaRERA
-        title (PC1330002600951) &mdash; starting from &#8377;3.5 Crore while launch pricing holds
+        title (PC1330002600951) &mdash; starting from &#8377;1.75 Crore while launch pricing holds
         until June 2026.
       </p>
       <p>
@@ -886,9 +889,9 @@
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
           <span><strong>Column-free space up to a full floor plate.</strong> Units run from a 467 sq ft boutique office to a 5,453 sq ft column-free floor plate, so the layout scales with the business.</span>
         </li>
-        <li data-fact-source="hero-flag / pricing table: launch price ₹3.5 Cr boutique office, open until June 2026">
+        <li data-fact-source="hero-flag / pricing table: launch price ₹1.75 Cr boutique office, open until June 2026">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>Launch pricing is a window, not a fixture.</strong> Boutique offices start at &#8377;3.5 Crore while launch pricing holds &mdash; only until June 2026.</span>
+          <span><strong>Launch pricing is a window, not a fixture.</strong> Boutique offices start at &#8377;1.75 Crore while launch pricing holds &mdash; only until June 2026.</span>
         </li>
         <li data-fact-source="#distances ledger: Mumbai-Pune Expressway 3.5 km / 10 min; #corridor: Atal Setu, Metro Line 5">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
@@ -924,7 +927,7 @@
             <tr><th scope="row">Land parcel</th><td>8.7 acres</td></tr>
             <tr><th scope="row">Unit types</th><td>Boutique &middot; Executive &middot; Premium &middot; Corporate &middot; Full floor plate</td></tr>
             <tr><th scope="row">Carpet area range</th><td>467 &ndash; 5,453 sq ft</td></tr>
-            <tr><th scope="row">Launch price from</th><td class="price-drop"><del>&#8377;4.6 Crore</del><strong>&#8377;3.5 Cr</strong></td></tr>
+            <tr><th scope="row">Launch price from</th><td class="price-drop"><del>&#8377;2.3 Crore</del><strong>&#8377;1.75 Cr</strong></td></tr>
             <tr><th scope="row">Possession</th><td>December 2031</td></tr>
           </tbody>
         </table>
@@ -1363,7 +1366,7 @@
       </details>
       <details>
         <summary>What do prices start at?</summary>
-        <p>₹92 Lakhs for a 2 BHK, ₹1.31 Crore for a 3 BHK, and ₹3.5 Crore for the smallest office.
+        <p>₹92 Lakhs for a 2 BHK, ₹1.31 Crore for a 3 BHK, and ₹1.75 Crore for the smallest office.
            These are launch-stage prices and they revise as construction progresses.</p>
       </details>
       <details>
@@ -1565,7 +1568,7 @@
         { "@type": "Question", "name": "What sizes are available?",
           "acceptedAnswer": { "@type": "Answer", "text": "Homes are 2 BHK at 749 sq ft carpet and 3 BHK at 997 sq ft carpet, across two towers of 347 units. Offices run from a 467 sq ft boutique unit to a 5,453 sq ft full floor plate." } },
         { "@type": "Question", "name": "What do prices start at?",
-          "acceptedAnswer": { "@type": "Answer", "text": "92 Lakhs for a 2 BHK, 1.31 Crore for a 3 BHK, and 3.5 Crore for the smallest office. These are launch-stage prices and they revise as construction progresses." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "92 Lakhs for a 2 BHK, 1.31 Crore for a 3 BHK, and 1.75 Crore for the smallest office. These are launch-stage prices and they revise as construction progresses." } },
         { "@type": "Question", "name": "Can I get a home loan on this?",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes. MahaRERA-registered projects are eligible for standard home and commercial loan products." } },
         { "@type": "Question", "name": "Can I visit the site?",

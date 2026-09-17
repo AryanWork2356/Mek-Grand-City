@@ -65,24 +65,28 @@ body[data-view="offices"] [data-project="offices"]::after{
 body[data-view="offices"] [data-project="offices"]::after{background:var(--teal);}
 
 /* ---------- RERA verification badge ----------
-   Sits above the hero form card, nudged slightly right, and scrolls
-   away with the page like any other content — an earlier version used
-   position:fixed inside the header, which (a) covered the header's own
-   Contact link/phone button once space got tight and (b) never scrolled
-   out of view since fixed elements stay pinned to the viewport. Neither
-   is right for a supporting trust badge, so it now lives in normal flow
-   in its own column wrapper (.hero-form-col) alongside the form.
+   Sits at the top-right of the hero section and scrolls away with the
+   page like any other content. Two earlier placements were wrong: (1)
+   position:fixed inside the header — the header has backdrop-filter,
+   which creates a new containing block, so the badge didn't anchor to
+   the viewport as intended and ended up overlapping the header's own
+   Contact link/phone button; (2) inline above the hero form card —
+   correct scroll behaviour, but the user wanted it back at the top of
+   the hero rather than down by the form. This version anchors to
+   .hero (position:relative) via .rera-badge--hero, giving the same
+   "top-right of the page" look as the very first version without the
+   containing-block bug, since .hero itself has no backdrop-filter.
    Shows whichever project's registration number matches the current
    Homes/Offices focus; in "All" (the default) both numbers show
    stacked, since neither project is more relevant than the other. */
-.hero-form-col{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.hero-form-col{display:flex;flex-direction:column;gap:10px;}
 .rera-badge{
   display:flex;align-items:center;gap:10px;
-  margin-right:8%;
   background:rgba(10,17,20,.88);border:1px solid var(--slate-line);
   border-radius:8px;padding:7px 11px;backdrop-filter:blur(8px);
   box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
+.rera-badge--hero{position:absolute;top:20px;right:20px;z-index:5;}
 .rera-badge img{display:block;border-radius:3px;flex-shrink:0;}
 .rera-badge-text{display:flex;flex-direction:column;gap:2px;}
 .rera-badge-num{font-size:.74rem;font-weight:700;color:var(--marigold-lt);letter-spacing:.02em;}
@@ -94,8 +98,8 @@ body[data-view="all"] .rera-badge-num{display:block;}
 body[data-view="homes"] .rera-badge-num[data-project="offices"],
 body[data-view="offices"] .rera-badge-num[data-project="homes"]{display:none;}
 @media (max-width:640px){
-  .hero-form-col{align-items:center;}
-  .rera-badge{margin-right:0;padding:6px 9px;gap:7px;}
+  .rera-badge--hero{top:12px;right:12px;}
+  .rera-badge{padding:6px 9px;gap:7px;}
   .rera-badge img{width:34px;height:34px;}
   .rera-badge-num{font-size:.66rem;}
   .rera-badge-label{font-size:.55rem;}
