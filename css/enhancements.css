@@ -424,25 +424,28 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 }
 
 /* ---------- Hallmarks showcase ----------
-   A modern, asymmetric alternative to the reference screenshot's plain
-   two-column icon+text list next to one photo. Instead of a uniform grid:
-     - a 12-column masonry-like layout where most cards sit compact but two
-       "hero" cards (the biggest, most quotable numbers) span two columns
-       and two rows, carrying an oversized ghost numeral behind the icon —
-       the same display-type/outlined-numeral device used for .project-tag
-       elsewhere on the page, reused here at card scale instead of section
-       scale;
-     - hand-authored line-art SVG icons (24x24-ish viewBoxes, currentColor
-       strokes) rather than a flat colourful icon-pack, so they read as an
-       extension of the eyebrow/type system already established;
-     - a staggered scroll-reveal: the whole block is one [data-reveal]
-       target (existing IntersectionObserver wiring in js/enhancements.js
-       needs no changes), and each card gets its own transition-delay via
-       nth-child so cards settle in one after another instead of all at
-       once — a more "advanced" motion read than a flat fade.
-   Residential uses the marigold accent system; commercial swaps to teal
-   via the .hallmarks--office variant, mirroring how .project.light/.dark
-   already split the two accent colours. */
+   REDESIGNED from a horizontal scroll-snap strip (below, kept as history in
+   this comment) into a full-width bento grid, per direct user feedback: the
+   scroll strip hid most of the 7 tiles off-screen on wide desktop viewports,
+   under-using available width and reading as sparse/empty until a visitor
+   discovered the sideways scroll hint. The bold-numeral concept itself is
+   kept exactly as asked — only the layout changes.
+     - Desktop: a 4-column grid where the first (most quotable) stat per
+       project becomes a "hero" tile spanning 2 columns/2 rows with a larger
+       numeral, and the remaining six fill in around it — so the same
+       oversized-numeral hierarchy the old strip had (some tiles bigger than
+       others) survives, but every tile is visible at once with no scroll
+       gesture required.
+     - Tablet: collapses to 2 columns; the hero tile still spans 2.
+     - Mobile: collapses to a single column stack (still degrades gracefully
+       without a horizontal scroll, per the brief).
+     - hand-authored line-art SVG icons unchanged.
+     - staggered scroll-reveal unchanged in spirit: the whole block is still
+       one [data-reveal] target (no JS change needed) and each tile still
+       gets its own nth-child transition-delay so tiles settle in one after
+       another rather than all at once.
+   Residential uses the marigold accent system; commercial swaps to teal via
+   the .hallmarks--office variant, mirroring .project.light/.dark. */
 .hallmarks{
   position:relative;z-index:1;margin-top:56px;padding-top:44px;
   border-top:1px solid var(--slate-line-soft);
@@ -452,29 +455,25 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 .hallmarks-head .eyebrow{margin-bottom:14px;}
 .hallmarks-head h3{max-width:26ch;}
 
-/* Horizontal scroll strip of bold stat tiles — same scroll-snap mechanics
-   as the infrastructure timeline (.timeline[data-timeline]) but its own
-   component: solid accent-tinted tiles rather than a dated list, each
-   pairing one big number/label with a short line of supporting text. */
-.h-scroller{
-  overflow-x:auto;scroll-snap-type:x proximity;
-  padding:6px var(--gutter) 22px;margin:0 calc(var(--gutter) * -1);
-  scrollbar-color:var(--marigold) transparent;
-}
-.hallmarks--office .h-scroller{scrollbar-color:var(--teal) transparent;}
-.h-scroller::-webkit-scrollbar{height:6px;}
-.h-scroller::-webkit-scrollbar-thumb{background:var(--slate-line);border-radius:100px;}
+/* Bento-style grid of bold stat tiles, replacing the old .h-scroller/.h-strip
+   horizontal scroll rail. 4 columns wide enough to show all 7 tiles with no
+   sideways scrolling; the hero tile (first child) spans 2x2 to preserve the
+   "some numbers are bigger than others" hierarchy the old strip had. */
+/* 7 tiles total (1 hero at 2x2 + 6 regular at 1x1) need 10 grid cells; a
+   4-column grid gives 12 cells across 3 rows, leaving 2 spare in the last
+   row. Rather than leave that as a visible gap, the final two tiles each
+   span 2 columns so the last row fills edge-to-edge like the first two. */
 .h-strip{
-  display:grid;grid-auto-flow:column;grid-auto-columns:min(72%,240px);
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;
   gap:14px;list-style:none;padding:0;margin:0;
-  width:max-content;min-width:100%;
 }
+.h-strip .h-tile:nth-child(6),
+.h-strip .h-tile:nth-child(7){grid-column:span 2;}
 .h-tile{
-  scroll-snap-align:start;
-  display:flex;flex-direction:column;gap:14px;
+  display:flex;flex-direction:column;justify-content:center;gap:14px;
   background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate);
   border:1px solid var(--slate-line-soft);border-radius:8px;
-  padding:24px 22px;
+  padding:24px 22px;min-height:150px;
   transition:transform .22s cubic-bezier(.2,.7,.3,1),border-color .22s ease,box-shadow .22s ease;
 }
 .dark .h-tile{background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate-soft);border-color:var(--slate-line);}
@@ -482,6 +481,27 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
   background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate);
 }
 .dark .hallmarks--office .h-tile{background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate-soft);}
+
+/* Hero tile: the first, most quotable stat gets 2x2 of the grid and a
+   bigger numeral, so the layout keeps the old strip's "one number reads as
+   the headline" hierarchy device without hiding the rest off-screen. The
+   card's own icon is echoed hugely, faintly, top-right (the same oversized
+   ghost-outline device used for .project-tag/.amen-numeral elsewhere on the
+   page) so the taller 2x2 card reads as a deliberate feature panel rather
+   than mostly empty background above the bottom-anchored number. */
+.h-tile--hero{
+  grid-column:span 2;grid-row:span 2;justify-content:flex-end;padding:30px 26px;
+  position:relative;overflow:hidden;
+}
+.h-tile--hero .h-num{font-size:clamp(2.8rem,6vw,4.2rem);position:relative;z-index:1;}
+.h-tile--hero .h-text{position:relative;z-index:1;max-width:22ch;}
+.h-tile--hero .h-icon{position:relative;z-index:1;width:38px;height:38px;}
+.h-tile--hero .h-icon-ghost{
+  position:absolute;top:-6%;right:-6%;width:62%;height:62%;
+  color:var(--marigold-lt);opacity:.1;pointer-events:none;
+}
+.hallmarks--office .h-tile--hero .h-icon-ghost{color:var(--teal-lt);}
+.h-tile--hero .h-icon-ghost svg{width:100%;height:100%;}
 
 .h-icon{display:inline-flex;width:30px;height:30px;color:var(--marigold);flex-shrink:0;}
 .h-icon svg{width:100%;height:100%;}
@@ -510,8 +530,6 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 .h-tile:focus-within{border-color:var(--marigold);outline:none;}
 .hallmarks--office .h-tile:focus-within{border-color:var(--teal);}
 
-.h-hint{font-size:.78rem;color:var(--text-mute);margin-top:-8px;}
-
 /* Staggered reveal: the parent .hallmarks block is the single [data-reveal]
    target (so JS/IntersectionObserver wiring needs no change); once it
    gains .is-visible each tile fades/rises in turn via nth-child delay. */
@@ -531,10 +549,24 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 }
 .no-js .h-tile{opacity:1;transform:none;}
 
+@media (max-width:900px){
+  .h-strip{grid-template-columns:repeat(2,1fr);}
+  .h-tile--hero{grid-column:span 2;grid-row:span 1;}
+  .h-tile--hero .h-num{font-size:clamp(2.4rem,5.4vw,3rem);}
+  /* 2 columns: hero (2 cells) + 6 regular tiles (6 cells) = 8 cells exactly,
+     4 even rows with no gap — the desktop-only last-row-widen fix is not
+     needed here. */
+  .h-strip .h-tile:nth-child(6),
+  .h-strip .h-tile:nth-child(7){grid-column:span 1;}
+}
 @media (max-width:640px){
   .hallmarks{margin-top:44px;padding-top:36px;}
-  .h-strip{grid-auto-columns:78%;}
-  .h-tile{padding:20px 18px;}
+  .h-strip{grid-template-columns:1fr;gap:12px;}
+  .h-tile--hero{grid-column:span 1;}
+  .h-tile{padding:20px 18px;min-height:0;}
+  .h-tile--hero{padding:22px 20px;}
+  .h-strip .h-tile:nth-child(6),
+  .h-strip .h-tile:nth-child(7){grid-column:span 1;}
 }
 
 /* ---------- Amenities showcase (tabbed list + image) ----------
@@ -700,4 +732,144 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
   .amen-visual{aspect-ratio:16/10;}
   .amen-tab{min-width:0;flex:1 1 0;padding:10px 8px 9px;font-size:.7rem;}
   .amen-tab-icon{width:22px;height:22px;}
+}
+
+/* ---------- Amenities PHOTO GRID (replaces the tab-switcher above) ----------
+   Per direct, confirmed user choice ("Yes, switch to a photo grid"): instead
+   of clicking between categories to see one list + one photo at a time,
+   every real amenity card is visible at once in a grid, reference-style
+   (Hiranandani-like: image-background cards, bottom gradient scrim, caption
+   overlaid bottom-left). The .amen-tabs/.amen-tab/.amen-panel component
+   this replaced for amenities specifically is left fully intact above —
+   the Floor Plan section (#floorplan) still uses that exact same component
+   for its residential/commercial toggle and must keep working unmodified.
+
+   Honesty rule: .amen-card--photo is only ever used for an image that is a
+   genuine, specific match for its caption (verified against the gallery's
+   own already-checked alt text). Every other real amenity/category becomes
+   an .amen-card--icon card, reusing the outlined-numeral device already
+   established by .amen-numeral. No new colours: marigold for residential,
+   teal for commercial via .amen-grid-wrap--office / .amen-grid--office. */
+.amen-grid-wrap{
+  position:relative;z-index:1;margin-top:56px;padding-top:44px;
+  border-top:1px solid var(--slate-line-soft);
+}
+.dark .amen-grid-wrap{border-top-color:var(--slate-line);}
+
+.amen-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;
+  gap:16px;list-style:none;padding:0;margin:0;
+}
+/* Asymmetric bento layout: the hero photo (gymnasium, first-listed amenity)
+   takes a bigger 2x2 block; the other two photos and two icon cards fill
+   the remaining cells at regular size — a grid that uses the full width
+   with one clearly "lead" card, per the Hiranandani-style reference, sized
+   to what we actually have (3 real photos), not forced into an unrelated
+   ratio. */
+.amen-card--hero{grid-column:span 2;grid-row:span 2;}
+
+.amen-card{
+  position:relative;border-radius:10px;overflow:hidden;
+  border:1px solid var(--slate-line-soft);
+}
+.dark .amen-card{border-color:var(--slate-line);}
+
+/* Photo cards: full-bleed image, bottom gradient scrim, caption overlaid
+   bottom-left — the same cinematic treatment the single gym photo used to
+   get in the old tab panel, now applied per-card. */
+.amen-card--photo{background:var(--slate);box-shadow:0 20px 50px rgba(0,0,0,.35);}
+.amen-card--photo figure{margin:0;width:100%;height:100%;}
+.amen-card--photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.94) brightness(.88);
+}
+.amen-card--photo::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,rgba(10,17,20,.82) 0%,rgba(10,17,20,.18) 46%,transparent 68%);
+}
+.amen-card--photo figcaption{
+  position:absolute;left:16px;bottom:14px;right:16px;z-index:1;
+  font-family:var(--body);font-size:.86rem;font-weight:700;color:var(--text-light);
+  line-height:1.3;
+}
+.amen-card--hero figcaption{font-size:1.02rem;}
+
+/* Subtle hover/focus zoom on the photo itself — image scales inside the
+   overflow:hidden card, card edges never move. A common polished pattern,
+   consistent with the same zoom already used on .gal img elsewhere. */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .amen-card--photo img{transition:transform .5s cubic-bezier(.2,.7,.3,1);}
+  .amen-card--photo:hover img,.amen-card--photo:focus-within img{transform:scale(1.06);}
+}
+.amen-card--photo:focus-within{outline:2px solid var(--marigold-lt);outline-offset:2px;}
+.amen-grid--office .amen-card--photo:focus-within{outline-color:var(--teal-lt);}
+
+/* Icon cards: the same outlined-numeral device as before, now a standalone
+   card rather than a tab-panel visual, with its own category heading and
+   list restored alongside it (previously in a separate .amen-list column;
+   here they share the one card). */
+.amen-card--icon{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:10px;padding:26px 20px;
+  background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate);
+}
+.dark .amen-card--icon{background:linear-gradient(155deg,rgba(227,169,40,.16),transparent 60%),var(--slate-soft);}
+.amen-grid--office .amen-card--icon{background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate);}
+.dark .amen-grid--office .amen-card--icon{background:linear-gradient(155deg,rgba(62,139,130,.2),transparent 60%),var(--slate-soft);}
+.amen-card-numeral{
+  font-family:var(--display);font-size:clamp(1.7rem,3.6vw,2.2rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1.4px var(--marigold-lt);
+}
+.amen-grid--office .amen-card-numeral{-webkit-text-stroke-color:var(--teal-lt);}
+.amen-card-icon{width:32px;height:32px;color:var(--marigold);flex-shrink:0;}
+.amen-grid--office .amen-card-icon{color:var(--teal-lt);}
+.amen-card--icon h4{
+  font-family:var(--body);font-size:.82rem;font-weight:700;color:var(--text-light);
+  text-transform:uppercase;letter-spacing:.05em;margin:2px 0 0;
+}
+.amen-card--icon ul{display:grid;gap:5px;list-style:none;padding:0;margin:0;}
+.amen-card--icon li{font-size:.82rem;color:var(--text-mute);line-height:1.4;}
+
+@media (hover:hover){
+  .amen-card--icon{transition:transform .22s cubic-bezier(.2,.7,.3,1),border-color .22s ease;}
+  .amen-card--icon:hover{transform:translateY(-4px);border-color:rgba(227,169,40,.5);}
+  .amen-grid--office .amen-card--icon:hover{border-color:rgba(127,194,183,.55);}
+}
+.amen-card--icon:focus-within{border-color:var(--marigold);outline:none;}
+.amen-grid--office .amen-card--icon:focus-within{border-color:var(--teal);}
+
+/* Commercial grid: no real photo exists for any category, so it is simply
+   3 icon cards across, a plain uniform row rather than a forced asymmetric
+   layout with an empty-feeling "hero" slot. */
+.amen-grid--icons-only{grid-template-columns:repeat(3,1fr);grid-auto-rows:auto;}
+.amen-grid--icons-only .amen-card--icon{min-height:220px;}
+
+/* Staggered scroll-reveal, same pattern as .h-tile: the whole grid wrapper
+   is one [data-reveal] target, each card gets its own nth-child delay so
+   cards settle in one after another. */
+@media (prefers-reduced-motion:no-preference){
+  .amen-card{opacity:0;transform:translateY(20px);
+    transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1);
+  }
+  .amen-grid-wrap.is-visible .amen-card{opacity:1;transform:none;}
+  .amen-grid-wrap.is-visible .amen-card:nth-child(1){transition-delay:.05s;}
+  .amen-grid-wrap.is-visible .amen-card:nth-child(2){transition-delay:.13s;}
+  .amen-grid-wrap.is-visible .amen-card:nth-child(3){transition-delay:.21s;}
+  .amen-grid-wrap.is-visible .amen-card:nth-child(4){transition-delay:.29s;}
+  .amen-grid-wrap.is-visible .amen-card:nth-child(5){transition-delay:.37s;}
+}
+.no-js .amen-card{opacity:1;transform:none;}
+
+@media (max-width:900px){
+  .amen-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px;}
+  .amen-card--hero{grid-column:span 2;grid-row:span 1;height:280px;}
+  .amen-grid--icons-only{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:640px){
+  .amen-grid-wrap{margin-top:44px;padding-top:36px;}
+  .amenities-head{margin-bottom:28px;}
+  .amen-grid{grid-template-columns:1fr;grid-auto-rows:auto;}
+  .amen-card{height:240px;}
+  .amen-card--hero{grid-column:span 1;height:280px;}
+  .amen-grid--icons-only .amen-card--icon{height:auto;min-height:0;padding:24px 18px;}
 }

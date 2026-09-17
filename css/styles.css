@@ -235,17 +235,34 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    the current real launch price: hero stats, pricing tables, spec tables.
    The old price is muted and struck through (semantic <del>); the new
    price uses the display font and the page's bright accent colour so it
-   reads as a confident "price just dropped" callout, not a stray typo. */
+   reads as a confident "price just dropped" callout, not a stray typo.
+
+   Investigated a report that this reads as a washed-out "yellow" next to
+   other stat numbers (e.g. the hallmark strip's .h-num, css/enhancements.css)
+   — both already use the exact same --marigold-lt/--teal-lt token, so the
+   colour itself is identical (verified: 11.5:1 / 8.9:1 contrast against the
+   dark backgrounds either sits on, comfortably AA). The perceived
+   difference is context, not colour: .h-num sits on a tinted card at up to
+   2.7rem; .price-drop strong sat bare on the section background at 1em of
+   a 2.1rem stat (hero) or the pricing/specs table's own 1.2rem row size —
+   noticeably smaller and with no card/weight cues, so the same hex reads
+   weaker. Fixed by scaling the new price up relative to the old one and
+   adding the same warm glow used elsewhere on the page's bright accent
+   text (e.g. identity-banner), so it reads as a confident stat rather than
+   a same-weight inline word next to its strikethrough. */
 .price-drop{display:inline-flex;align-items:baseline;gap:.5em;flex-wrap:wrap;}
 .price-drop del{
-  font-family:var(--body);font-size:.62em;font-weight:600;
+  font-family:var(--body);font-size:.56em;font-weight:600;
   color:var(--text-faint);text-decoration:line-through;text-decoration-thickness:1.5px;
 }
-.price-drop strong{font-family:var(--display);font-weight:400;color:var(--marigold-lt);}
-.dark .price-drop strong{color:var(--teal-lt);}
+.price-drop strong{
+  font-family:var(--display);font-weight:400;font-size:1.22em;line-height:1;
+  color:var(--marigold-lt);text-shadow:0 0 24px rgba(227,169,40,.35);
+}
+.dark .price-drop strong{color:var(--teal-lt);text-shadow:0 0 24px rgba(127,194,183,.35);}
 .hero-stats dd.price-drop{font-size:2.1rem;}
-.hero-stats dd.price-drop strong{font-size:1em;}
-.hero-stats dd.price-drop del{font-size:.5em;}
+.hero-stats dd.price-drop strong{font-size:1.22em;}
+.hero-stats dd.price-drop del{font-size:.46em;}
 
 /* one orchestrated entrance, hero only */
 .hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) backwards;}
