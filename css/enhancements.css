@@ -64,38 +64,41 @@ body[data-view="offices"] [data-project="offices"]::after{
 }
 body[data-view="offices"] [data-project="offices"]::after{background:var(--teal);}
 
-/* ---------- RERA verification badge (top-right, fixed) ----------
+/* ---------- RERA verification badge ----------
+   Sits above the hero form card, nudged slightly right, and scrolls
+   away with the page like any other content — an earlier version used
+   position:fixed inside the header, which (a) covered the header's own
+   Contact link/phone button once space got tight and (b) never scrolled
+   out of view since fixed elements stay pinned to the viewport. Neither
+   is right for a supporting trust badge, so it now lives in normal flow
+   in its own column wrapper (.hero-form-col) alongside the form.
    Shows whichever project's registration number matches the current
-   Homes/Offices focus. In "All" (the default), both numbers show
-   stacked rather than picking one arbitrarily, since neither project
-   is more relevant than the other at that point. */
+   Homes/Offices focus; in "All" (the default) both numbers show
+   stacked, since neither project is more relevant than the other. */
+.hero-form-col{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
 .rera-badge{
-  position:fixed;top:14px;right:14px;z-index:90;
   display:flex;align-items:center;gap:10px;
+  margin-right:8%;
   background:rgba(10,17,20,.88);border:1px solid var(--slate-line);
-  border-radius:8px;padding:8px 12px;backdrop-filter:blur(8px);
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  border-radius:8px;padding:7px 11px;backdrop-filter:blur(8px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 .rera-badge img{display:block;border-radius:3px;flex-shrink:0;}
 .rera-badge-text{display:flex;flex-direction:column;gap:2px;}
-.rera-badge-num{font-size:.78rem;font-weight:700;color:var(--marigold-lt);letter-spacing:.02em;}
+.rera-badge-num{font-size:.74rem;font-weight:700;color:var(--marigold-lt);letter-spacing:.02em;}
 .rera-badge-num[data-project="offices"]{color:var(--teal-lt);}
-.rera-badge-label{font-size:.62rem;color:var(--text-faint);line-height:1.3;text-transform:uppercase;letter-spacing:.04em;}
+.rera-badge-label{font-size:.6rem;color:var(--text-faint);line-height:1.3;text-transform:uppercase;letter-spacing:.04em;}
 /* Default (All): show both numbers stacked */
 body[data-view="all"] .rera-badge-num{display:block;}
 /* Homes/Offices focus: show only the matching project's number */
 body[data-view="homes"] .rera-badge-num[data-project="offices"],
 body[data-view="offices"] .rera-badge-num[data-project="homes"]{display:none;}
 @media (max-width:640px){
-  .rera-badge{
-    position:static;inset:auto;
-    margin:10px auto 0;width:fit-content;
-    padding:6px 9px;gap:7px;
-    box-shadow:none;
-  }
-  .rera-badge img{width:36px;height:36px;}
-  .rera-badge-num{font-size:.68rem;}
-  .rera-badge-label{font-size:.56rem;}
+  .hero-form-col{align-items:center;}
+  .rera-badge{margin-right:0;padding:6px 9px;gap:7px;}
+  .rera-badge img{width:34px;height:34px;}
+  .rera-badge-num{font-size:.66rem;}
+  .rera-badge-label{font-size:.55rem;}
 }
 
 /* ---------- Focused detail blocks (specs table + timeline) ----------

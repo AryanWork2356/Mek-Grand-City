@@ -91,22 +91,6 @@
   </div>
 </header>
 
-<!-- MahaRERA verification badge: QR links to the official portal
-     (verified to decode correctly), the number shown updates with the
-     Homes/Offices/All focus toggle via CSS, same mechanism used
-     elsewhere on the page for [data-project] visibility. Deliberately
-     OUTSIDE the header element — it has backdrop-filter, which creates
-     a new containing block, so a position:fixed child inside it doesn't
-     actually anchor to the viewport as intended. -->
-<div class="rera-badge">
-  <img src="assets/img/rera-qr.png" alt="Scan to verify on the MahaRERA portal" width="46" height="46">
-  <span class="rera-badge-text">
-    <span class="rera-badge-num" data-project="homes">PR1330002600936</span>
-    <span class="rera-badge-num" data-project="offices">PC1330002600951</span>
-    <span class="rera-badge-label">MahaRERA<br>maharera.maharashtra.gov.in</span>
-  </span>
-</div>
-
 <!-- ================= ENQUIRY POPUP (opens automatically after 20s on
      every visit — see js/enhancements.js. Reuses the exact same
      .lead-form markup/classes as the hero and closing forms, so
@@ -219,6 +203,23 @@
     </div>
 
     <!-- ---------- LEAD FORM 1 ---------- -->
+    <div class="hero-form-col">
+      <!-- MahaRERA verification badge: QR links to the official portal
+           (verified to decode correctly), the number shown updates with
+           the Homes/Offices/All focus toggle via CSS, same mechanism
+           used elsewhere on the page for [data-project] visibility.
+           Sits above the form card and scrolls with the page — a fixed
+           position previously covered the header's Contact link and
+           never scrolled away, which is wrong for a supporting element
+           like this. -->
+      <div class="rera-badge">
+        <img src="assets/img/rera-qr.png" alt="Scan to verify on the MahaRERA portal" width="40" height="40">
+        <span class="rera-badge-text">
+          <span class="rera-badge-num" data-project="homes">PR1330002600936</span>
+          <span class="rera-badge-num" data-project="offices">PC1330002600951</span>
+          <span class="rera-badge-label">MahaRERA<br>maharera.maharashtra.gov.in</span>
+        </span>
+      </div>
     <div class="formcard" id="formcard-hero">
       <h2 class="formcard-title">Get the full price sheet</h2>
       <p class="formcard-note">Floor plans, payment schedule and what is still unsold.</p>
@@ -257,6 +258,7 @@
         <button class="btn btn-gold btn-wide" type="submit">Send my enquiry</button>
         <p class="fineprint">We will only contact you about these two projects.</p>
       </form>
+    </div>
     </div>
   </div>
 </section>
