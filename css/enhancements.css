@@ -209,6 +209,110 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 .hotspot-tip strong{display:block;color:var(--marigold-lt);font-size:.78rem;margin-bottom:3px;}
 .hotspot-tip .placeholder-flag{display:block;margin-top:6px;font-size:.7rem;color:var(--text-mute);font-style:italic;}
 
+/* ---------- Floor plan switcher (#floorplan) ----------
+   Purpose-built multi-option selector (~10 options: 8 residential incl. two
+   "on request" placeholders, 1 commercial) — driven by fpSwitcher() in
+   js/enhancements.js. Visually it borrows the .amen-tab active/inactive
+   language (accent-filled box vs outlined) so it still reads as the same
+   design system, but the option ROW itself is a horizontal scroll-rail
+   rather than a wrapping tab list: at ~10 options a wrap gets tall and
+   fussy, while a scroll-rail (same technique already used for
+   .timeline[data-timeline] above) stays one tidy row at every width and
+   scales down cleanly to a phone without a dropdown or accordion. */
+.fp-switcher{margin-top:8px;}
+.fp-optlist{margin-bottom:32px;}
+.fp-optlist-heading{
+  font-family:var(--body);font-size:.72rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--marigold-lt);margin:0 0 12px;
+}
+.fp-optlist-heading--office{margin-top:22px;color:var(--teal-lt);}
+.fp-opts{
+  display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
+  padding-bottom:6px;margin:0 -4px;padding-left:4px;padding-right:4px;
+  scrollbar-color:var(--marigold-dim) transparent;
+}
+.fp-opts--office{scrollbar-color:var(--teal-dim) transparent;}
+.fp-opts::-webkit-scrollbar{height:6px;}
+.fp-opts::-webkit-scrollbar-thumb{background:var(--slate-line);border-radius:100px;}
+.fp-opt{
+  flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;
+  background:transparent;border:1px solid var(--slate-line);border-radius:100px;
+  color:var(--text-mute);font-family:var(--body);font-size:.82rem;font-weight:700;
+  padding:10px 18px;cursor:pointer;
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+.fp-opt:hover{color:var(--text-light);border-color:var(--marigold);}
+.fp-opt.is-active{background:var(--marigold);color:#16262B;border-color:var(--marigold);}
+.fp-opt:focus-visible{outline:2px solid var(--marigold-lt);outline-offset:2px;}
+.fp-opt--office:hover{border-color:var(--teal);}
+.fp-opt--office.is-active{background:var(--teal);color:#0A1114;border-color:var(--teal);}
+.fp-opt--office:focus-visible{outline-color:var(--teal-lt);}
+/* "Coming soon" options get a dashed border so it's visually obvious,
+   before you even click, that these are placeholders rather than the same
+   kind of option as the rest. */
+.fp-opt--soon{border-style:dashed;}
+.fp-opt--soon.is-active{border-style:solid;}
+
+.fp-stage{position:relative;min-height:120px;}
+.fp-panel{display:flex;flex-direction:column;align-items:center;gap:22px;}
+.fp-panel[hidden]{display:none;}
+
+/* Crossfade + gentle rise on panel swap, driven by JS toggling .is-active
+   after the [hidden] attribute is cleared (see fpSwitcher() in
+   js/enhancements.js) — same transition recipe as .amen-panel above so the
+   motion language matches across the page. */
+@media (prefers-reduced-motion:no-preference){
+  .fp-panel{
+    opacity:0;transform:translateY(14px);
+    transition:opacity .38s cubic-bezier(.2,.7,.3,1),transform .38s cubic-bezier(.2,.7,.3,1);
+  }
+  .fp-panel.is-active{opacity:1;transform:none;}
+}
+.no-js .fp-panel{opacity:1;transform:none;}
+.no-js .fp-panel[hidden]{display:flex;}
+.no-js .fp-opts{display:none;}
+.no-js .fp-optlist-heading{margin-top:28px;}
+.no-js .fp-panel+.fp-panel{margin-top:28px;padding-top:28px;border-top:1px solid var(--slate-line-soft);}
+
+/* Light-toned frame around each PNG: the source images have a warm
+   beige/cream background (unlike this site's dark theme), so each one gets
+   a dark-to-light vignette card rather than floating as a jarring light
+   rectangle — the same idea as .floorplan-stage used for the SVGs. */
+.fp-frame{
+  position:relative;width:100%;max-width:760px;margin:0;
+  background:linear-gradient(155deg,rgba(227,169,40,.14),transparent 60%),var(--slate-soft);
+  border:1px solid var(--slate-line);border-radius:10px;
+  padding:clamp(16px,3.4vw,34px);
+  box-shadow:0 30px 70px rgba(0,0,0,.4);
+}
+.fp-frame img{display:block;width:100%;height:auto;border-radius:4px;}
+.fp-frame--svg{background:linear-gradient(155deg,rgba(227,169,40,.14),transparent 60%),var(--slate-soft);padding:clamp(20px,4vw,48px);}
+.fp-frame--office,.fp-panel--office .fp-frame{
+  background:linear-gradient(155deg,rgba(62,139,130,.18),transparent 60%),var(--slate-soft);
+}
+.fp-caption{
+  text-align:center;font-size:.86rem;font-weight:600;
+  color:var(--text-mute);letter-spacing:.02em;
+}
+
+/* "On request" placeholder state for 4/5 BHK Jodi — intentional and
+   on-brand (matches .fp-frame's dark-cinematic card language) rather than
+   a blank space or a broken image. */
+.fp-soon{
+  width:100%;max-width:560px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  background:linear-gradient(155deg,rgba(227,169,40,.12),transparent 60%),var(--slate-soft);
+  border:1px dashed var(--slate-line);border-radius:10px;
+  padding:clamp(36px,6vw,64px) clamp(24px,5vw,48px);
+}
+.fp-soon-icon{width:44px;height:44px;color:var(--marigold-lt);}
+.fp-soon-title{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,1.5rem);color:var(--text-light);margin:0;}
+.fp-soon-text{font-size:.92rem;color:var(--text-mute);margin:0;max-width:38ch;}
+
+@media (max-width:640px){
+  .fp-opt{padding:9px 15px;font-size:.78rem;}
+}
+
 /* ---------- Animated stat counters (glance strip) ---------- */
 .glance{background:var(--slate-soft);border-bottom:1px solid var(--slate-line);padding:48px 0;}
 .glance-in{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}

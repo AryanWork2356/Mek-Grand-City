@@ -1036,59 +1036,194 @@
 </section>
 
 <!-- ================= FLOOR PLAN ================= -->
-<!-- A dedicated, larger-format showcase for the one real floor plan diagram
-     each project has (assets/img/floor-plan-homes.svg and
-     floor-plan-offices.svg — the same two files already used inline with
-     hotspots inside #homes/#offices). No fake plan variants are listed;
-     each project genuinely has exactly one diagram, so this is a bigger,
-     better-presented stage for it rather than an interactive repeat of the
-     hotspot tooltips that already live in the Homes/Offices sections.
-     Reuses the .amen-tabs tab/panel component and its existing generic
-     [data-amen-tabs] JS wiring (js/enhancements.js amenTabs()) — no new
-     script needed — restyled here as .floorplan-tabs for a full-width,
-     single-visual layout instead of the list+visual split used for
-     amenities. -->
+<!-- Multi-option floor-plan switcher. Residential now has real per-level
+     PNG plans (from an earlier build of this project's own site,
+     grandmeridiancity.com — same project, not third-party work) plus the
+     existing hotspot SVG re-used as the "3 BHK" option (it already is a
+     genuine 3BHK unit diagram — see #homes above) and two "on request"
+     placeholders for 4/5 BHK Jodi units with no image yet. Commercial keeps
+     its single existing SVG. This is a purpose-built selector (fpSwitcher()
+     in js/enhancements.js) rather than the .amen-tab/.amen-panel component
+     used elsewhere — ~10 options need a row that can wrap/scroll instead of
+     a two-way toggle, but it borrows that component's exact tab visual
+     language (active/inactive colours, focus states) and its crossfade
+     approach so the section still reads as the same design system. The
+     original 3BHK SVG markup/DOM (.floorplan-wrap + .hotspot buttons) is
+     preserved byte-for-byte inside its option so js/enhancements.js's
+     hotspots() IIFE keeps working unmodified. -->
 <section class="floorplan" id="floorplan" data-reveal>
   <div class="wrap">
     <p class="eyebrow">Floor Plan</p>
     <h2>See the layout before you see the site</h2>
     <p class="lede">
-      One real plan per project, presented full size &mdash; the same diagrams used for the
-      hotspot walk-throughs above, given the bigger stage they deserve.
+      Every real plan we have for Grand Meridian City and MEK Grand Central &mdash; pick an option
+      below to bring it up full size.
     </p>
 
-    <div class="floorplan-tabs" data-amen-tabs>
-      <div class="amen-tablist" role="tablist" aria-label="Choose a floor plan">
-        <button type="button" class="amen-tab is-active" role="tab" id="fp-tab-0" aria-selected="true" aria-controls="fp-panel-0">
-          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 42V14l15-8 15 8v28"/><path d="M9 42h30"/><path d="M19 42V26h10v16"/></svg>
-          <span class="amen-tab-label">Residential<br>Grand Meridian City</span>
-        </button>
-        <button type="button" class="amen-tab" role="tab" id="fp-tab-1" aria-selected="false" aria-controls="fp-panel-1" tabindex="-1">
-          <svg class="amen-tab-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 42V17c0-6 7-11 16-11s16 5 16 11v25"/><path d="M8 42h32"/><path d="M20 42V24a4 4 0 0 1 8 0v18"/></svg>
-          <span class="amen-tab-label">Commercial<br>MEK Grand Central</span>
-        </button>
+    <div class="fp-switcher" data-fp-switcher>
+
+      <div class="fp-optlist" role="tablist" aria-label="Choose a floor plan">
+        <p class="fp-optlist-heading">Residential &middot; Grand Meridian City</p>
+        <div class="fp-opts fp-opts--home">
+          <button type="button" class="fp-opt is-active" role="tab" id="fp-opt-0" aria-selected="true" aria-controls="fp-panel-0" data-panel="fp-panel-0">Ground Floor</button>
+          <button type="button" class="fp-opt" role="tab" id="fp-opt-1" aria-selected="false" aria-controls="fp-panel-1" data-panel="fp-panel-1" tabindex="-1">First Floor</button>
+          <button type="button" class="fp-opt" role="tab" id="fp-opt-2" aria-selected="false" aria-controls="fp-panel-2" data-panel="fp-panel-2" tabindex="-1">2nd, 3rd &amp; 4th Floor</button>
+          <button type="button" class="fp-opt" role="tab" id="fp-opt-3" aria-selected="false" aria-controls="fp-panel-3" data-panel="fp-panel-3" tabindex="-1">6th Floor / Amenity Deck</button>
+          <button type="button" class="fp-opt" role="tab" id="fp-opt-4" aria-selected="false" aria-controls="fp-panel-4" data-panel="fp-panel-4" tabindex="-1">Typical Floor &middot; Wing E/F</button>
+          <button type="button" class="fp-opt" role="tab" id="fp-opt-5" aria-selected="false" aria-controls="fp-panel-5" data-panel="fp-panel-5" tabindex="-1">2 BHK Unit</button>
+          <button type="button" class="fp-opt" role="tab" id="fp-opt-6" aria-selected="false" aria-controls="fp-panel-6" data-panel="fp-panel-6" tabindex="-1">3 BHK Unit</button>
+          <button type="button" class="fp-opt fp-opt--soon" role="tab" id="fp-opt-7" aria-selected="false" aria-controls="fp-panel-7" data-panel="fp-panel-7" tabindex="-1">4 BHK Jodi</button>
+          <button type="button" class="fp-opt fp-opt--soon" role="tab" id="fp-opt-8" aria-selected="false" aria-controls="fp-panel-8" data-panel="fp-panel-8" tabindex="-1">5 BHK Jodi</button>
+        </div>
+        <p class="fp-optlist-heading fp-optlist-heading--office">Commercial &middot; MEK Grand Central</p>
+        <div class="fp-opts fp-opts--office">
+          <button type="button" class="fp-opt fp-opt--office" role="tab" id="fp-opt-9" aria-selected="false" aria-controls="fp-panel-9" data-panel="fp-panel-9" tabindex="-1">Office Floor Plate</button>
+        </div>
       </div>
 
-      <div class="amen-panels">
-        <div class="amen-panel is-active floorplan-panel" role="tabpanel" id="fp-panel-0" aria-labelledby="fp-tab-0" data-reveal="left">
-          <figure class="floorplan-stage floorplan-stage--home">
-            <img src="assets/img/floor-plan-homes.svg" alt="Grand Meridian City 2 and 3 BHK floor plan, full size" loading="lazy">
-            <figcaption>2 &amp; 3 BHK layout &middot; 749&ndash;997 sq ft carpet</figcaption>
+      <div class="fp-stage" data-fp-stage>
+
+        <div class="fp-panel is-active" role="tabpanel" id="fp-panel-0" aria-labelledby="fp-opt-0">
+          <figure class="fp-frame">
+            <img src="ImgVids/floorplans/ground-floor-plan.png" alt="Ground Floor Plan — Residential Block 01" loading="lazy">
           </figure>
+          <figcaption class="fp-caption">Ground Floor Plan &mdash; Residential Block 01</figcaption>
           <p class="cta-inline floorplan-cta">
             <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
           </p>
         </div>
 
-        <div class="amen-panel floorplan-panel" role="tabpanel" id="fp-panel-1" aria-labelledby="fp-tab-1" hidden data-reveal="right">
-          <figure class="floorplan-stage floorplan-stage--office">
-            <img src="assets/img/floor-plan-offices.svg" alt="MEK Grand Central office floor plate, full size" loading="lazy">
-            <figcaption>Boutique to full floor plate &middot; 467&ndash;5,453 sq ft carpet</figcaption>
+        <div class="fp-panel" role="tabpanel" id="fp-panel-1" aria-labelledby="fp-opt-1" hidden>
+          <figure class="fp-frame">
+            <img src="ImgVids/floorplans/first-floor-plan.png" alt="First Floor Plan — Residential Block 01" loading="lazy">
           </figure>
+          <figcaption class="fp-caption">First Floor Plan &mdash; Residential Block 01</figcaption>
           <p class="cta-inline floorplan-cta">
             <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
           </p>
         </div>
+
+        <div class="fp-panel" role="tabpanel" id="fp-panel-2" aria-labelledby="fp-opt-2" hidden>
+          <figure class="fp-frame">
+            <img src="ImgVids/floorplans/second-third-fourth-floor-plan.png" alt="Second, Third &amp; Fourth Floor Plans — Residential Block 01" loading="lazy">
+          </figure>
+          <figcaption class="fp-caption">Second, Third &amp; Fourth Floor Plans &mdash; Residential Block 01</figcaption>
+          <p class="cta-inline floorplan-cta">
+            <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
+          </p>
+        </div>
+
+        <div class="fp-panel" role="tabpanel" id="fp-panel-3" aria-labelledby="fp-opt-3" hidden>
+          <figure class="fp-frame">
+            <img src="ImgVids/floorplans/sixth-floor-amenity-deck-plan.png" alt="Sixth Floor Plan (Amenity Deck) — Residential Block 01" loading="lazy">
+          </figure>
+          <figcaption class="fp-caption">Sixth Floor Plan (Amenity Deck) &mdash; Residential Block 01</figcaption>
+          <p class="cta-inline floorplan-cta">
+            <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
+          </p>
+        </div>
+
+        <div class="fp-panel" role="tabpanel" id="fp-panel-4" aria-labelledby="fp-opt-4" hidden>
+          <figure class="fp-frame">
+            <img src="ImgVids/floorplans/residential-typical-floor-plan.png" alt="Residential Typical Floor Plan — Wing E / Wing F" loading="lazy">
+          </figure>
+          <figcaption class="fp-caption">Residential Typical Floor Plan &mdash; Wing E / Wing F</figcaption>
+          <p class="cta-inline floorplan-cta">
+            <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
+          </p>
+        </div>
+
+        <div class="fp-panel" role="tabpanel" id="fp-panel-5" aria-labelledby="fp-opt-5" hidden>
+          <figure class="fp-frame">
+            <img src="ImgVids/floorplans/2bhk-unit-plan.png" alt="2 BHK Single Unit (+ Isometric)" loading="lazy">
+          </figure>
+          <figcaption class="fp-caption">2 BHK Single Unit (+ Isometric)</figcaption>
+          <p class="cta-inline floorplan-cta">
+            <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
+          </p>
+        </div>
+
+        <!-- 3 BHK option: the site's existing real hotspot SVG, kept exactly
+             as it already renders elsewhere (#homes) so js/enhancements.js's
+             hotspots() IIFE — which looks for .floorplan-wrap + .hotspot —
+             keeps finding the same DOM shape and stays fully functional. -->
+        <div class="fp-panel" role="tabpanel" id="fp-panel-6" aria-labelledby="fp-opt-6" hidden>
+          <figure class="fp-frame fp-frame--svg">
+            <div class="floorplan-wrap">
+              <img src="assets/img/floor-plan-homes.svg"
+                   alt="Grand Meridian City 3 BHK floor plan, full size" loading="lazy">
+              <button type="button" class="hotspot" style="left:24.4%;top:40.2%" data-dim="14'6&quot; x 18'0&quot;" data-note="Living / Dining — placeholder dimension, confirm with sales">
+                <span class="sr-only">Living / Dining room details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:24.4%;top:82.1%" data-dim="8'6&quot; x 10'0&quot;" data-note="Kitchen — placeholder dimension, confirm with sales">
+                <span class="sr-only">Kitchen details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:51.9%;top:17.9%" data-dim="10'6&quot; x 12'0&quot;" data-note="Bedroom 1 — placeholder dimension, confirm with sales">
+                <span class="sr-only">Bedroom 1 details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:43.8%;top:85.7%" data-dim="10'0&quot; x 11'6&quot;" data-note="Bedroom 2 — placeholder dimension, confirm with sales">
+                <span class="sr-only">Bedroom 2 details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:83.8%;top:36.6%" data-dim="Standard fixture" data-note="Bath — placeholder detail, confirm with sales">
+                <span class="sr-only">Bath details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:83.8%;top:80.4%" data-dim="10'0&quot; x 10'6&quot;" data-note="Bedroom 3 — placeholder dimension, confirm with sales">
+                <span class="sr-only">Bedroom 3 details</span>
+              </button>
+            </div>
+          </figure>
+          <figcaption class="fp-caption">3 BHK Single Unit &middot; 997 sq ft carpet</figcaption>
+          <p class="cta-inline floorplan-cta">
+            <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
+          </p>
+        </div>
+
+        <!-- 4/5 BHK Jodi: no real image yet (future round) — an intentional
+             on-brand placeholder state, not a broken image or blank space. -->
+        <div class="fp-panel" role="tabpanel" id="fp-panel-7" aria-labelledby="fp-opt-7" hidden>
+          <div class="fp-soon">
+            <svg class="fp-soon-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="2"/><path d="M7 30l9-9 7 7 8-10 10 12"/><circle cx="16" cy="18" r="2.6"/></svg>
+            <p class="fp-soon-title">4 BHK Jodi &mdash; floor plan available on request</p>
+            <p class="fp-soon-text">This layout is being finalised. Ask our sales team for the latest 4 BHK Jodi drawing.</p>
+            <p class="cta-inline floorplan-cta">
+              <a class="btn btn-gold" href="#enquire">Enquire about 4 BHK Jodi &rarr;</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="fp-panel" role="tabpanel" id="fp-panel-8" aria-labelledby="fp-opt-8" hidden>
+          <div class="fp-soon">
+            <svg class="fp-soon-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="2"/><path d="M7 30l9-9 7 7 8-10 10 12"/><circle cx="16" cy="18" r="2.6"/></svg>
+            <p class="fp-soon-title">5 BHK Jodi &mdash; coming soon</p>
+            <p class="fp-soon-text">Coming soon &mdash; ask our sales team for the latest 5 BHK Jodi layout.</p>
+            <p class="cta-inline floorplan-cta">
+              <a class="btn btn-gold" href="#enquire">Enquire about 5 BHK Jodi &rarr;</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="fp-panel fp-panel--office" role="tabpanel" id="fp-panel-9" aria-labelledby="fp-opt-9" hidden>
+          <figure class="fp-frame fp-frame--svg fp-frame--office">
+            <div class="floorplan-wrap">
+              <img src="assets/img/floor-plan-offices.svg"
+                   alt="MEK Grand Central office floor plate, full size" loading="lazy">
+              <button type="button" class="hotspot" style="left:18.1%;top:21.4%" data-dim="467 sq ft" data-note="Boutique office — placeholder area, confirm with sales">
+                <span class="sr-only">Boutique office details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:50%;top:50%" data-dim="Shared lift lobby" data-note="Lift lobby — placeholder detail, confirm with sales">
+                <span class="sr-only">Lift lobby details</span>
+              </button>
+              <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 5,453 sq ft" data-note="Column-free floor plate — placeholder area, confirm with sales">
+                <span class="sr-only">Column-free floor plate details</span>
+              </button>
+            </div>
+          </figure>
+          <figcaption class="fp-caption">Boutique to full floor plate &middot; 467&ndash;5,453 sq ft carpet</figcaption>
+          <p class="cta-inline floorplan-cta">
+            <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
+          </p>
+        </div>
+
       </div>
     </div>
   </div>

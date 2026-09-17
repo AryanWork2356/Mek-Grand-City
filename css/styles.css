@@ -493,35 +493,14 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 }
 
 /* ---------- Floor Plan showcase ----------
-   Reuses the .amen-tab/.amen-panel tab component (and its existing generic
-   [data-amen-tabs] JS) for a residential/commercial toggle, but swaps the
-   list+visual split for a single large diagram per panel — this section's
-   whole point is giving the one real floor plan per project a bigger,
-   cleaner stage rather than repeating the inline hotspot walkthroughs. */
+   Base section chrome only — the multi-option switcher itself
+   (.fp-switcher/.fp-opt/.fp-panel/.fp-frame/.fp-soon) lives in
+   css/enhancements.css next to its JS (js/enhancements.js fpSwitcher()),
+   the same pairing pattern used for .amen-tabs/.hotspot. */
 .floorplan{padding:var(--section-y) 0;background:var(--slate);}
 .floorplan h2{margin-bottom:16px;}
 .floorplan .lede{margin-bottom:40px;}
-.floorplan-tabs .amen-tablist{justify-content:center;}
-.floorplan-panel{display:flex;flex-direction:column;align-items:center;gap:28px;}
-.floorplan-stage{
-  position:relative;width:100%;max-width:760px;margin:0;
-  background:linear-gradient(155deg,rgba(227,169,40,.14),transparent 60%),var(--slate-soft);
-  border:1px solid var(--slate-line);border-radius:10px;
-  padding:clamp(20px,4vw,48px);
-  box-shadow:0 30px 70px rgba(0,0,0,.4);
-}
-.floorplan-stage--office{
-  background:linear-gradient(155deg,rgba(62,139,130,.18),transparent 60%),var(--slate-soft);
-}
-.floorplan-stage img{display:block;width:100%;height:auto;}
-.floorplan-stage figcaption{
-  margin-top:18px;text-align:center;font-size:.86rem;font-weight:600;
-  color:var(--text-mute);letter-spacing:.02em;
-}
 .floorplan-cta{margin:0;}
-@media (max-width:640px){
-  .floorplan-tabs .amen-tablist{justify-content:flex-start;}
-}
 
 /* ---------- FAQ ---------- */
 .faq{padding:var(--section-y) 0;background:var(--slate-deep);}

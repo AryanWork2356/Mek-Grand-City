@@ -439,6 +439,123 @@
     });
   })();
 
+  /* ---------------- Floor plan switcher (#floorplan) ----------------
+     Purpose-built for this section's ~10 options (8 residential incl. two
+     "coming soon" placeholders, 1 commercial) rather than forcing the
+     .amen-tab/.amen-panel component to scale past the 2-way toggle it was
+     built for. Same engineering shape as amenTabs() above (flat option/panel
+     arrays, [hidden] + .is-active driven from one activate() function,
+     roving tabindex, arrow-key/Home/End keyboard support) but adds a real
+     fade-out-then-fade-in handoff so old and new images never appear to
+     jump-cut — the crossfade the user asked for ("photo changes with some
+     good animation"), not just a fade-in of the new panel alone.
+     Respects reduceMotion exactly like every other effect in this file:
+     when true, the swap is instant with no transition delay at all. */
+  (function fpSwitcher() {
+    var root = document.querySelector('[data-fp-switcher]');
+    if (!root) return;
+
+    var opts = Array.prototype.slice.call(root.querySelectorAll('.fp-opt'));
+    var panels = Array.prototype.slice.call(root.querySelectorAll('.fp-panel'));
+    if (!opts.length || !panels.length) return;
+
+    var FADE_OUT_MS = 220; // matches the shorter half of the CSS transition below
+    var current = opts.findIndex(function (o) { return o.classList.contains('is-active'); });
+    if (current < 0) current = 0;
+    var switching = false;
+
+    function panelForOpt(opt) {
+      var id = opt.getAttribute('data-panel');
+      return panels.filter(function (p) { return p.id === id; })[0] || null;
+    }
+
+    function setActiveOpt(index, focusOpt) {
+      opts.forEach(function (opt, i) {
+        var active = i === index;
+        opt.classList.toggle('is-active', active);
+        opt.setAttribute('aria-selected', active ? 'true' : 'false');
+        opt.tabIndex = active ? 0 : -1;
+      });
+      if (focusOpt) opts[index].focus();
+      // The option row is a horizontal scroll-rail on narrow screens (see
+      // .fp-opts in css/enhancements.css) — a tap near either edge can pick
+      // an option that's only partly visible, so bring it fully into view.
+      if (typeof opts[index].scrollIntoView === 'function') {
+        opts[index].scrollIntoView({
+          behavior: reduceMotion ? 'auto' : 'smooth',
+          block: 'nearest',
+          inline: 'nearest'
+        });
+      }
+    }
+
+    function showPanel(panel) {
+      panel.hidden = false;
+      // Force layout so the browser registers the [hidden] removal before
+      // .is-active is added a tick later — otherwise the opacity/transform
+      // transition can get skipped (both states would land in the same frame).
+      // eslint-disable-next-line no-unused-expressions
+      panel.offsetHeight;
+      panel.classList.add('is-active');
+    }
+
+    function activate(index, focusOpt) {
+      if (switching || index === current) {
+        if (focusOpt) opts[index].focus();
+        return;
+      }
+      var nextPanel = panelForOpt(opts[index]);
+      var currentPanel = panelForOpt(opts[current]);
+      if (!nextPanel) return;
+
+      setActiveOpt(index, focusOpt);
+
+      if (reduceMotion || !currentPanel || currentPanel === nextPanel) {
+        // Instant swap: no fade-out wait, matching how every other motion
+        // effect on this site degrades under prefers-reduced-motion.
+        if (currentPanel && currentPanel !== nextPanel) {
+          currentPanel.classList.remove('is-active');
+          currentPanel.hidden = true;
+        }
+        showPanel(nextPanel);
+        current = index;
+        return;
+      }
+
+      switching = true;
+      currentPanel.classList.remove('is-active'); // starts the fade-out
+      window.setTimeout(function () {
+        currentPanel.hidden = true;
+        showPanel(nextPanel); // starts the fade-in, once the old one is gone
+        current = index;
+        switching = false;
+      }, FADE_OUT_MS);
+    }
+
+    opts.forEach(function (opt, index) {
+      opt.addEventListener('click', function () { activate(index, false); });
+
+      // Same ARIA tabs keyboard pattern as amenTabs(): arrows/Home/End move
+      // focus between options and activate the newly focused one.
+      opt.addEventListener('keydown', function (event) {
+        var newIndex = null;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+          newIndex = (index + 1) % opts.length;
+        } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+          newIndex = (index - 1 + opts.length) % opts.length;
+        } else if (event.key === 'Home') {
+          newIndex = 0;
+        } else if (event.key === 'End') {
+          newIndex = opts.length - 1;
+        }
+        if (newIndex !== null) {
+          event.preventDefault();
+          activate(newIndex, true);
+        }
+      });
+    });
+  })();
+
   /* ---------------- Enquiry popup: opens 20s after page load, every visit ---------------- */
   (function enquiryPopup() {
     var overlay = document.getElementById('enquiry-popup');
