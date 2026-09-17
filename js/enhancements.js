@@ -19,6 +19,16 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------------- Hero background video: respect reduced motion ---------------- */
+  (function heroVideo() {
+    var video = document.querySelector('.hero-bg video');
+    if (!video) return;
+    if (reduceMotion) {
+      video.pause();
+      video.removeAttribute('autoplay');
+    }
+  })();
+
   /* ---------------- Scroll progress bar ---------------- */
   (function scrollProgress() {
     var bar = document.getElementById('scrollProgress');
@@ -67,7 +77,7 @@
   /* ---------------- Subtle hero parallax ---------------- */
   (function parallax() {
     if (reduceMotion) return;
-    var bg = document.querySelector('[data-parallax] img');
+    var bg = document.querySelector('[data-parallax] img, [data-parallax] video');
     var wrap = document.querySelector('[data-parallax]');
     if (!bg || !wrap) return;
 

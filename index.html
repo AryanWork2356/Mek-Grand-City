@@ -170,8 +170,18 @@
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-bg" id="heroBg" data-parallax>
-    <img src="ImgVids/hero-night-aerial.jpg"
-         alt="Night aerial view of the Grand Meridian City tower and retail podium with rooftop pool deck, Mumbra" fetchpriority="high">
+    <!-- Silent, looping background video (AI-generated architectural
+         walkthrough, cropped to remove source letterboxing and
+         compressed for web delivery — ~8MB down from a 90MB source).
+         autoplay+muted+playsinline is required for browsers to allow
+         autoplay at all; poster shows a real frame while it loads, and
+         is also what prefers-reduced-motion users effectively see since
+         the video is paused for them via JS (see js/enhancements.js). -->
+    <video autoplay muted loop playsinline
+           poster="ImgVids/hero-video-poster.jpg"
+           aria-hidden="true">
+      <source src="ImgVids/hero-bg-video.mp4" type="video/mp4">
+    </video>
   </div>
   <!-- CSS-only motion stand-ins for a hero video: an animated diagonal
        light sweep and a fine noise/grain texture, both purely decorative
@@ -345,7 +355,7 @@
         </thead>
         <tbody>
           <tr><td>2 BHK</td><td>749 sq ft</td><td class="price-drop"><del>₹1.22 Cr</del><strong>₹92 Lakh</strong></td></tr>
-          <tr><td>3 BHK</td><td>997 sq ft</td><td>₹1.31 Crore</td></tr>
+          <tr><td>3 BHK</td><td>997 sq ft</td><td class="price-drop"><del>₹1.64 Cr</del><strong>₹1.23 Cr</strong></td></tr>
         </tbody>
       </table>
 
@@ -536,7 +546,7 @@
         </li>
         <li data-fact-source="hero-flag / pricing table: launch price ₹92 Lakh 2BHK, open until June 2026">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>Launch pricing is a window, not a fixture.</strong> 2 BHK homes start at &#8377;92 Lakh and 3 BHK at &#8377;1.31 Crore while launch pricing holds &mdash; only until June 2026.</span>
+          <span><strong>Launch pricing is a window, not a fixture.</strong> 2 BHK homes start at &#8377;92 Lakh and 3 BHK at &#8377;1.23 Crore while launch pricing holds &mdash; only until June 2026.</span>
         </li>
         <li data-fact-source="spec list: Land 8.7 acres">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
@@ -1366,7 +1376,7 @@
       </details>
       <details>
         <summary>What do prices start at?</summary>
-        <p>₹92 Lakhs for a 2 BHK, ₹1.31 Crore for a 3 BHK, and ₹1.75 Crore for the smallest office.
+        <p>₹92 Lakhs for a 2 BHK, ₹1.23 Crore for a 3 BHK, and ₹1.75 Crore for the smallest office.
            These are launch-stage prices and they revise as construction progresses.</p>
       </details>
       <details>
@@ -1568,7 +1578,7 @@
         { "@type": "Question", "name": "What sizes are available?",
           "acceptedAnswer": { "@type": "Answer", "text": "Homes are 2 BHK at 749 sq ft carpet and 3 BHK at 997 sq ft carpet, across two towers of 347 units. Offices run from a 467 sq ft boutique unit to a 5,453 sq ft full floor plate." } },
         { "@type": "Question", "name": "What do prices start at?",
-          "acceptedAnswer": { "@type": "Answer", "text": "92 Lakhs for a 2 BHK, 1.31 Crore for a 3 BHK, and 1.75 Crore for the smallest office. These are launch-stage prices and they revise as construction progresses." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "92 Lakhs for a 2 BHK, 1.23 Crore for a 3 BHK, and 1.75 Crore for the smallest office. These are launch-stage prices and they revise as construction progresses." } },
         { "@type": "Question", "name": "Can I get a home loan on this?",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes. MahaRERA-registered projects are eligible for standard home and commercial loan products." } },
         { "@type": "Question", "name": "Can I visit the site?",

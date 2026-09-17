@@ -175,7 +175,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    element) rather than the img, so the two transforms don't fight. */
 .hero{position:relative;overflow:hidden;background:var(--slate-black);}
 .hero-bg{position:absolute;inset:0;}
-.hero-bg img{
+.hero-bg img,.hero-bg video{
   width:100%;height:100%;object-fit:cover;
   /* Was saturate(.85) brightness(.8) — tuned for the old hotlinked stock
      photo. That extra 20% brightness cut, stacked on top of the ::after
