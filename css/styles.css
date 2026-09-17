@@ -152,9 +152,15 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
   .brand-mark{width:30px;height:30px;}
 }
 .nav{display:flex;gap:26px;margin-left:auto;font-size:.92rem;color:var(--text-mute);}
+.nav a{white-space:nowrap;}
 .nav a:hover{color:var(--marigold-lt);}
-.head-cta{padding:10px 18px;font-size:.88rem;gap:7px;}
+.head-cta{padding:10px 18px;font-size:.88rem;gap:7px;white-space:nowrap;}
 .whatsapp-ico{flex-shrink:0;}
+@media (max-width:1240px) and (min-width:941px){
+  .nav{gap:14px;font-size:.8rem;}
+  .head-cta{padding:9px 12px;font-size:.78rem;}
+  .head-in{gap:18px;padding-right:14px;}
+}
 @media (max-width:940px){
   .nav{display:none;}
   .head-in{height:62px;gap:16px;}
@@ -273,6 +279,15 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .hero-copy > *:nth-child(5){animation-delay:.37s;}
 @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
 
+/* Between full desktop and the stacked mobile layout, the headline's
+   fluid clamp() size can outgrow the narrowed 1.12fr column before the
+   grid actually stacks, overlapping the form card. Widening the column
+   split and capping the headline size in this range keeps both sides
+   readable without overlap. */
+@media (max-width:1240px) and (min-width:901px){
+  .hero-in{grid-template-columns:1.3fr .7fr;gap:32px;}
+  .hero h1{font-size:clamp(2.6rem,6.2vw,4.4rem);}
+}
 @media (max-width:900px){
   .hero-in{grid-template-columns:1fr;gap:36px;padding-top:56px;padding-bottom:64px;}
   .hero-bg::after{background:linear-gradient(180deg,rgba(10,17,20,.95),rgba(10,17,20,.92));}
