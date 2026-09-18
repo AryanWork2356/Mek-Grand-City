@@ -190,23 +190,31 @@
   <div class="hero-sweep" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
 
-  <!-- MahaRERA verification badge: QR links to the official portal
-       (verified to decode correctly), the number shown updates with
-       the Homes/Offices/All focus toggle via CSS, same mechanism used
-       elsewhere on the page for [data-project] visibility. Positioned
-       within the hero (top-right), NOT inside the header — the header
-       has backdrop-filter, which creates a new containing block, so a
+  <!-- MahaRERA verification badge: two rows, one per project, each with
+       its own QR (verified to decode: the residential QR resolves to
+       the public MahaRERA portal, the commercial QR to that project's
+       specific MahaRERA listing page). Positioned within the hero
+       (top-right), NOT inside the header — the header has
+       backdrop-filter, which creates a new containing block, so a
        position:fixed/absolute child there doesn't anchor to the
        viewport/section as intended and can overlap the header's own
        nav/phone button. Absolute here anchors correctly to .hero
        (position:relative) and scrolls away with the page normally. -->
   <div class="rera-badge rera-badge--hero">
-    <img src="assets/img/rera-qr.png" alt="Scan to verify on the MahaRERA portal" width="40" height="40">
-    <span class="rera-badge-text">
-      <span class="rera-badge-num" data-project="homes">PR1330002600936</span>
-      <span class="rera-badge-num" data-project="offices">PC1330002600951</span>
-      <span class="rera-badge-label">MahaRERA<br>maharera.maharashtra.gov.in</span>
-    </span>
+    <div class="rera-badge-row">
+      <img src="assets/img/rera-qr.png" alt="Scan to verify Grand Meridian City on the MahaRERA portal" width="40" height="40">
+      <span class="rera-badge-text">
+        <span class="rera-badge-num rera-badge-num--home">PR1330002600936</span>
+        <span class="rera-badge-tag">(Residential)</span>
+      </span>
+    </div>
+    <div class="rera-badge-row">
+      <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal" width="40" height="40">
+      <span class="rera-badge-text">
+        <span class="rera-badge-num rera-badge-num--office">PC1330002600951</span>
+        <span class="rera-badge-tag">(Commercial)</span>
+      </span>
+    </div>
   </div>
 
   <div class="wrap hero-in">
@@ -1033,7 +1041,7 @@
 <section class="callout" data-reveal>
   <div class="callout-in">
     <blockquote>
-      Two developments, <span>one MahaRERA-registered group</span>, on the same half kilometre of
+      Two developments, <span>two MahaRERA registrations</span>, one group, on the same half kilometre of
       Old Mumbai Pune Road.
     </blockquote>
     <dl class="callout-stats">

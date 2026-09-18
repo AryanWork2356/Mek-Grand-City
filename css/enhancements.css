@@ -76,33 +76,34 @@ body[data-view="offices"] [data-project="offices"]::after{background:var(--teal)
    .hero (position:relative) via .rera-badge--hero, giving the same
    "top-right of the page" look as the very first version without the
    containing-block bug, since .hero itself has no backdrop-filter.
-   Shows whichever project's registration number matches the current
-   Homes/Offices focus; in "All" (the default) both numbers show
-   stacked, since neither project is more relevant than the other. */
+   Now shows BOTH projects' own QR + number + (Residential)/(Commercial)
+   tag stacked as two rows, always, regardless of the Homes/Offices
+   focus toggle — each project has its own distinct QR code (verified
+   to decode to a real MahaRERA URL), so there is no single "current"
+   QR to swap the way the old single-QR/two-number version did. */
 .hero-form-col{display:flex;flex-direction:column;gap:10px;}
 .rera-badge{
-  display:flex;align-items:center;gap:10px;
+  display:flex;flex-direction:column;gap:8px;
   background:rgba(10,17,20,.88);border:1px solid var(--slate-line);
-  border-radius:8px;padding:7px 11px;backdrop-filter:blur(8px);
+  border-radius:8px;padding:9px 12px;backdrop-filter:blur(8px);
   box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 .rera-badge--hero{position:absolute;top:20px;right:20px;z-index:5;}
+.rera-badge-row{display:flex;align-items:center;gap:10px;}
+.rera-badge-row:first-child{padding-bottom:8px;border-bottom:1px solid var(--slate-line-soft);}
 .rera-badge img{display:block;border-radius:3px;flex-shrink:0;}
 .rera-badge-text{display:flex;flex-direction:column;gap:2px;}
-.rera-badge-num{font-size:.74rem;font-weight:700;color:var(--marigold-lt);letter-spacing:.02em;}
-.rera-badge-num[data-project="offices"]{color:var(--teal-lt);}
-.rera-badge-label{font-size:.6rem;color:var(--text-faint);line-height:1.3;text-transform:uppercase;letter-spacing:.04em;}
-/* Default (All): show both numbers stacked */
-body[data-view="all"] .rera-badge-num{display:block;}
-/* Homes/Offices focus: show only the matching project's number */
-body[data-view="homes"] .rera-badge-num[data-project="offices"],
-body[data-view="offices"] .rera-badge-num[data-project="homes"]{display:none;}
+.rera-badge-num{font-size:.74rem;font-weight:700;letter-spacing:.02em;}
+.rera-badge-num--home{color:var(--marigold-lt);}
+.rera-badge-num--office{color:var(--teal-lt);}
+.rera-badge-tag{font-size:.6rem;color:var(--text-faint);line-height:1.3;text-transform:uppercase;letter-spacing:.04em;}
 @media (max-width:640px){
   .rera-badge--hero{top:12px;right:12px;}
-  .rera-badge{padding:6px 9px;gap:7px;}
-  .rera-badge img{width:34px;height:34px;}
-  .rera-badge-num{font-size:.66rem;}
-  .rera-badge-label{font-size:.55rem;}
+  .rera-badge{padding:7px 9px;gap:6px;}
+  .rera-badge-row:first-child{padding-bottom:6px;}
+  .rera-badge img{width:32px;height:32px;}
+  .rera-badge-num{font-size:.64rem;}
+  .rera-badge-tag{font-size:.52rem;}
 }
 
 /* ---------- Focused detail blocks (specs table + timeline) ----------
