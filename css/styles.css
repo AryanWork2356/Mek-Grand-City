@@ -241,18 +241,18 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 }
 .hero-in{
   position:relative;display:grid;grid-template-columns:1.12fr .88fr;gap:54px;
-  align-items:center;padding-top:96px;padding-bottom:104px;
+  align-items:center;padding-top:48px;padding-bottom:56px;
 }
 .hero-flag{
   display:inline-block;font-size:.78rem;font-weight:700;color:var(--marigold);
   text-transform:uppercase;letter-spacing:var(--eyebrow-tracking);
-  border:1px solid rgba(227,169,40,.42);border-radius:100px;padding:8px 18px;margin-bottom:28px;
+  border:1px solid rgba(227,169,40,.42);border-radius:100px;padding:8px 18px;margin-bottom:18px;
 }
-.hero h1{margin-bottom:26px;max-width:16ch;}
-.hero-sub{font-size:1.14rem;color:#CBD6D4;max-width:52ch;margin-bottom:34px;}
-.hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:42px;}
+.hero h1{margin-bottom:16px;max-width:16ch;}
+.hero-sub{font-size:1.14rem;color:#CBD6D4;max-width:52ch;margin-bottom:22px;}
+.hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:26px;}
 
-.hero-stats{display:flex;flex-wrap:wrap;gap:16px 40px;border-top:1px solid var(--slate-line);padding-top:26px;}
+.hero-stats{display:flex;flex-wrap:wrap;gap:16px 40px;border-top:1px solid var(--slate-line);padding-top:18px;}
 .hero-stats dt{font-size:.76rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:.08em;}
 .hero-stats dd{font-family:var(--display);font-size:2.1rem;line-height:1.1;color:var(--text-light);}
 
@@ -324,11 +324,11 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    most reliably readable pattern for form fields against a dark shell. */
 .formcard{
   background:var(--paper);color:var(--text-dark);
-  border-radius:6px;padding:34px 30px;
+  border-radius:6px;padding:26px 26px;
   box-shadow:0 32px 80px rgba(0,0,0,.55),0 2px 0 rgba(255,255,255,.4) inset;
 }
-.formcard-title{font-size:1.7rem;margin-bottom:6px;font-family:var(--display);}
-.formcard-note{font-size:.88rem;color:#5E6D6B;margin-bottom:22px;}
+.formcard-title{font-size:1.5rem;margin-bottom:5px;font-family:var(--display);}
+.formcard-note{font-size:.86rem;color:#5E6D6B;margin-bottom:16px;}
 .lead-form label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#46595A;margin-bottom:6px;}
 .lead-form input,.lead-form select{
   width:100%;padding:13px 14px;font-size:.95rem;

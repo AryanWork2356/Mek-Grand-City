@@ -522,7 +522,7 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
    brightest element with a gold underline so the eye lands there last. */
 .identity-banner{
   position:relative;overflow:hidden;
-  margin:0;padding:26px var(--gutter) 30px;
+  margin:0;padding:16px var(--gutter) 18px;
   background:var(--slate-deep);
   border-bottom:1px solid var(--slate-line);
   text-align:center;
