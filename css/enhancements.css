@@ -98,7 +98,13 @@ body[data-view="offices"] [data-project="offices"]::after{background:var(--teal)
 .rera-badge-num--office{color:var(--teal-lt);}
 .rera-badge-tag{font-size:.6rem;color:var(--text-faint);line-height:1.3;text-transform:uppercase;letter-spacing:.04em;}
 @media (max-width:640px){
-  .rera-badge--hero{top:12px;right:12px;}
+  /* Two stacked rows made the badge too tall to float over the hero at
+     any fixed offset without colliding with the launch-pricing pill or
+     the headline underneath it at some point in the flow. Simpler and
+     more robust: drop out of absolute positioning entirely and place it
+     as a normal centred block right at the top of the hero content,
+     ahead of everything else, so there's no overlap to chase. */
+  .rera-badge--hero{position:static;margin:0 auto 20px;width:fit-content;}
   .rera-badge{padding:7px 9px;gap:6px;}
   .rera-badge-row:first-child{padding-bottom:6px;}
   .rera-badge img{width:32px;height:32px;}
