@@ -184,7 +184,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
      doesn't blow out against the site's otherwise near-black palette) and
      nudged saturation back up so the render's warm building lights and
      forest greens actually read. */
-  filter:saturate(1) brightness(.97);
+  filter:saturate(1.05) brightness(1.04);
 }
 @media (prefers-reduced-motion:no-preference){
   .hero-bg{animation:hero-kenburns 26s ease-in-out infinite alternate;}
@@ -204,8 +204,12 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    still clear WCAG AA against the image at the headline's actual position. */
 .hero-bg::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(108deg,rgba(10,17,20,.78) 0%,rgba(10,17,20,.68) 42%,rgba(10,17,20,.4) 100%),
-             linear-gradient(0deg,rgba(10,17,20,.35),rgba(10,17,20,0) 45%);
+  /* Lightened again: the video itself (checked frame-by-frame) is a
+     bright, well-exposed daytime shot — the previous scrim (.78/.68/.4)
+     was tuned for a much darker source and was making a genuinely good
+     video look dim. Text legibility re-verified after this change. */
+  background:linear-gradient(108deg,rgba(10,17,20,.58) 0%,rgba(10,17,20,.46) 42%,rgba(10,17,20,.24) 100%),
+             linear-gradient(0deg,rgba(10,17,20,.22),rgba(10,17,20,0) 45%);
 }
 /* Animated light sweep: a soft diagonal band of warm light drifting across
    the hero image, the cheapest possible stand-in for filmed motion. */
@@ -310,7 +314,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
      the new real render deserves to be visible) — still a flat, fairly
      strong cover since the copy spans the full width on this layout rather
      than sitting only on the left third as it does on desktop. */
-  .hero-bg::after{background:linear-gradient(180deg,rgba(10,17,20,.82),rgba(10,17,20,.74));}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(10,17,20,.62),rgba(10,17,20,.54));}
 }
 
 /* ---------- Form card ----------
