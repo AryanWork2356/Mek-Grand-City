@@ -372,8 +372,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 
 /* ---------- Proof ---------- */
 .proof{background:var(--marigold);color:#16262B;}
-.proof-in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 40px;padding:17px var(--gutter);font-size:.9rem;font-weight:500;}
-.proof-in p:nth-child(2){flex:1 1 auto;text-align:center;}
+.proof-in{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 40px;padding:17px var(--gutter);font-size:.9rem;font-weight:500;text-align:center;}
 
 /* ---------- Project blocks ----------
    Editorial/asymmetric layout: the media block overlaps the section edge
