@@ -270,58 +270,66 @@
   })();
 
   /* ---------------- Residential/Commercial view toggle ---------------- */
+  /* Pure scroll-to-anchor + scroll-synced highlight. Clicking a button only
+     scrolls to that section — nothing on the page is ever hidden, dimmed
+     or removed. The pill highlight always reflects actual scroll position:
+     "All" by default, "Home" once the residential section crosses the
+     viewport centre, "Offices" once the commercial section does. */
   (function viewToggle() {
     var buttons = document.querySelectorAll('.view-btn');
     if (!buttons.length) return;
 
-    var STORAGE_KEY = 'mek-view-focus';
+    var correctionToken = 0;
 
-    // Homes/offices are now fully display:none'd when not selected (see
-    // css/enhancements.css), so after switching to a solo view the visitor
-    // should land on the section that remains rather than stay wherever
-    // they happened to be scrolled to on a page that just reshuffled under
-    // them. Only do this on an explicit click, not on the initial
-    // restore-from-sessionStorage on page load (nobody wants to be
-    // auto-scrolled away from the top the moment the page opens).
     function scrollToView(view) {
       if (view !== 'homes' && view !== 'offices') return;
       var section = document.getElementById(view);
       if (!section) return;
+      // Invalidate any correction loop still running from a previous click
+      // — without this, clicking Home then quickly clicking Offices would
+      // let the first click's corrections keep firing after the second
+      // scroll and yank the page back toward the wrong section.
+      var myToken = ++correctionToken;
+
       section.scrollIntoView({
         behavior: reduceMotion ? 'auto' : 'smooth',
         block: 'start'
       });
-    }
 
-    function setView(view) {
-      document.body.setAttribute('data-view', view);
-      buttons.forEach(function (btn) {
-        var active = btn.getAttribute('data-view') === view;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-      });
-      try { window.sessionStorage.setItem(STORAGE_KEY, view); } catch (e) { /* ignore */ }
+      // Below-the-fold images are loading="lazy" (good for initial page
+      // speed), but that means images further down can finish loading and
+      // grow the page's height while the smooth-scroll above is still
+      // animating, leaving it short of the real target — worst on a fresh
+      // page load where more images are still queued. Re-align repeatedly
+      // (instant, no visible re-animation) for up to 1.6s so it keeps
+      // tracking the section's true position as images settle in, then
+      // stop once it's held still for two checks in a row.
+      var attempts = 0;
+      var lastTop = null;
+      var stableCount = 0;
+      function correct() {
+        if (myToken !== correctionToken) return;
+        var top = Math.round(section.getBoundingClientRect().top);
+        if (top !== lastTop) {
+          section.scrollIntoView({ behavior: 'auto', block: 'start' });
+          stableCount = 0;
+        } else {
+          stableCount++;
+        }
+        lastTop = top;
+        attempts++;
+        if (stableCount >= 2 || attempts >= 8) return;
+        window.setTimeout(correct, 200);
+      }
+      window.setTimeout(correct, 200);
     }
 
     buttons.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var view = btn.getAttribute('data-view');
-        setView(view);
-        scrollToView(view);
+        scrollToView(btn.getAttribute('data-view'));
       });
     });
 
-    var saved = null;
-    try { saved = window.sessionStorage.getItem(STORAGE_KEY); } catch (e) { /* ignore */ }
-    if (saved === 'homes' || saved === 'offices' || saved === 'all') {
-      setView(saved);
-    }
-
-    // Highlight-only scroll sync: as the visitor scrolls past the Home or
-    // Offices section, the toggle pill follows along so it always shows
-    // where they are on the page. This never touches body[data-view] or
-    // hides anything — only setView() (an explicit click) does that — so
-    // scrolling down the page always keeps every section reachable.
     var homeSection = document.getElementById('homes');
     var officeSection = document.getElementById('offices');
     if (homeSection && officeSection && 'IntersectionObserver' in window) {
@@ -332,11 +340,6 @@
       };
 
       function highlightOnly(view) {
-        // Skip while a project is explicitly focused via click — that
-        // filter state already drives its own highlight in setView().
-        // No attribute yet (fresh page load, nothing clicked) counts as "all".
-        var currentFocus = document.body.getAttribute('data-view') || 'all';
-        if (currentFocus !== 'all') return;
         buttons.forEach(function (btn) {
           btn.classList.toggle('is-active', btn === highlightBtns[view]);
           btn.setAttribute('aria-pressed', btn === highlightBtns[view] ? 'true' : 'false');
@@ -360,30 +363,6 @@
 
       sectionObserver.observe(homeSection);
       sectionObserver.observe(officeSection);
-
-      // Clicking Home/Offices filters the page to just that section (see
-      // setView() above) so a visitor who explicitly asked for one project
-      // isn't stuck scrolling past the other to find the form. But that
-      // filter should not permanently block the rest of the page: once
-      // they keep scrolling and reach the end of the focused section, the
-      // filter lifts on its own — the hidden section reappears and normal
-      // scroll-sync (above) takes over the toggle highlight from there.
-      var clearFilterObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          var focus = document.body.getAttribute('data-view');
-          if (focus !== 'homes' && focus !== 'offices') return;
-          var focusedSection = focus === 'homes' ? homeSection : officeSection;
-          if (entry.target !== focusedSection) return;
-          // Not intersecting the (expanded) viewport at all means the
-          // visitor has scrolled past all of the focused section's content.
-          if (!entry.isIntersecting) {
-            setView('all');
-          }
-        });
-      }, { rootMargin: '0px 0px 200px 0px', threshold: 0 });
-
-      clearFilterObserver.observe(homeSection);
-      clearFilterObserver.observe(officeSection);
     }
   })();
 

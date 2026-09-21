@@ -37,32 +37,6 @@
   .view-btn{padding:6px 12px;font-size:.76rem;}
 }
 
-/* Fully hide (not dim) the non-selected project's section when a specific
-   focus is chosen. `display:none` still leaves the markup in the DOM — it
-   is only a presentation change driven by a class toggled in JS, exactly
-   like any accordion/tab widget — so the content stays crawlable (see the
-   comment above .view-toggle in index.html) while a human visitor sees the
-   other project genuinely gone, with no residual gap, rather than merely
-   faded. display:none also removes it from the tab order/accessibility
-   tree, which is the correct behaviour here. */
-body[data-view="homes"] [data-project="offices"],
-body[data-view="offices"] [data-project="homes"]{
-  display:none;
-}
-
-/* Give the actively-focused project's own section a touch more presence
-   — a subtle inset accent bar down the left edge of the wrap, in that
-   project's existing accent colour. Purely decorative, no layout shift. */
-body[data-view="homes"] [data-project="homes"],
-body[data-view="offices"] [data-project="offices"]{
-  position:relative;
-}
-body[data-view="homes"] [data-project="homes"]::after,
-body[data-view="offices"] [data-project="offices"]::after{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:var(--marigold);pointer-events:none;
-}
-body[data-view="offices"] [data-project="offices"]::after{background:var(--teal);}
 
 /* ---------- RERA verification badge ----------
    One card, two stacked rows: each row is a QR code with its MahaRERA
@@ -184,33 +158,11 @@ body[data-view="offices"] [data-project="offices"]::after{background:var(--teal)
   .focus-grid{grid-template-columns:1fr;gap:26px;}
 }
 
-/* Default ("All") view: keep the block present but visually compact so the
-   page does not grow long before a visitor picks a focus. Nothing is
-   removed from the DOM or from assistive-tech/SEO reading order — only
-   presentation changes. */
-body[data-view="all"] .focus-detail .focus-grid{
-  grid-template-columns:1fr;
-}
-body[data-view="all"] .focus-detail .project-timeline{
-  display:flex;flex-wrap:wrap;gap:8px 22px;padding-left:0;
-}
-body[data-view="all"] .focus-detail .project-timeline::before{display:none;}
-body[data-view="all"] .focus-detail .project-timeline li{
-  flex-direction:row;align-items:baseline;gap:8px;padding-left:20px;
-}
-body[data-view="all"] .focus-detail .project-timeline li::before{left:0;top:5px;}
-
-/* When a project is actively focused, give its own focus-detail block a
-   quiet highlight so the "richer single-project view" reads as genuinely
-   promoted content, not just an unchanged block sitting under a dimmed
-   neighbour. */
-body[data-view="homes"] [data-project="homes"] .focus-detail,
-body[data-view="offices"] [data-project="offices"] .focus-detail{
-  border-top-color:var(--marigold-dim);
-}
-body[data-view="offices"] [data-project="offices"] .focus-detail{
-  border-top-color:var(--teal-dim);
-}
+/* Each project's own focus-detail block gets a quiet permanent highlight
+   in its accent colour — always shown now, not just when explicitly
+   focused via the (now scroll-only) toggle. */
+[data-project="homes"] .focus-detail{border-top-color:var(--marigold-dim);}
+[data-project="offices"] .focus-detail{border-top-color:var(--teal-dim);}
 
 /* ---------- Scroll reveal ---------- */
 @media (prefers-reduced-motion:no-preference){
