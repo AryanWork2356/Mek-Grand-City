@@ -51,6 +51,31 @@
 <!-- Scroll progress bar -->
 <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
 
+<!-- ================= OFFICIAL SITE MARQUEE =================
+     Continuously scrolling attention strip above the header. Two identical
+     copies of the text sit side by side and the whole track animates left
+     by exactly 50% of its own width on an infinite loop, so the seam
+     between the end of copy 1 and the start of copy 2 is invisible and the
+     motion reads as one endless line rather than a jump-cut repeat.
+     aria-hidden + a plain sr-only line underneath keeps this from being
+     read aloud twice (or as gibberish) by screen readers. -->
+<div class="site-marquee" role="note" aria-label="This is the official website of MEK Grand City">
+  <div class="site-marquee-track" aria-hidden="true">
+    <span class="site-marquee-item">This is the official website of MEK Grand City</span>
+    <span class="site-marquee-sep">&#9670;</span>
+    <span class="site-marquee-item">by La Majeste Group (MEK)</span>
+    <span class="site-marquee-sep">&#9670;</span>
+    <span class="site-marquee-item">MahaRERA registered</span>
+    <span class="site-marquee-sep">&#9670;</span>
+    <span class="site-marquee-item">This is the official website of MEK Grand City</span>
+    <span class="site-marquee-sep">&#9670;</span>
+    <span class="site-marquee-item">by La Majeste Group (MEK)</span>
+    <span class="site-marquee-sep">&#9670;</span>
+    <span class="site-marquee-item">MahaRERA registered</span>
+    <span class="site-marquee-sep">&#9670;</span>
+  </div>
+</div>
+
 <!-- ================= HEADER ================= -->
 <header class="site-head" id="siteHead">
   <div class="head-in">

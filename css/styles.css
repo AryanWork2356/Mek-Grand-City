@@ -119,6 +119,40 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .btn-wide{width:100%;}
 .btn[disabled]{opacity:.55;cursor:not-allowed;}
 
+/* ---------- Official-site attention marquee ----------
+   Sits above the header, scrolls away with the page (not sticky) since the
+   header itself already carries the brand mark permanently — this is a
+   one-time "you're in the right place" cue for the first moment on the
+   page, not a persistent fixture. Two copies of the same content sit
+   side by side inside .site-marquee-track and the whole track is
+   translated left by exactly -50% on an infinite CSS animation, so the
+   loop seam is invisible (see index.html comment). */
+.site-marquee{
+  overflow:hidden;background:linear-gradient(90deg,var(--marigold-dim),var(--teal-dim));
+  border-bottom:1px solid var(--slate-line);
+}
+.site-marquee-track{
+  display:flex;align-items:center;gap:14px;width:max-content;
+  padding:7px 0;white-space:nowrap;
+  animation:site-marquee-scroll 26s linear infinite;
+}
+.site-marquee-item{
+  font-family:var(--body);font-size:.78rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text-light);
+}
+.site-marquee-sep{color:var(--marigold-lt);font-size:.6rem;opacity:.8;}
+@keyframes site-marquee-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@media (prefers-reduced-motion: reduce){
+  .site-marquee-track{animation:none;}
+}
+@media (max-width:640px){
+  .site-marquee-item{font-size:.68rem;}
+  .site-marquee-track{gap:10px;padding:6px 0;animation-duration:20s;}
+}
+
 /* ---------- Header ---------- */
 .site-head{
   position:sticky;top:0;z-index:80;
