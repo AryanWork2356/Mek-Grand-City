@@ -65,10 +65,16 @@
     <nav class="nav" aria-label="Sections">
       <a href="#homes">Home</a>
       <a href="#offices">Offices</a>
-      <a href="#amenities">Amenities</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">Amenities</button>
+        <div class="nav-dropdown-menu" role="menu">
+          <a href="#amenities-homes" role="menuitem">Residential amenities</a>
+          <a href="#amenities-offices" role="menuitem">Commercial amenities</a>
+        </div>
+      </div>
+      <a href="#gallery">Gallery</a>
       <a href="#distances">Connectivity</a>
       <a href="#corridor">Why here</a>
-      <a href="#gallery">Gallery</a>
       <a href="#enquire">Contact</a>
     </nav>
 
@@ -176,13 +182,17 @@
      create a containing block and position:fixed still resolves against
      the real viewport. -->
 <div class="rera-badge rera-badge--fixed">
+  <p class="rera-badge-heading">Scan to verify</p>
   <div class="rera-badge-row">
     <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
-    <span class="rera-badge-label">Residential - RERA</span>
+    <span class="rera-badge-num">PR1330002600936</span>
+    <span class="rera-badge-label rera-badge-label--home">Residential - RERA</span>
   </div>
+  <div class="rera-badge-divider" aria-hidden="true"></div>
   <div class="rera-badge-row">
     <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
-    <span class="rera-badge-label">Commercial - RERA</span>
+    <span class="rera-badge-num">PC1330002600951</span>
+    <span class="rera-badge-label rera-badge-label--office">Commercial - RERA</span>
   </div>
 </div>
 
@@ -409,7 +419,7 @@
        hallmark/commercial icon set already on this page rather than
        redrawn. -->
   <div class="wrap">
-    <div class="amen-grid-wrap" id="amenities" data-reveal>
+    <div class="amen-grid-wrap" id="amenities-homes" data-reveal>
       <div class="amenities-head">
         <p class="amenities-eyebrow">Grand Meridian City</p>
         <h3>Everything the address includes</h3>
@@ -523,7 +533,7 @@
         </li>
         <li data-fact-source="identity-banner / why-choose: shared corridor with MEK Grand Central">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>A home and a workplace on the same corridor.</strong> Grand Meridian City shares its 8.74-acre address with MEK Grand Central, so the same half kilometre can serve both ends of your day.</span>
+          <span><strong>A home and a workplace, one land, one location.</strong> Grand Meridian City shares its 8.74-acre address with MEK Grand Central, so the same location can serve both ends of your day.</span>
         </li>
       </ul>
     </div>
@@ -888,7 +898,7 @@
        icons already established elsewhere on this page (hallmark strip /
        residential amenity grid) rather than redrawn. -->
   <div class="wrap">
-    <div class="amen-grid-wrap amen-grid-wrap--office" data-reveal>
+    <div class="amen-grid-wrap amen-grid-wrap--office" id="amenities-offices" data-reveal>
       <div class="amenities-head">
         <p class="amenities-eyebrow">MEK Grand Central</p>
         <h3>Everything the address includes</h3>
@@ -963,7 +973,7 @@
         </li>
         <li data-fact-source="why-choose: shared address with Grand Meridian City">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>A workplace and a home on the same corridor.</strong> Pair an office here with a home at Grand Meridian City, on the same 8.74-acre address, and the commute between the two disappears.</span>
+          <span><strong>A workplace and a home, one land, one location.</strong> Pair an office here with a home at Grand Meridian City, on the same 8.74-acre address, and the commute between the two disappears.</span>
         </li>
       </ul>
     </div>
@@ -1149,6 +1159,43 @@
   </div>
 </section>
 
+<!-- ================= WHY MEK GRAND CITY ================= -->
+<!-- New buyer-facing persuasion section, distinct from the existing
+     infrastructure-timeline "Why here" section further down (#corridor).
+     This one argues the case for the combined address itself — why one
+     group, one gate, two registrations is worth choosing over a single
+     project — rather than why the location is worth choosing. Every claim
+     cites a fact already established elsewhere on the page. -->
+<section class="why-city" data-reveal>
+  <div class="wrap">
+    <p class="eyebrow">Why MEK Grand City</p>
+    <h2>One developer, one address, two decisions you don't have to rush</h2>
+    <p class="lede">
+      Most buyers choose between a home and an investment. Here, both sit behind the same gate,
+      under the same launch window, built by the same group &mdash; so the decision is which one
+      first, not whether to trust two different developers with two different track records.
+    </p>
+
+    <ul class="check-list">
+      <li data-fact-source="proof section: two separate MahaRERA registrations, PR1330002600936 and PC1330002600951">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+        <span><strong>Two registrations, not one shared promise.</strong> Grand Meridian City and MEK Grand Central are each independently MahaRERA registered, so a residential buyer and a commercial investor are each backed by their own legal record &mdash; not a single filing covering both.</span>
+      </li>
+      <li data-fact-source="hero-stats / pricing tables: launch pricing open until October 2026 across both projects">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+        <span><strong>One launch window, two entry points.</strong> Whichever you choose first, the same October 2026 deadline applies &mdash; so holding out to compare the two doesn't cost you the pricing on either.</span>
+      </li>
+      <li data-fact-source="identity-banner / why-choose: shared address, one land, one location">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+        <span><strong>Live and invest without a second commute.</strong> A home at Grand Meridian City and an office or shop at MEK Grand Central sit on one land, one location &mdash; buy one now and the other is already a five-minute walk away when you're ready.</span>
+      </li>
+      <li data-fact-source="hero-sub / pricing tables: 2 BHK, 3 BHK, 4 & 5 BHK Jodi Flats, boutique to corporate office">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+        <span><strong>Sized for wherever you are in life.</strong> From a 2 BHK to a 5 BHK Jodi on the residential side, and a boutique office to a full floor plate on the commercial side &mdash; the range means you're not stretching to fit one fixed unit size.</span>
+      </li>
+    </ul>
+  </div>
+</section>
 
 <!-- ================= PULL-QUOTE / STAT CALLOUT ================= -->
 <!-- Full-bleed editorial break between the two projects, per the redesign
@@ -1159,7 +1206,7 @@
 <section class="callout" data-reveal>
   <div class="callout-in">
     <blockquote>
-      Two developments, <span>two MahaRERA registrations</span>, one group, on the same half kilometre of
+      Two developments, <span>two MahaRERA registrations</span>, one group, one land, one location on
       Old Mumbai Pune Road.
     </blockquote>
     <dl class="callout-stats">

@@ -65,37 +65,70 @@ body[data-view="offices"] [data-project="offices"]::after{
 body[data-view="offices"] [data-project="offices"]::after{background:var(--teal);}
 
 /* ---------- RERA verification badge ----------
-   One card, two rows: each row is a QR code with its project's label to
-   the right (residential on top, commercial below). True position:fixed
-   against the browser window, as a sibling of .identity-banner (not a
-   descendant), so it stays visible in the same spot the entire time you
-   scroll the page, not just while the identity banner is in view.
-   .identity-banner has no backdrop-filter/transform, so it does not
-   create a containing block and position:fixed still resolves against
-   the real viewport — the same bug that broke earlier placements when
-   the badge sat inside <header> (which does use backdrop-filter). */
+   One card, two stacked rows: each row is a QR code with its MahaRERA
+   number and project label underneath (residential on top, commercial
+   below). True position:fixed against the browser window, as a sibling
+   of .identity-banner (not a descendant), so it stays visible in the
+   same spot the entire time you scroll the page, not just while the
+   identity banner is in view. .identity-banner has no backdrop-filter/
+   transform, so it does not create a containing block and position:fixed
+   still resolves against the real viewport — the same bug that broke
+   earlier placements when the badge sat inside <header> (which does use
+   backdrop-filter). Dual-glow gradient background + marigold/teal top
+   accent bar mirror the identity-banner's own visual language instead of
+   a flat slate card, so the badge reads as designed rather than bolted on. */
 .rera-badge--fixed{
   position:fixed;top:96px;right:14px;z-index:85;
-  display:flex;flex-direction:column;gap:8px;
-  padding:8px 12px;border-radius:10px;
-  background:var(--slate-deep);border:1px solid var(--slate-line);
-  box-shadow:0 10px 30px rgba(0,0,0,.45);
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:14px 16px 12px;border-radius:14px;
+  background:
+    radial-gradient(ellipse 120% 80% at 20% 0%, rgba(227,169,40,.16), transparent 60%),
+    radial-gradient(ellipse 120% 80% at 80% 100%, rgba(62,139,130,.16), transparent 60%),
+    var(--slate-deep);
+  border:1px solid var(--slate-line);
+  box-shadow:0 14px 34px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04);
+  overflow:hidden;
 }
-.rera-badge-row{display:flex;align-items:center;gap:8px;}
+.rera-badge--fixed::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--marigold),var(--teal));
+}
+.rera-badge-heading{
+  font-family:var(--body);font-size:.62rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);
+  margin:0 0 8px;
+}
+.rera-badge-row{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
 .rera-badge img{
-  display:block;width:56px;height:56px;object-fit:cover;
-  border-radius:5px;flex-shrink:0;
-  background:#fff;
+  display:block;width:74px;height:74px;object-fit:cover;
+  border-radius:6px;flex-shrink:0;
+  background:#fff;padding:4px;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.rera-badge-num{
+  font-family:var(--body);font-size:.68rem;font-weight:700;
+  letter-spacing:.02em;color:var(--text-light);white-space:nowrap;
 }
 .rera-badge-label{
-  font-family:var(--body);font-size:.72rem;font-weight:700;
-  letter-spacing:.03em;text-transform:uppercase;color:var(--text-light);
-  white-space:nowrap;
+  font-family:var(--body);font-size:.66rem;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+  padding:2px 9px;border-radius:999px;
+}
+.rera-badge-label--home{color:var(--marigold-lt);background:rgba(227,169,40,.14);}
+.rera-badge-label--office{color:var(--teal-lt);background:rgba(62,139,130,.16);}
+.rera-badge-divider{
+  width:100%;height:1px;margin:10px 0;
+  background:linear-gradient(90deg,transparent,var(--slate-line),transparent);
 }
 @media (max-width:900px){
-  .rera-badge--fixed{top:auto;bottom:66px;right:8px;padding:6px 9px;gap:6px;}
-  .rera-badge img{width:38px;height:38px;border-radius:4px;}
-  .rera-badge-label{font-size:.62rem;}
+  .rera-badge--fixed{top:auto;bottom:66px;right:8px;padding:10px 12px 9px;}
+  .rera-badge-heading{font-size:.56rem;margin-bottom:6px;}
+  .rera-badge img{width:48px;height:48px;padding:3px;}
+  .rera-badge-num{font-size:.58rem;}
+  .rera-badge-label{font-size:.56rem;padding:1px 7px;}
+  .rera-badge-divider{margin:7px 0;}
 }
 
 /* ---------- Focused detail blocks (specs table + timeline) ----------

@@ -667,4 +667,34 @@
     window.setTimeout(openPopup, 20000);
   })();
 
+  /* ---------------- Nav "Amenities" dropdown ---------------- */
+  (function navDropdown() {
+    var dropdown = document.querySelector('.nav-dropdown');
+    if (!dropdown) return;
+    var btn = dropdown.querySelector('.nav-dropdown-btn');
+
+    function close() {
+      dropdown.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function toggle() {
+      var open = dropdown.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    btn.addEventListener('click', function (event) {
+      event.stopPropagation();
+      toggle();
+    });
+    document.addEventListener('click', function (event) {
+      if (!dropdown.contains(event.target)) close();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') close();
+    });
+    dropdown.querySelectorAll('.nav-dropdown-menu a').forEach(function (link) {
+      link.addEventListener('click', close);
+    });
+  })();
+
 })();
