@@ -348,7 +348,8 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 
 /* ---------- Proof ---------- */
 .proof{background:var(--marigold);color:#16262B;}
-.proof-in{display:flex;flex-direction:column;gap:6px;padding:17px var(--gutter);font-size:.9rem;font-weight:500;}
+.proof-in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 40px;padding:17px var(--gutter);font-size:.9rem;font-weight:500;}
+.proof-in p:nth-child(2){flex:1 1 auto;text-align:center;}
 
 /* ---------- Project blocks ----------
    Editorial/asymmetric layout: the media block overlaps the section edge
@@ -609,6 +610,19 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .mobile-bar a:last-child{border-right:0;}
 .mobile-bar a.primary{background:var(--marigold);color:#16262B;}
 @media (max-width:900px){.mobile-bar{display:grid;}}
+
+/* Floating WhatsApp button: always visible bottom-right on desktop/tablet.
+   Hidden under 900px since .mobile-bar already has its own WhatsApp entry
+   there and the two would otherwise overlap in the same corner. */
+.whatsapp-float{
+  position:fixed;right:20px;bottom:24px;z-index:88;
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);
+  transition:transform .15s ease;
+}
+.whatsapp-float:hover{transform:scale(1.08);}
+@media (max-width:900px){.whatsapp-float{display:none;}}
 
 /* ---------- Pull-quote / stat callout ----------
    A full-bleed break between the residential and commercial sections:

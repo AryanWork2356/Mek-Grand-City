@@ -90,20 +90,6 @@
   </div>
 </header>
 
-<!-- MahaRERA verification badge: two large QR codes, one per project,
-     each filling its card edge-to-edge with no text label needed —
-     the QR itself is the whole point. True position:fixed relative to
-     the browser window (not nested inside .header or .hero, both of
-     which can create a new containing block via backdrop-filter or
-     transform), so it stays visible in the same spot no matter how
-     far down the page you scroll, and cannot collide with the
-     header's own nav/phone button since it is a sibling, not a child,
-     of <header>. -->
-<div class="rera-badge rera-badge--fixed">
-  <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
-  <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
-</div>
-
 <!-- ================= ENQUIRY POPUP (opens automatically after 20s on
      every visit — see js/enhancements.js. Reuses the exact same
      .lead-form markup/classes as the hero and closing forms, so
@@ -168,6 +154,15 @@
 <div class="identity-banner" data-reveal>
   <p class="identity-eyebrow">One address, two ways in</p>
   <p class="identity-row">
+    <!-- MahaRERA verification QR codes, stacked in one card beside the
+         equation. Kept fixed-position so it stays visible while scrolling
+         anywhere on the page (see .rera-badge--fixed), but now lives
+         visually inside the identity row instead of floating separately
+         in the top-right corner. -->
+    <span class="rera-badge rera-badge--fixed">
+      <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
+      <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
+    </span>
     <span class="identity-term">
       <span class="identity-part identity-part--home">Grand Meridian City</span>
       <span class="identity-tag identity-tag--home">(Residential - RERA)</span>
@@ -222,7 +217,7 @@
 
       <dl class="hero-stats">
         <div><dt>Home from</dt><dd class="price-drop"><del>₹1.22 Cr</del><strong>₹92 Lakh</strong></dd></div>
-        <div><dt>Offices from</dt><dd class="price-drop"><del>₹2.3 Crore</del><strong>₹1.75 Cr</strong></dd></div>
+        <div><dt>Offices from</dt><dd class="price-drop"><del>₹2.33 Crore</del><strong>₹1.75 Cr</strong></dd></div>
         <div><dt>Across</dt><dd data-count data-target="8.74" data-decimals="2" data-suffix=" acres">8.74 acres</dd></div>
       </dl>
     </div>
@@ -287,7 +282,7 @@
 <section class="glance" data-reveal>
   <div class="wrap glance-in">
     <div class="glance-stat">
-      <p class="glance-remaining">Last 121 Units remaining</p>
+      <p class="glance-remaining"><span class="glance-remaining-dot" aria-hidden="true"></span>Last 121 Units remaining</p>
       <dd class="is-struck"><del><span data-count data-target="347" data-suffix="">0</span></del></dd>
       <dt>Units across two towers</dt>
     </div>
@@ -296,7 +291,7 @@
       <dt>Floors, Grand Meridian City</dt>
     </div>
     <div class="glance-stat">
-      <dd data-count data-target="7661" data-suffix=" sq ft">0</dd>
+      <dd data-count data-target="1451" data-suffix=" sq ft">0</dd>
       <dt>Largest Commercial floor plate</dt>
     </div>
     <div class="glance-stat">
@@ -390,11 +385,6 @@
         </div>
       </div>
 
-      <a class="btn btn-ink" href="#enquire">Check what is available in your budget</a>
-
-      <p class="cta-inline">
-        <a href="#enquire">Get the full price sheet for Grand Meridian City &rarr;</a>
-      </p>
     </div>
   </div>
 
@@ -496,35 +486,9 @@
     </div>
   </div>
 
-  <!-- ---------- WHY CHOOSE: RESIDENTIAL ----------
-       Every claim below already appears elsewhere on this page: RERA number
-       and gated-community facts from this section above, launch-pricing
-       window from the hero flag/closing section, Atal Setu/airport/Metro
-       facts from #corridor, distance figures from #distances, and the
-       combined residential+commercial framing from the hero copy/callout. -->
-  <div class="wrap">
-    <div class="why-choose">
-      <p class="eyebrow">Why choose Grand Meridian City</p>
-      <h3>Built for the corridor Mumbai just got closer to</h3>
-      <p>
-        347 vastu-compliant 2 and 3 BHK home on 8.74 acres, priced from &#8377;92 Lakhs at a moment
-        when Atal Setu has already cut the run to south Mumbai to about twenty minutes and Metro
-        Line 5 is due to reach this corridor by December 2026. That is infrastructure most of Thane
-        priced in years ago &mdash; here, it is arriving while launch pricing is still open.
-      </p>
-      <p>
-        The gated enclave sits 1.5 km from Mumbra railway station and the Old Mumbai Pune Road, with
-        schools, hospitals and the main market all under 3 km. It is MahaRERA registered
-        (PR1330002600936) and verifiable before you pay anything, and it shares its address corridor
-        with MEK Grand Central &mdash; so the same half kilometre that gets you home can also get you
-        to work.
-      </p>
-    </div>
-  </div>
-
   <!-- ---------- WHY INVEST: RESIDENTIAL ----------
        New checkmarked bullet list per direct user instruction, positioned
-       right after the existing "Why choose" narrative above. Every bullet
+       right after the amenities showcase above. Every bullet
        cites a fact already established elsewhere on this page — see the
        inline data-fact-source on each item — rather than any new claim,
        award or superlative. No stock image used, per the user's explicit
@@ -549,15 +513,15 @@
         </li>
         <li data-fact-source="spec list: Land 8.74 acres">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>8.7 gated acres, not a tower on a plot.</strong> Two towers of ground plus 38 floors sit inside a landscaped, walled enclave rather than a standalone high-rise.</span>
+          <span><strong>8.74 gated acres, not a tower on a plot.</strong> Two towers of ground plus 38 floors sit inside a landscaped, walled enclave rather than a standalone high-rise.</span>
         </li>
-        <li data-fact-source="#distances ledger: Mumbra station 1.5 km, main market 0.8 km, schools/hospitals under 3 km">
+        <li data-fact-source="#distances ledger: Mumbra station 0.7 km, main market 2.0 km, schools/hospitals under 3.5 km">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>Everything measured, nothing rounded up.</strong> Mumbra station is 1.5 km, the main market 0.8 km, and schools and hospitals all sit under 3 km &mdash; the actual distances from the site gates.</span>
+          <span><strong>Everything measured, nothing rounded up.</strong> Mumbra station is 0.7 km, the main market 2.0 km, and schools and hospitals all sit under 3.5 km &mdash; the actual distances from the site gates.</span>
         </li>
         <li data-fact-source="identity-banner / why-choose: shared corridor with MEK Grand Central">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>A home and a workplace on the same corridor.</strong> Grand Meridian City shares its 8.7-acre address with MEK Grand Central, so the same half kilometre can serve both ends of your day.</span>
+          <span><strong>A home and a workplace on the same corridor.</strong> Grand Meridian City shares its 8.74-acre address with MEK Grand Central, so the same half kilometre can serve both ends of your day.</span>
         </li>
       </ul>
     </div>
@@ -654,7 +618,7 @@
           <span class="h-num h-num--small">RERA</span>
           <span class="h-text">Registered — PR1330002600936</span>
         </li>
-        <li class="h-tile" data-fact-source="#distances ledger: Mumbra railway station 1.5 km / 5 min">
+        <li class="h-tile" data-fact-source="#distances ledger: Mumbra railway station 0.7 km / 5 min">
           <span class="h-icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="11" y="8" width="26" height="26" rx="8"/><path d="M11 24h26"/><circle cx="18" cy="30" r="1.6" fill="currentColor" stroke="none"/><circle cx="30" cy="30" r="1.6" fill="currentColor" stroke="none"/><path d="M17 40l4-6M31 40l-4-6"/></svg>
           </span>
@@ -682,7 +646,11 @@
     <!-- Floor plan switcher (residential) -- moved inside #homes so this
          project's floor plans live with the rest of its content, per
          redesign: each project section now owns only its own floor plans
-         rather than sharing one combined gallery further down the page. -->
+         rather than sharing one combined gallery further down the page.
+         Wrapped in its own .wrap (the outer .wrap.project-in div above
+         already closed) so it gets the same left/right gutter as every
+         other section instead of sitting flush against the screen edge. -->
+    <div class="wrap">
     <div class="floorplan-switcher-wrap" data-reveal>
       <p class="eyebrow">Floor Plan</p>
       <h3>See the layout before you see the site</h3>
@@ -824,46 +792,8 @@
         </div>
       </div>
     </div>
-  </section>
-
-<!-- ================= GALLERY ================= -->
-<section class="gallery light" id="gallery" data-reveal>
-  <div class="wrap">
-    <p class="eyebrow">Gallery</p>
-    <h2>Inside both addresses</h2>
-    <p class="lede">Real renders of the site, its views and its shared amenity decks.</p>
-
-    <!-- Replaced the previous hotlinked placeholder photos with the user's
-         supplied real project renders/photos (ImgVids/Res+Commercial/),
-         verified visually against what each actually shows:
-           - complex-aerial-full.jpg: daytime aerial of the full tower +
-             podium + amenity deck (pool, sports court, play area together),
-             used as the wide feature tile.
-           - view-mountain.jpg / view-creek.jpg: real aerial photographs of
-             Mumbra's surrounding geography with "Mountain View" / "Creek
-             View" captions baked into the source images themselves — used
-             verbatim, matching the existing hero-sub copy's mountain/creek
-             view claims.
-           - amenity-sports-court-wide.jpg: the rooftop sports court +
-             kids' play area + lawn deck above the retail podium.
-         Grid stays 4 tiles (1 wide + 3 standard) so there is no dangling
-         row, per .gal/.gal figure.wide in css/styles.css. -->
-    <div class="gal">
-      <figure class="wide"><img loading="lazy" src="ImgVids/complex-aerial-full.jpg" alt="Full aerial view of the tower, retail podium and rooftop amenity deck, Grand Meridian City"><figcaption>The complex from above &mdash; tower, podium and amenity deck</figcaption></figure>
-      <figure><img loading="lazy" src="ImgVids/view-mountain.jpg" alt="Aerial photo of Mumbra town and hills, captioned Mountain View"><figcaption>Mountain View</figcaption></figure>
-      <!-- ImgVids/view-creek.jpg is pre-cropped (not the original file) to a
-           middle horizontal band of the source photo: the original also has
-           its own baked-in "A Rare Vista to Treasure for a Lifetime" /
-           "Creek View" captions top-left and bottom-left, which duplicated/
-           overlapped this figure's own figcaption once object-fit:cover
-           cropped the wide source down to the grid's 4:3 tile. The cropped
-           file keeps the creek bend, mangroves and far-bank city clearly in
-           frame with neither baked-in caption. -->
-      <figure><img loading="lazy" src="ImgVids/view-creek.jpg" alt="Aerial photo of a river creek bend with mangroves, near Mumbra"><figcaption>Creek View</figcaption></figure>
-      <figure><img loading="lazy" src="ImgVids/amenity-sports-court-wide.jpg" alt="Rooftop amenity deck with sports court, lawn and children's play area above the retail podium"><figcaption>Rooftop amenity deck</figcaption></figure>
     </div>
-  </div>
-</section>
+  </section>
 
 <!-- ================= COMMERCIAL ================= -->
 <section class="project dark" id="offices" data-project="offices">
@@ -878,7 +808,7 @@
         <button type="button" class="hotspot" style="left:50%;top:50%" data-dim="Shared lift lobby" data-note="Lift lobby — placeholder detail, confirm with sales">
           <span class="sr-only">Lift lobby details</span>
         </button>
-        <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 7,661 sq ft" data-note="Column-free floor plate — placeholder area, confirm with sales">
+        <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 1,451 sq ft" data-note="Column-free floor plate — placeholder area, confirm with sales">
           <span class="sr-only">Column-free floor plate details</span>
         </button>
       </div>
@@ -894,12 +824,11 @@
     <div class="project-body" data-reveal="left">
       <span class="project-tag" aria-hidden="true">02</span>
       <p class="eyebrow">MEK Grand Central &middot; Commercial</p>
-      <h2>A business address, before the corridor prices one in</h2>
+      <h2>A storefront built to be seen, not converted</h2>
       <p class="lede">
-        Premium office space is genuinely scarce along Old Mumbai Pune Road. Most of what trades here is
-        converted residential stock. MEK Grand Central is purpose-built commercial on 8.74 acres shared
-        with Grand Meridian City: column-free spans, a glass frontage that works as signage, and clear
-        title on MahaRERA record.
+        Purpose-built commercial on 8.74 acres shared with Grand Meridian City &mdash; column-free
+        floor plates, a glass frontage that doubles as signage, and clear MahaRERA title, where most
+        of the corridor is still trading converted flats as office space.
       </p>
 
       <table class="pricing">
@@ -908,11 +837,11 @@
           <tr><th scope="col">Unit</th><th scope="col">Carpet area</th><th scope="col">Launch price</th></tr>
         </thead>
         <tbody>
-          <tr><td>Boutique office</td><td>467 sq ft</td><td class="price-drop"><del>₹2.3 Crore</del><strong>₹1.75 Cr</strong></td></tr>
-          <tr><td>Executive suite</td><td>764 sq ft</td><td>₹1.26 Crore</td></tr>
-          <tr><td>Premium office</td><td>2,588 sq ft</td><td>₹4.27 Crore</td></tr>
-          <tr><td>Corporate office</td><td>4,062 sq ft</td><td>₹6.70 Crore</td></tr>
-          <tr><td>Full floor plate</td><td>7,661 sq ft</td><td>On request</td></tr>
+          <tr><td>Boutique office</td><td>467 sq ft</td><td class="price-drop"><del>₹2.33 Crore</del><strong>₹1.75 Cr</strong></td></tr>
+          <tr><td>Executive suite</td><td>764 sq ft</td><td class="price-drop"><del>₹3.82 Crore</del><strong>₹2.86 Cr</strong></td></tr>
+          <tr><td>Premium office</td><td>1,064 sq ft</td><td class="price-drop"><del>₹5.32 Crore</del><strong>₹3.99 Cr</strong></td></tr>
+          <tr><td>Corporate office</td><td>1,451 sq ft</td><td class="price-drop"><del>₹7.25 Crore</del><strong>₹5.44 Cr</strong></td></tr>
+          <tr><td>Contact for More</td><td>On Request</td><td>&mdash;</td></tr>
         </tbody>
       </table>
 
@@ -922,14 +851,12 @@
           <ul>
             <li>High-speed lifts</li>
             <li>Double-height arrival lobby</li>
-            <li>Shared conference rooms</li>
             <li>Executive lounge</li>
           </ul>
         </div>
         <div class="amenity-group">
           <h3>Safety &amp; access</h3>
           <ul>
-            <li>Layered access control</li>
             <li>Fire detection and suppression throughout</li>
           </ul>
         </div>
@@ -1001,26 +928,6 @@
        from the hero flag/closing section, Atal Setu/airport/Metro facts
        from #corridor, distance figures from #distances, and the combined
        residential+commercial framing from the hero copy/callout. -->
-  <div class="wrap">
-    <div class="why-choose">
-      <p class="eyebrow">Why choose MEK Grand Central</p>
-      <h3>A commercial address the corridor doesn't actually have yet</h3>
-      <p>
-        Most office stock on Old Mumbai Pune Road is converted residential space. MEK Grand Central
-        is purpose-built commercial on 8.74 acres shared with Grand Meridian City &mdash; column-free
-        floor plates up to 7,661 sq ft, a glass frontage that doubles as signage, and clear MahaRERA
-        title (PC1330002600951) &mdash; starting from &#8377;1.75 Crore while launch pricing holds
-        until October 2026.
-      </p>
-      <p>
-        It sits on the same corridor as the Mumbai&ndash;Pune Expressway (3.5 km) and Mumbra
-        railway station (1.5 km), with Atal Setu already shortening the run to south Mumbai and
-        Metro Line 5 due by December 2026. Pair it with a home at Grand Meridian City on the same
-        half kilometre and the commute between the two disappears entirely.
-      </p>
-    </div>
-  </div>
-
   <!-- ---------- WHY INVEST: COMMERCIAL ----------
        New checkmarked bullet list per direct user instruction, mirroring
        the residential one above (teal accent via .why-invest--office).
@@ -1040,9 +947,9 @@
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
           <span><strong>MahaRERA registered, not just promised.</strong> PC1330002600951 is verifiable on the MahaRERA portal before you pay anything &mdash; the same registration cited in the specs table above.</span>
         </li>
-        <li data-fact-source="specs-table: carpet area range 467-7,661 sq ft, column-free">
+        <li data-fact-source="specs-table: carpet area range 467-1,451 sq ft, column-free">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>Column-free space up to a full floor plate.</strong> Units run from a 467 sq ft boutique office to a 7,661 sq ft column-free floor plate, so the layout scales with the business.</span>
+          <span><strong>Column-free space up to a full floor plate.</strong> Units run from a 467 sq ft boutique office to a 1,451 sq ft column-free floor plate, so the layout scales with the business.</span>
         </li>
         <li data-fact-source="hero-flag / pricing table: launch price ₹1.75 Cr boutique office, open until October 2026">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
@@ -1054,7 +961,7 @@
         </li>
         <li data-fact-source="why-choose: shared address with Grand Meridian City">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>A workplace and a home on the same corridor.</strong> Pair an office here with a home at Grand Meridian City, on the same 8.7-acre address, and the commute between the two disappears.</span>
+          <span><strong>A workplace and a home on the same corridor.</strong> Pair an office here with a home at Grand Meridian City, on the same 8.74-acre address, and the commute between the two disappears.</span>
         </li>
       </ul>
     </div>
@@ -1067,7 +974,7 @@
          - Land parcel, column-free/glass-frontage facts: project-body lede
            above.
          - Unit types + carpet areas + prices: .pricing table above.
-         - Largest floor plate (7,661 sq ft): glance strip / callout stats.
+         - Largest floor plate (1,451 sq ft): glance strip / callout stats.
          - Launch window, construction status: same FAQ entries as homes. -->
   <div class="wrap">
     <div class="focus-detail" data-focus-detail>
@@ -1081,8 +988,8 @@
             <tr><th scope="row">MahaRERA number</th><td>PC1330002600951</td></tr>
             <tr><th scope="row">Land parcel</th><td>8.74 acres</td></tr>
             <tr><th scope="row">Unit types</th><td>Boutique &middot; Executive &middot; Premium &middot; Corporate &middot; Full floor plate</td></tr>
-            <tr><th scope="row">Carpet area range</th><td>467 &ndash; 7,661 sq ft</td></tr>
-            <tr><th scope="row">Launch price from</th><td class="price-drop"><del>&#8377;2.3 Crore</del><strong>&#8377;1.75 Cr</strong></td></tr>
+            <tr><th scope="row">Carpet area range</th><td>467 &ndash; 1,451 sq ft</td></tr>
+            <tr><th scope="row">Launch price from</th><td class="price-drop"><del>&#8377;2.33 Crore</del><strong>&#8377;1.75 Cr</strong></td></tr>
             <tr><th scope="row">Possession</th><td>December 2031</td></tr>
           </tbody>
         </table>
@@ -1112,14 +1019,14 @@
     </div>
     <div class="wrap">
       <ul class="h-strip" data-fact-source="see individual tiles">
-        <li class="h-tile h-tile--hero" data-fact-source="specs-table: Carpet area range 467-7,661 sq ft">
+        <li class="h-tile h-tile--hero" data-fact-source="specs-table: Carpet area range 467-1,451 sq ft">
           <span class="h-icon-ghost" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="36" height="36" rx="2"/><path d="M6 20h36M6 32h36M18 6v36M30 6v36"/></svg>
           </span>
           <span class="h-icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="36" height="36" rx="2"/><path d="M6 20h36M6 32h36M18 6v36M30 6v36"/></svg>
           </span>
-          <span class="h-num h-num--frac">467&ndash;7,661</span>
+          <span class="h-num h-num--frac">467&ndash;1,451</span>
           <span class="h-text">Sq ft of column-free commercial space</span>
         </li>
         <li class="h-tile" data-fact-source="project-body lede / why-choose: column-free floor plates">
@@ -1169,7 +1076,9 @@
   </div>
 
     <!-- Floor plan (commercial) -- moved inside #offices; single option so
-         no tab list is needed here, just the plan itself. -->
+         no tab list is needed here, just the plan itself. Wrapped in its
+         own .wrap for the same reason as the residential one above. -->
+    <div class="wrap">
     <div class="floorplan-switcher-wrap" data-reveal>
       <p class="eyebrow">Floor Plan</p>
       <h3>See the layout before you see the site</h3>
@@ -1186,17 +1095,58 @@
           <button type="button" class="hotspot" style="left:50%;top:50%" data-dim="Shared lift lobby" data-note="Lift lobby -- placeholder detail, confirm with sales">
             <span class="sr-only">Lift lobby details</span>
           </button>
-          <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 7,661 sq ft" data-note="Column-free floor plate -- placeholder area, confirm with sales">
+          <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 1,451 sq ft" data-note="Column-free floor plate -- placeholder area, confirm with sales">
             <span class="sr-only">Column-free floor plate details</span>
           </button>
         </div>
       </figure>
-      <figcaption class="fp-caption">Boutique to full floor plate &middot; 467&ndash;7,661 sq ft carpet</figcaption>
+      <figcaption class="fp-caption">Boutique to full floor plate &middot; 467&ndash;1,451 sq ft carpet</figcaption>
       <p class="cta-inline floorplan-cta">
         <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
       </p>
     </div>
+    </div>
   </section>
+
+<!-- ================= GALLERY ================= -->
+<section class="gallery light" id="gallery" data-reveal>
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2>Inside both addresses</h2>
+    <p class="lede">Real renders of the site, its views and its shared amenity decks.</p>
+
+    <!-- Replaced the previous hotlinked placeholder photos with the user's
+         supplied real project renders/photos (ImgVids/Res+Commercial/),
+         verified visually against what each actually shows:
+           - complex-aerial-full.jpg: daytime aerial of the full tower +
+             podium + amenity deck (pool, sports court, play area together),
+             used as the wide feature tile.
+           - view-mountain.jpg / view-creek.jpg: real aerial photographs of
+             Mumbra's surrounding geography with "Mountain View" / "Creek
+             View" captions baked into the source images themselves — used
+             verbatim, matching the existing hero-sub copy's mountain/creek
+             view claims.
+           - amenity-sports-court-wide.jpg: the rooftop sports court +
+             kids' play area + lawn deck above the retail podium.
+         Grid stays 4 tiles (1 wide + 3 standard) so there is no dangling
+         row, per .gal/.gal figure.wide in css/styles.css. -->
+    <div class="gal">
+      <figure class="wide"><img loading="lazy" src="ImgVids/complex-aerial-full.jpg" alt="Full aerial view of the tower, retail podium and rooftop amenity deck, Grand Meridian City"><figcaption>The complex from above &mdash; tower, podium and amenity deck</figcaption></figure>
+      <figure><img loading="lazy" src="ImgVids/view-mountain.jpg" alt="Aerial photo of Mumbra town and hills, captioned Mountain View"><figcaption>Mountain View</figcaption></figure>
+      <!-- ImgVids/view-creek.jpg is pre-cropped (not the original file) to a
+           middle horizontal band of the source photo: the original also has
+           its own baked-in "A Rare Vista to Treasure for a Lifetime" /
+           "Creek View" captions top-left and bottom-left, which duplicated/
+           overlapped this figure's own figcaption once object-fit:cover
+           cropped the wide source down to the grid's 4:3 tile. The cropped
+           file keeps the creek bend, mangroves and far-bank city clearly in
+           frame with neither baked-in caption. -->
+      <figure><img loading="lazy" src="ImgVids/view-creek.jpg" alt="Aerial photo of a river creek bend with mangroves, near Mumbra"><figcaption>Creek View</figcaption></figure>
+      <figure><img loading="lazy" src="ImgVids/amenity-sports-court-wide.jpg" alt="Rooftop amenity deck with sports court, lawn and children's play area above the retail podium"><figcaption>Rooftop amenity deck</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 
 <!-- ================= PULL-QUOTE / STAT CALLOUT ================= -->
 <!-- Full-bleed editorial break between the two projects, per the redesign
@@ -1213,7 +1163,7 @@
     <dl class="callout-stats">
       <div><dd data-count data-target="8.74" data-decimals="2" data-suffix=" acres">8.74 acres</dd><dt>Combined land</dt></div>
       <div><dd data-count data-target="347" data-suffix="">347</dd><dt>Units across two towers</dt></div>
-      <div><dd data-count data-target="7661" data-suffix=" sq ft">7,661 sq ft</dd><dt>Largest Commercial floor plate</dt></div>
+      <div><dd data-count data-target="1451" data-suffix=" sq ft">1,451 sq ft</dd><dt>Largest Commercial floor plate</dt></div>
     </dl>
   </div>
 </section>
@@ -1253,36 +1203,35 @@
       <div class="ledger-col" data-category="transit">
         <h3>Trains and highways</h3>
         <ul>
-          <li data-km="1.5" data-min="5"><span class="place">Mumbra railway station</span><span class="dist">1.5 km</span><span class="mins">5 min</span></li>
-          <li data-km="1.5" data-min="4"><span class="place">Old Mumbai–Pune highway</span><span class="dist">1.5 km</span><span class="mins">4 min</span></li>
-          <li data-km="3.5" data-min="10"><span class="place">Mumbai–Pune Expressway</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
-          <li data-km="4.2" data-min="12"><span class="place">Diva junction</span><span class="dist">4.2 km</span><span class="mins">12 min</span></li>
-          <li data-km="8.0" data-min="20"><span class="place">Eastern Express Highway</span><span class="dist">8.0 km</span><span class="mins">20 min</span></li>
-          <li data-km="32" data-min="55"><span class="place">Mumbai airport</span><span class="dist">32 km</span><span class="mins">55 min</span></li>
+          <li data-km="0.7" data-min="5"><span class="place">Mumbra railway station</span><span class="dist">0.7 km</span><span class="mins">5 min</span></li>
+          <li data-km="0.6" data-min="2"><span class="place">Old Mumbai–Pune highway</span><span class="dist">0.6 km</span><span class="mins">2 min</span></li>
+          <li data-km="3.5" data-min="9"><span class="place">Mumbai–Pune Expressway</span><span class="dist">3.5 km</span><span class="mins">9 min</span></li>
+          <li data-km="3.5" data-min="10"><span class="place">Diva junction</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
+          <li data-km="9.0" data-min="18"><span class="place">Eastern Express Highway</span><span class="dist">9.0 km</span><span class="mins">18 min</span></li>
+          <li data-km="30" data-min="53"><span class="place">Mumbai airport</span><span class="dist">30 km</span><span class="mins">53 min</span></li>
         </ul>
       </div>
 
       <div class="ledger-col" data-category="health">
         <h3>Schools and hospitals</h3>
         <ul>
-          <li data-km="1.0" data-min="3"><span class="place">Bilal Hospital</span><span class="dist">1.0 km</span><span class="mins">3 min</span></li>
-          <li data-km="1.2" data-min="4"><span class="place">Symbiosis Convent High School</span><span class="dist">1.2 km</span><span class="mins">4 min</span></li>
-          <li data-km="2.0" data-min="7"><span class="place">MS College of Arts and Science</span><span class="dist">2.0 km</span><span class="mins">7 min</span></li>
-          <li data-km="2.5" data-min="8"><span class="place">Kalsekar Hospital</span><span class="dist">2.5 km</span><span class="mins">8 min</span></li>
-          <li data-km="3.0" data-min="9"><span class="place">Prime Criticare Hospital</span><span class="dist">3.0 km</span><span class="mins">9 min</span></li>
-          <li data-km="3.5" data-min="10"><span class="place">Royal College</span><span class="dist">3.5 km</span><span class="mins">10 min</span></li>
+          <li data-km="2.4" data-min="7"><span class="place">Bilal Hospital</span><span class="dist">2.4 km</span><span class="mins">7 min</span></li>
+          <li data-km="2.0" data-min="6"><span class="place">Symbiosis Convent High School</span><span class="dist">2.0 km</span><span class="mins">6 min</span></li>
+          <li data-km="2.5" data-min="7"><span class="place">MS College of Arts and Science</span><span class="dist">2.5 km</span><span class="mins">7 min</span></li>
+          <li data-km="2.8" data-min="8"><span class="place">Kalsekar Hospital</span><span class="dist">2.8 km</span><span class="mins">8 min</span></li>
+          <li data-km="3.2" data-min="8"><span class="place">Prime Criticare Hospital</span><span class="dist">3.2 km</span><span class="mins">8 min</span></li>
         </ul>
       </div>
 
       <div class="ledger-col" data-category="retail">
         <h3>Everyday and retail</h3>
         <ul>
-          <li data-km="0.8" data-min="2"><span class="place">Mumbra main market</span><span class="dist">0.8 km</span><span class="mins">2 min</span></li>
-          <li data-km="1.7" data-min="5"><span class="place">Grand Central Park</span><span class="dist">1.7 km</span><span class="mins">5 min</span></li>
-          <li data-km="2.2" data-min="7"><span class="place">Reti Bunder promenade</span><span class="dist">2.2 km</span><span class="mins">7 min</span></li>
+          <li data-km="2.0" data-min="7"><span class="place">Mumbra main market</span><span class="dist">2.0 km</span><span class="mins">7 min</span></li>
+          <li data-km="1.8" data-min="5"><span class="place">Grand Central Park</span><span class="dist">1.8 km</span><span class="mins">5 min</span></li>
+          <li data-km="2.5" data-min="8"><span class="place">Reti Bunder promenade</span><span class="dist">2.5 km</span><span class="mins">8 min</span></li>
           <li data-km="4.8" data-min="12"><span class="place">Gold Digital Cinema</span><span class="dist">4.8 km</span><span class="mins">12 min</span></li>
-          <li data-km="11.2" data-min="22"><span class="place">Korum Mall, Thane</span><span class="dist">11.2 km</span><span class="mins">22 min</span></li>
-          <li data-km="13" data-min="28"><span class="place">Viviana Mall, Thane</span><span class="dist">13 km</span><span class="mins">28 min</span></li>
+          <li data-km="11.5" data-min="23"><span class="place">Korum Mall, Thane</span><span class="dist">11.5 km</span><span class="mins">23 min</span></li>
+          <li data-km="12.5" data-min="27"><span class="place">Viviana Mall, Thane</span><span class="dist">12.5 km</span><span class="mins">27 min</span></li>
         </ul>
       </div>
     </div>
@@ -1328,60 +1277,16 @@
   </div>
 </section>
 
-<!-- ================= FAQ ================= -->
-<section class="faq light" id="questions" data-reveal>
-  <div class="wrap">
-    <p class="eyebrow">Questions</p>
-    <h2>Questions buyers ask first</h2>
-
-    <div class="faq-list">
-      <details open>
-        <summary>Who is the developer?</summary>
-        <p>Both projects are built by La Majeste Group (MEK). Grand Meridian City is the residential
-           project on Old Mumbai Pune Road, Mumbra. MEK Grand Central is the commercial project on the same road.</p>
-      </details>
-      <details>
-        <summary>Are the projects MahaRERA registered?</summary>
-        <p>Yes. Grand Meridian City is PR1330002600936 and MEK Grand Central is PC1330002600951.
-           Both can be checked on the MahaRERA portal before you book.</p>
-      </details>
-      <details>
-        <summary>When do I get possession?</summary>
-        <p>December 2031 for both, with launch in October 2026. Both are under construction now.</p>
-      </details>
-      <details>
-        <summary>What sizes are available?</summary>
-        <p>Home are 2 BHK at 740 sq ft carpet and 3 BHK at 997 sq ft carpet, across two towers of
-           347 units. Offices run from a 467 sq ft boutique unit to a 7,661 sq ft full floor plate.</p>
-      </details>
-      <details>
-        <summary>What do prices start at?</summary>
-        <p>₹92 Lakhs for a 2 BHK, ₹1.23 Crore for a 3 BHK, and ₹1.75 Crore for the smallest office.
-           These are launch-stage prices and they revise as construction progresses.</p>
-      </details>
-      <details>
-        <summary>Can I get a home loan on this?</summary>
-        <p>Yes. MahaRERA-registered projects are eligible for standard home and commercial loan
-           products. Tell us your requirement and we will walk you through the payment schedule.</p>
-      </details>
-      <details>
-        <summary>Can I visit the site?</summary>
-        <p>Yes, seven days a week. Call 98217 02210 to book a slot.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
 <!-- ================= CLOSING ENQUIRY ================= -->
 <section class="closing" id="enquire" data-reveal>
   <div class="wrap closing-in">
     <div>
       <p class="eyebrow">Get in touch</p>
-      <h2>Launch pricing does not survive the launch</h2>
+      <h2>The earlier you call, the more you choose from</h2>
       <p class="lede">
-        Both projects are pre-launch through October 2026. First-allocation buyers take the best
-        inventory, the lowest entry and the longest payment runway. Tell us what you are after and
-        we will send the price sheet, the payment plan and current availability.
+        Launch pricing on both projects holds only until October 2026, and the best-facing units go
+        first. Tell us what you need &mdash; a home, an office, or both &mdash; and we will send the
+        price sheet, the payment plan and what is still available today.
       </p>
       <div class="closing-cta">
         <a class="btn btn-gold" href="tel:+919821702210">Call 98217 02210</a>
@@ -1436,8 +1341,8 @@
 
 <!-- ================= MAPS ================= -->
 <!-- Both projects share one address (confirmed against the verified Google
-     Business listing for "MEK Grand Central (MEK Grand City)": B, 102, Old
-     Mumbai - Pune Rd, opp. Mumbra Police Station, Mumbra, Thane 400612) —
+     Business listing for "MEK Grand Central (MEK Grand City)": 102 - B, Old
+     Mumbai - Pune Rd, Opp. Mumbra Police Station, Mumbra, Thane 400612) —
      previously shown as two separate pins at two different coordinates,
      which was a leftover placeholder inconsistency, not a real difference
      in location. -->
@@ -1447,7 +1352,7 @@
     <figure class="map-single">
       <iframe title="MEK Grand City location" loading="lazy"
               src="https://maps.google.com/maps?q=19.1823511,73.0219158&amp;z=16&amp;output=embed"></iframe>
-      <figcaption>Grand Meridian City &amp; MEK Grand Central — B, 102, Old Mumbai Pune Road, opp. Mumbra Police Station, Mumbra, Thane 400612</figcaption>
+      <figcaption>Grand Meridian City &amp; MEK Grand Central — 102 - B, Old Mumbai Pune Road, Opp. Mumbra Police Station, Mumbra, Thane 400612</figcaption>
     </figure>
   </div>
 </section>
@@ -1468,14 +1373,13 @@
           <li><a href="#homes">Grand Meridian City</a></li>
           <li><a href="#offices">MEK Grand Central</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#questions">Questions</a></li>
         </ul>
       </div>
       <div>
         <h3>Reach us</h3>
         <ul>
           <li><a href="tel:+919821702210">+91 98217 02210</a></li>
-          <li><a href="https://wa.me/919821702210" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://wa.me/919821702210?text=Hi%2C%20I%20would%20like%20to%20enquire" target="_blank" rel="noopener">WhatsApp</a></li>
           <li>Old Mumbai Pune Road, Mumbra, Thane 400612</li>
         </ul>
       </div>
@@ -1500,6 +1404,16 @@
   <a href="https://wa.me/919821702210?text=I%20would%20like%20details%20on%20LA%20MAJESTE%20GROUP%20(MEK)%20Mumbra." target="_blank" rel="noopener">WhatsApp</a>
   <a href="#enquire" class="primary">Price sheet</a>
 </div>
+
+<!-- Floating WhatsApp button: always visible bottom-right on every screen
+     size, same prefilled message as the header's WhatsApp button, so
+     every WhatsApp entry point on the page opens the same chat. -->
+<a class="whatsapp-float" href="https://wa.me/919821702210?text=Hi%2C%20I%20would%20like%20to%20enquire" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" width="30" height="30">
+    <path fill="#25D366" d="M17.47 14.38c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.73-.71 1.98-1.39.24-.68.24-1.27.17-1.39-.07-.13-.26-.2-.55-.34z"/>
+    <path fill="#25D366" d="M12.01 2C6.5 2 2 6.48 2 11.98c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.34a10 10 0 0 0 4.91 1.28h.01c5.5 0 10-4.48 10-9.98C22 6.48 17.51 2 12.01 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.03.8.81-2.95-.2-.3a8.16 8.16 0 0 1-1.25-4.39c0-4.5 3.67-8.16 8.17-8.16 2.18 0 4.23.85 5.77 2.39a8.1 8.1 0 0 1 2.4 5.78c0 4.5-3.68 8.16-8.18 8.16z"/>
+  </svg>
+</a>
 
 <script src="js/main.js" defer></script>
 <script src="js/enhancements.js" defer></script>
@@ -1541,31 +1455,12 @@
       "@type": "Place",
       "name": "MEK Grand Central",
       "url": "https://www.mekgrandcity.com/#offices",
-      "description": "Purpose-built commercial development on Old Mumbai Pune Road, Mumbra. Offices from 467 sq ft to full floor plates of 7,661 sq ft across 8.74 acres. MahaRERA PC1330002600951.",
+      "description": "Purpose-built commercial development on Old Mumbai Pune Road, Mumbra. Offices from 467 sq ft to full floor plates of 1,451 sq ft across 8.74 acres. MahaRERA PC1330002600951.",
       "geo": { "@type": "GeoCoordinates", "latitude": 19.1823511, "longitude": 73.0219158 },
       "address": {
         "@type": "PostalAddress", "streetAddress": "Old Mumbai Pune Road, Mumbra", "addressLocality": "Thane",
         "addressRegion": "Maharashtra", "postalCode": "400612", "addressCountry": "IN"
       }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Who is the developer?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Both projects are built by La Majeste Group (MEK). Grand Meridian City is the residential project on Old Mumbai Pune Road, Mumbra. MEK Grand Central is the commercial project on the same road." } },
-        { "@type": "Question", "name": "Are the projects MahaRERA registered?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Grand Meridian City is PR1330002600936 and MEK Grand Central is PC1330002600951. Both can be checked on the MahaRERA portal before booking." } },
-        { "@type": "Question", "name": "When do I get possession?",
-          "acceptedAnswer": { "@type": "Answer", "text": "December 2031 for both, with launch in October 2026. Both are under construction now." } },
-        { "@type": "Question", "name": "What sizes are available?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Home are 2 BHK at 740 sq ft carpet and 3 BHK at 997 sq ft carpet, across two towers of 347 units. Offices run from a 467 sq ft boutique unit to a 7,661 sq ft full floor plate." } },
-        { "@type": "Question", "name": "What do prices start at?",
-          "acceptedAnswer": { "@type": "Answer", "text": "92 Lakhs for a 2 BHK, 1.23 Crore for a 3 BHK, and 1.75 Crore for the smallest office. These are launch-stage prices and they revise as construction progresses." } },
-        { "@type": "Question", "name": "Can I get a home loan on this?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. MahaRERA-registered projects are eligible for standard home and commercial loan products." } },
-        { "@type": "Question", "name": "Can I visit the site?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, seven days a week. Call 98217 02210 to book a slot." } }
-      ]
     }
   ]
 }
