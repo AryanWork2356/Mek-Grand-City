@@ -344,6 +344,9 @@ body[data-view="offices"] [data-project="offices"] .focus-detail{
 .glance-in{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
 .glance-stat dd{font-family:var(--display);font-size:clamp(2rem,3.8vw,2.8rem);color:var(--marigold-lt);}
 .glance-stat dt{font-size:.78rem;color:var(--text-mute);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;}
+.glance-remaining{font-size:.8rem;font-weight:700;color:var(--marigold-lt);margin-bottom:4px;}
+.glance-stat dd.is-struck{color:var(--text-faint);}
+.glance-stat dd.is-struck del{text-decoration-thickness:1.5px;}
 @media (max-width:820px){.glance-in{grid-template-columns:1fr 1fr;}}
 
 /* ---------- Micro-interactions ---------- */

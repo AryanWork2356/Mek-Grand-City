@@ -348,7 +348,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 
 /* ---------- Proof ---------- */
 .proof{background:var(--marigold);color:#16262B;}
-.proof-in{display:flex;flex-wrap:wrap;gap:8px 40px;padding:17px var(--gutter);font-size:.9rem;font-weight:500;}
+.proof-in{display:flex;flex-direction:column;gap:6px;padding:17px var(--gutter);font-size:.9rem;font-weight:500;}
 
 /* ---------- Project blocks ----------
    Editorial/asymmetric layout: the media block overlaps the section edge
@@ -540,6 +540,12 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .floorplan h2{margin-bottom:16px;}
 .floorplan .lede{margin-bottom:40px;}
 .floorplan-cta{margin:0;}
+
+/* Per-project floor plan block, now embedded inside #homes/#offices
+   instead of a shared standalone section (see index.html). */
+.floorplan-switcher-wrap{margin-top:56px;padding-top:40px;border-top:1px solid var(--slate-line-soft);}
+.floorplan-switcher-wrap h3{margin-bottom:16px;}
+.floorplan-switcher-wrap .lede{margin-bottom:32px;}
 
 /* ---------- FAQ ---------- */
 .faq{padding:var(--section-y) 0;background:var(--slate-deep);}

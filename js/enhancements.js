@@ -316,6 +316,51 @@
     if (saved === 'homes' || saved === 'offices' || saved === 'all') {
       setView(saved);
     }
+
+    // Highlight-only scroll sync: as the visitor scrolls past the Home or
+    // Offices section, the toggle pill follows along so it always shows
+    // where they are on the page. This never touches body[data-view] or
+    // hides anything — only setView() (an explicit click) does that — so
+    // scrolling down the page always keeps every section reachable.
+    var homeSection = document.getElementById('homes');
+    var officeSection = document.getElementById('offices');
+    if (homeSection && officeSection && 'IntersectionObserver' in window) {
+      var highlightBtns = {
+        all: document.querySelector('.view-btn[data-view="all"]'),
+        homes: document.querySelector('.view-btn[data-view="homes"]'),
+        offices: document.querySelector('.view-btn[data-view="offices"]')
+      };
+
+      function highlightOnly(view) {
+        // Skip while a project is explicitly focused via click — that
+        // filter state already drives its own highlight in setView().
+        // No attribute yet (fresh page load, nothing clicked) counts as "all".
+        var currentFocus = document.body.getAttribute('data-view') || 'all';
+        if (currentFocus !== 'all') return;
+        buttons.forEach(function (btn) {
+          btn.classList.toggle('is-active', btn === highlightBtns[view]);
+          btn.setAttribute('aria-pressed', btn === highlightBtns[view] ? 'true' : 'false');
+        });
+      }
+
+      var sectionObserver = new IntersectionObserver(function () {
+        // Recompute from scratch on every change (entering OR leaving) so
+        // scrolling back above both sections correctly falls back to "All"
+        // instead of leaving the last-seen section's pill stuck active.
+        if (officeSection.getBoundingClientRect().top < window.innerHeight / 2 &&
+            officeSection.getBoundingClientRect().bottom > window.innerHeight / 2) {
+          highlightOnly('offices');
+        } else if (homeSection.getBoundingClientRect().top < window.innerHeight / 2 &&
+                   homeSection.getBoundingClientRect().bottom > window.innerHeight / 2) {
+          highlightOnly('homes');
+        } else {
+          highlightOnly('all');
+        }
+      }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+      sectionObserver.observe(homeSection);
+      sectionObserver.observe(officeSection);
+    }
   })();
 
   /* ---------------- Distance ledger: filter + sort ---------------- */
