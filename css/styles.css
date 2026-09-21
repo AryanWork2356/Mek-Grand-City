@@ -419,7 +419,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    what they care about (safety vs. recreation vs. day-to-day convenience)
    instead of parsing one run-on sentence. */
 .amenity-groups{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:22px 24px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px 24px;
   margin-bottom:28px;
 }
 .amenity-group h3{

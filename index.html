@@ -154,15 +154,6 @@
 <div class="identity-banner" data-reveal>
   <p class="identity-eyebrow">One address, two ways in</p>
   <p class="identity-row">
-    <!-- MahaRERA verification QR codes, stacked in one card beside the
-         equation. Kept fixed-position so it stays visible while scrolling
-         anywhere on the page (see .rera-badge--fixed), but now lives
-         visually inside the identity row instead of floating separately
-         in the top-right corner. -->
-    <span class="rera-badge rera-badge--fixed">
-      <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
-      <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
-    </span>
     <span class="identity-term">
       <span class="identity-part identity-part--home">Grand Meridian City</span>
       <span class="identity-tag identity-tag--home">(Residential - RERA)</span>
@@ -175,6 +166,24 @@
     <span class="identity-op" aria-hidden="true">=</span>
     <span class="identity-part identity-part--sum">MEK Grand City</span>
   </p>
+</div>
+
+<!-- MahaRERA verification badge: two QR codes, one per project, each with
+     its own label to the right, stacked in one card. True position:fixed
+     against the browser window so it stays visible in the same spot no
+     matter how far down the page you scroll — see .rera-badge--fixed.
+     .identity-banner has no backdrop-filter/transform, so it does not
+     create a containing block and position:fixed still resolves against
+     the real viewport. -->
+<div class="rera-badge rera-badge--fixed">
+  <div class="rera-badge-row">
+    <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
+    <span class="rera-badge-label">Residential - RERA</span>
+  </div>
+  <div class="rera-badge-row">
+    <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
+    <span class="rera-badge-label">Commercial - RERA</span>
+  </div>
 </div>
 
 <!-- ================= HERO ================= -->
@@ -291,7 +300,7 @@
       <dt>Floors, Grand Meridian City</dt>
     </div>
     <div class="glance-stat">
-      <dd data-count data-target="1451" data-suffix=" sq ft">0</dd>
+      <dd data-count data-target="7661" data-suffix=" sq ft">0</dd>
       <dt>Largest Commercial floor plate</dt>
     </div>
     <div class="glance-stat">
@@ -374,13 +383,6 @@
             <li>Fitted gymnasium</li>
             <li>Landscaped gardens and walking paths</li>
             <li>Enclosed children's play area</li>
-          </ul>
-        </div>
-        <div class="amenity-group">
-          <h3>Convenience &amp; sustainability</h3>
-          <ul>
-            <li>Rainwater harvesting</li>
-            <li>Lifts sized for a thirty-eight floor tower</li>
           </ul>
         </div>
       </div>
@@ -553,7 +555,7 @@
             <tr><th scope="row">Land parcel</th><td>8.74 acres</td></tr>
             <tr><th scope="row">Towers</th><td>Two, ground plus 38 floors</td></tr>
             <tr><th scope="row">Total home</th><td>347</td></tr>
-            <tr><th scope="row">Configurations</th><td>2 BHK (740 sq ft) &middot; 3 BHK (997 sq ft)</td></tr>
+            <tr><th scope="row">Configurations</th><td>2 BHK (740 sq ft) &middot; 3 BHK (997 sq ft) &middot; 4 BHK Jodi &middot; 5 BHK Jodi</td></tr>
             <tr><th scope="row">Launch price from</th><td class="price-drop"><del>&#8377;1.22 Cr</del><strong>&#8377;92 Lakh</strong></td></tr>
             <tr><th scope="row">Possession</th><td>December 2031</td></tr>
           </tbody>
@@ -808,7 +810,7 @@
         <button type="button" class="hotspot" style="left:50%;top:50%" data-dim="Shared lift lobby" data-note="Lift lobby — placeholder detail, confirm with sales">
           <span class="sr-only">Lift lobby details</span>
         </button>
-        <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 1,451 sq ft" data-note="Column-free floor plate — placeholder area, confirm with sales">
+        <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 7,661 sq ft" data-note="Column-free floor plate — placeholder area, confirm with sales">
           <span class="sr-only">Column-free floor plate details</span>
         </button>
       </div>
@@ -947,9 +949,9 @@
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
           <span><strong>MahaRERA registered, not just promised.</strong> PC1330002600951 is verifiable on the MahaRERA portal before you pay anything &mdash; the same registration cited in the specs table above.</span>
         </li>
-        <li data-fact-source="specs-table: carpet area range 467-1,451 sq ft, column-free">
+        <li data-fact-source="specs-table: carpet area range 467-7,661 sq ft, column-free">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
-          <span><strong>Column-free space up to a full floor plate.</strong> Units run from a 467 sq ft boutique office to a 1,451 sq ft column-free floor plate, so the layout scales with the business.</span>
+          <span><strong>Column-free space up to a full floor plate.</strong> Units run from a 467 sq ft boutique office to a 7,661 sq ft column-free floor plate, so the layout scales with the business.</span>
         </li>
         <li data-fact-source="hero-flag / pricing table: launch price ₹1.75 Cr boutique office, open until October 2026">
           <svg class="check-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
@@ -974,7 +976,7 @@
          - Land parcel, column-free/glass-frontage facts: project-body lede
            above.
          - Unit types + carpet areas + prices: .pricing table above.
-         - Largest floor plate (1,451 sq ft): glance strip / callout stats.
+         - Largest floor plate (7,661 sq ft): glance strip / callout stats.
          - Launch window, construction status: same FAQ entries as homes. -->
   <div class="wrap">
     <div class="focus-detail" data-focus-detail>
@@ -988,7 +990,7 @@
             <tr><th scope="row">MahaRERA number</th><td>PC1330002600951</td></tr>
             <tr><th scope="row">Land parcel</th><td>8.74 acres</td></tr>
             <tr><th scope="row">Unit types</th><td>Boutique &middot; Executive &middot; Premium &middot; Corporate &middot; Full floor plate</td></tr>
-            <tr><th scope="row">Carpet area range</th><td>467 &ndash; 1,451 sq ft</td></tr>
+            <tr><th scope="row">Carpet area range</th><td>467 &ndash; 7,661 sq ft</td></tr>
             <tr><th scope="row">Launch price from</th><td class="price-drop"><del>&#8377;2.33 Crore</del><strong>&#8377;1.75 Cr</strong></td></tr>
             <tr><th scope="row">Possession</th><td>December 2031</td></tr>
           </tbody>
@@ -1019,14 +1021,14 @@
     </div>
     <div class="wrap">
       <ul class="h-strip" data-fact-source="see individual tiles">
-        <li class="h-tile h-tile--hero" data-fact-source="specs-table: Carpet area range 467-1,451 sq ft">
+        <li class="h-tile h-tile--hero" data-fact-source="specs-table: Carpet area range 467-7,661 sq ft">
           <span class="h-icon-ghost" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="36" height="36" rx="2"/><path d="M6 20h36M6 32h36M18 6v36M30 6v36"/></svg>
           </span>
           <span class="h-icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="36" height="36" rx="2"/><path d="M6 20h36M6 32h36M18 6v36M30 6v36"/></svg>
           </span>
-          <span class="h-num h-num--frac">467&ndash;1,451</span>
+          <span class="h-num h-num--frac">467&ndash;7,661</span>
           <span class="h-text">Sq ft of column-free commercial space</span>
         </li>
         <li class="h-tile" data-fact-source="project-body lede / why-choose: column-free floor plates">
@@ -1095,12 +1097,12 @@
           <button type="button" class="hotspot" style="left:50%;top:50%" data-dim="Shared lift lobby" data-note="Lift lobby -- placeholder detail, confirm with sales">
             <span class="sr-only">Lift lobby details</span>
           </button>
-          <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 1,451 sq ft" data-note="Column-free floor plate -- placeholder area, confirm with sales">
+          <button type="button" class="hotspot" style="left:81.9%;top:21.4%" data-dim="Up to 7,661 sq ft" data-note="Column-free floor plate -- placeholder area, confirm with sales">
             <span class="sr-only">Column-free floor plate details</span>
           </button>
         </div>
       </figure>
-      <figcaption class="fp-caption">Boutique to full floor plate &middot; 467&ndash;1,451 sq ft carpet</figcaption>
+      <figcaption class="fp-caption">Boutique to full floor plate &middot; 467&ndash;7,661 sq ft carpet</figcaption>
       <p class="cta-inline floorplan-cta">
         <a class="btn btn-gold" href="#enquire">Enquire about this floor plan &rarr;</a>
       </p>
@@ -1163,7 +1165,7 @@
     <dl class="callout-stats">
       <div><dd data-count data-target="8.74" data-decimals="2" data-suffix=" acres">8.74 acres</dd><dt>Combined land</dt></div>
       <div><dd data-count data-target="347" data-suffix="">347</dd><dt>Units across two towers</dt></div>
-      <div><dd data-count data-target="1451" data-suffix=" sq ft">1,451 sq ft</dd><dt>Largest Commercial floor plate</dt></div>
+      <div><dd data-count data-target="7661" data-suffix=" sq ft">7,661 sq ft</dd><dt>Largest Commercial floor plate</dt></div>
     </dl>
   </div>
 </section>
@@ -1455,7 +1457,7 @@
       "@type": "Place",
       "name": "MEK Grand Central",
       "url": "https://www.mekgrandcity.com/#offices",
-      "description": "Purpose-built commercial development on Old Mumbai Pune Road, Mumbra. Offices from 467 sq ft to full floor plates of 1,451 sq ft across 8.74 acres. MahaRERA PC1330002600951.",
+      "description": "Purpose-built commercial development on Old Mumbai Pune Road, Mumbra. Offices from 467 sq ft to full floor plates of 7,661 sq ft across 8.74 acres. MahaRERA PC1330002600951.",
       "geo": { "@type": "GeoCoordinates", "latitude": 19.1823511, "longitude": 73.0219158 },
       "address": {
         "@type": "PostalAddress", "streetAddress": "Old Mumbai Pune Road, Mumbra", "addressLocality": "Thane",
