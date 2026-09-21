@@ -120,14 +120,15 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .btn[disabled]{opacity:.55;cursor:not-allowed;}
 
 /* ---------- Official-site attention marquee ----------
-   Sits above the header, scrolls away with the page (not sticky) since the
-   header itself already carries the brand mark permanently — this is a
-   one-time "you're in the right place" cue for the first moment on the
-   page, not a persistent fixture. Two copies of the same content sit
+   Sticky above the header so it stays visible the entire time you scroll,
+   not just at the top of the page. Two copies of the same content sit
    side by side inside .site-marquee-track and the whole track is
    translated left by exactly -50% on an infinite CSS animation, so the
-   loop seam is invisible (see index.html comment). */
+   loop seam is invisible (see index.html comment). .site-head's own
+   sticky `top` is offset by this element's height (see below) so the two
+   stack cleanly instead of overlapping. */
 .site-marquee{
+  position:sticky;top:0;z-index:81;
   overflow:hidden;background:linear-gradient(90deg,var(--marigold-dim),var(--teal-dim));
   border-bottom:1px solid var(--slate-line);
 }
@@ -155,10 +156,13 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 
 /* ---------- Header ---------- */
 .site-head{
-  position:sticky;top:0;z-index:80;
+  position:sticky;top:36px;z-index:80;
   background:rgba(16,28,34,.93);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--slate-line);
+}
+@media (max-width:640px){
+  .site-head{top:31px;}
 }
 /* Full-width header bar (deliberately NOT wrapped in .wrap like the rest
    of the page) — the brand logo sits close to the true left edge with

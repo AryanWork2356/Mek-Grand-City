@@ -6,10 +6,15 @@
    defined in that file's :root block. No new colours are introduced.
    ========================================================================= */
 
-/* Compensate anchor-jump targets for the sticky header, which grew by one
-   row when the view-focus toggle was added. */
+/* Compensate anchor-jump targets for the sticky header+marquee stack
+   (~167px tall at desktop: 36px marquee + ~131px header/toggle). */
 #homes,#offices,#distances,#corridor,#gallery,#questions,#enquire{
-  scroll-margin-top:96px;
+  scroll-margin-top:167px;
+}
+@media (max-width:640px){
+  #homes,#offices,#distances,#corridor,#gallery,#questions,#enquire{
+    scroll-margin-top:141px;
+  }
 }
 
 /* ---------- Scroll progress bar ---------- */
@@ -52,7 +57,7 @@
    accent bar mirror the identity-banner's own visual language instead of
    a flat slate card, so the badge reads as designed rather than bolted on. */
 .rera-badge--fixed{
-  position:fixed;top:96px;right:14px;z-index:85;
+  position:fixed;top:167px;right:14px;z-index:85;
   display:flex;flex-direction:column;align-items:center;gap:1px;
   padding:9px 11px 8px;border-radius:11px;
   background:
