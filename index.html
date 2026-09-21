@@ -91,6 +91,20 @@
   </div>
 </header>
 
+<!-- MahaRERA verification badge: two large QR codes, one per project,
+     each filling its card edge-to-edge with no text label needed —
+     the QR itself is the whole point. True position:fixed relative to
+     the browser window (not nested inside .header or .hero, both of
+     which can create a new containing block via backdrop-filter or
+     transform), so it stays visible in the same spot no matter how
+     far down the page you scroll, and cannot collide with the
+     header's own nav/phone button since it is a sibling, not a child,
+     of <header>. -->
+<div class="rera-badge rera-badge--fixed">
+  <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
+  <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
+</div>
+
 <!-- ================= ENQUIRY POPUP (opens automatically after 20s on
      every visit — see js/enhancements.js. Reuses the exact same
      .lead-form markup/classes as the hero and closing forms, so
@@ -189,33 +203,6 @@
        css/styles.css and the prefers-reduced-motion guard there. -->
   <div class="hero-sweep" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
-
-  <!-- MahaRERA verification badge: two rows, one per project, each with
-       its own QR (verified to decode: the residential QR resolves to
-       the public MahaRERA portal, the commercial QR to that project's
-       specific MahaRERA listing page). Positioned within the hero
-       (top-right), NOT inside the header — the header has
-       backdrop-filter, which creates a new containing block, so a
-       position:fixed/absolute child there doesn't anchor to the
-       viewport/section as intended and can overlap the header's own
-       nav/phone button. Absolute here anchors correctly to .hero
-       (position:relative) and scrolls away with the page normally. -->
-  <div class="rera-badge rera-badge--hero">
-    <div class="rera-badge-row">
-      <img src="assets/img/rera-qr.png" alt="Scan to verify Grand Meridian City on the MahaRERA portal" width="40" height="40">
-      <span class="rera-badge-text">
-        <span class="rera-badge-num rera-badge-num--home">PR1330002600936</span>
-        <span class="rera-badge-tag">(Residential)</span>
-      </span>
-    </div>
-    <div class="rera-badge-row">
-      <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal" width="40" height="40">
-      <span class="rera-badge-text">
-        <span class="rera-badge-num rera-badge-num--office">PC1330002600951</span>
-        <span class="rera-badge-tag">(Commercial)</span>
-      </span>
-    </div>
-  </div>
 
   <div class="wrap hero-in">
     <div class="hero-copy">
