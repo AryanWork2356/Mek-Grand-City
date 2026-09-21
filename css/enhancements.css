@@ -305,6 +305,10 @@
   box-shadow:0 30px 70px rgba(0,0,0,.4);
 }
 .fp-frame img{display:block;width:100%;height:auto;border-radius:4px;}
+
+/* Two floor plans stacked vertically (2 BHK above, 3 BHK below), used in
+   the residential project-media column. */
+.fp-stack{display:flex;flex-direction:column;gap:18px;}
 .fp-frame--svg{background:linear-gradient(155deg,rgba(227,169,40,.14),transparent 60%),var(--slate-soft);padding:clamp(20px,4vw,48px);}
 .fp-frame--office,.fp-panel--office .fp-frame{
   background:linear-gradient(155deg,rgba(62,139,130,.18),transparent 60%),var(--slate-soft);
