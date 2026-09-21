@@ -360,6 +360,30 @@
 
       sectionObserver.observe(homeSection);
       sectionObserver.observe(officeSection);
+
+      // Clicking Home/Offices filters the page to just that section (see
+      // setView() above) so a visitor who explicitly asked for one project
+      // isn't stuck scrolling past the other to find the form. But that
+      // filter should not permanently block the rest of the page: once
+      // they keep scrolling and reach the end of the focused section, the
+      // filter lifts on its own — the hidden section reappears and normal
+      // scroll-sync (above) takes over the toggle highlight from there.
+      var clearFilterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var focus = document.body.getAttribute('data-view');
+          if (focus !== 'homes' && focus !== 'offices') return;
+          var focusedSection = focus === 'homes' ? homeSection : officeSection;
+          if (entry.target !== focusedSection) return;
+          // Not intersecting the (expanded) viewport at all means the
+          // visitor has scrolled past all of the focused section's content.
+          if (!entry.isIntersecting) {
+            setView('all');
+          }
+        });
+      }, { rootMargin: '0px 0px 200px 0px', threshold: 0 });
+
+      clearFilterObserver.observe(homeSection);
+      clearFilterObserver.observe(officeSection);
     }
   })();
 
