@@ -52,8 +52,10 @@ isn't verified by Google — that's expected for your own scripts.
 
 Click **Advanced**, then **Go to (your project name) (unsafe)**, then **Allow**.
 
-It's asking for permission to edit this spreadsheet and send email as you. That's
-exactly what it does.
+It's asking for permission to edit this spreadsheet, send email as you, and
+manage its own triggers (used to send the notification email a moment after
+replying to the website, instead of making a visitor wait for the email to
+send before they see "Thank you"). That's exactly what it does.
 
 ## 5. Copy the URL into the site
 

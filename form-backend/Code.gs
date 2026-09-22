@@ -44,14 +44,17 @@ function doPost(e) {
     tab.appendRow(row);
     tab.getRange(tab.getLastRow(), 3).setValue(phone ? "'" + phone : '');
 
-    // The website waits for this reply before it shows "Thank you", so
-    // the sheet write above (the part that actually matters to a visitor)
-    // is already done and confirmed by the time notify() runs. A slow
-    // email here still delays the reply a little, but that's expected —
-    // a visitor should never see a success message before their row is
-    // genuinely in the sheet, and the email lagging a few seconds behind
-    // that is not a problem worth adding complexity to avoid.
-    notify(row);
+    // The website waits for this reply before it shows "Thank you" — and
+    // a visitor was seeing "Sending…" for 10+ seconds after their row was
+    // already in the sheet, because MailApp.sendEmail() used to run
+    // (synchronously, taking several seconds) before this function could
+    // return. Apps Script has no true fire-and-forget within one
+    // execution, so the fix is a real one-off trigger: queueNotification()
+    // schedules notify() to run moments from now, in its own separate
+    // execution, and this function returns immediately after — the
+    // website sees success right after the write that actually matters,
+    // and the email still goes out on its own a few seconds later.
+    queueNotification(row);
 
     return reply({ ok: true });
 
@@ -92,6 +95,51 @@ function sheet() {
   tab.getRange('C:C').setNumberFormat('@');
 
   return tab;
+}
+
+/** Schedules notify(row) to run a few seconds from now, in a separate
+ *  execution, so doPost can return to the website immediately instead of
+ *  waiting for MailApp.sendEmail() to finish. The row is stashed in
+ *  ScriptProperties (keyed by the trigger's own id, so concurrent
+ *  submissions never collide) and runNotification below reads it back
+ *  when the trigger fires, then deletes both the property and the
+ *  trigger — Apps Script does not clean up one-off triggers on its own,
+ *  and a leaked trigger would silently stop new ones from being created
+ *  after enough submissions pile up. */
+function queueNotification(row) {
+  const trigger = ScriptApp.newTrigger('runNotification')
+    .timeBased()
+    .after(1000)
+    .create();
+
+  PropertiesService.getScriptProperties()
+    .setProperty('notify_' + trigger.getUniqueId(), JSON.stringify(row));
+}
+
+/** Fired by the one-off trigger queueNotification() creates. Never called
+ *  directly, and never called with no matching trigger left to identify
+ *  itself by — Apps Script passes the firing trigger's id in the event
+ *  object for time-based triggers. */
+function runNotification(e) {
+  const props = PropertiesService.getScriptProperties();
+  const triggerId = e && e.triggerUid ? String(e.triggerUid) : null;
+
+  try {
+    if (triggerId) {
+      const stored = props.getProperty('notify_' + triggerId);
+      if (stored) notify(JSON.parse(stored));
+    }
+  } finally {
+    if (triggerId) props.deleteProperty('notify_' + triggerId);
+    // Remove this one-off trigger so it cannot fire again and so Apps
+    // Script's per-project trigger quota does not fill up over time.
+    ScriptApp.getProjectTriggers().forEach(function (t) {
+      if (t.getHandlerFunction() === 'runNotification' &&
+          (!triggerId || t.getUniqueId() === triggerId)) {
+        ScriptApp.deleteTrigger(t);
+      }
+    });
+  }
 }
 
 function notify(row) {
