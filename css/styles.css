@@ -183,11 +183,26 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
   .brand-name{font-size:1.18rem;}
 }
 @media (max-width:560px){
-  .head-in{padding:0 14px 0 16px;}
-  .brand-mark{height:30px;}
-}
-@media (max-width:560px){
+  .head-in{padding:0 14px 0 16px;gap:10px;}
   .brand-mark{width:30px;height:30px;}
+}
+/* Fluid sizing below the nav's own 940px cutoff, where the header is just
+   brand + phone/WhatsApp button competing for a narrowing strip — clamp()
+   keeps both readable and non-overlapping across the whole phone-width
+   range (a 360px phone and a 428px phone both fit correctly) instead of
+   jumping at one fixed breakpoint. */
+@media (max-width:940px){
+  .head-in{height:auto;min-height:64px;padding-top:8px;padding-bottom:8px;}
+  .brand-name{font-size:clamp(.86rem,4vw,1.1rem);}
+  .brand-sub{font-size:clamp(.6rem,2.6vw,.72rem);}
+  .brand-loc{display:none;}
+  .head-cta{padding:clamp(6px,2vw,9px) clamp(8px,2.6vw,14px);font-size:clamp(.68rem,2.6vw,.82rem);gap:5px;}
+  .head-cta span{white-space:nowrap;}
+  .whatsapp-ico{width:14px;height:14px;}
+}
+@media (max-width:400px){
+  .head-in{gap:8px;}
+  .brand-sub{display:none;}
 }
 .nav{display:flex;align-items:center;gap:26px;margin-left:auto;font-size:.92rem;color:var(--text-mute);}
 .nav a{white-space:nowrap;}
