@@ -19,6 +19,24 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------------- Sticky marquee height sync ---------------- */
+  /* .site-head's sticky `top` needs to exactly equal the marquee's real
+     rendered height so the two sit flush with no gap or overlap — but
+     that height varies by device (font rendering, text wrapping at very
+     narrow widths, browser zoom) so a single hardcoded pixel value in CSS
+     can drift out of sync on some phones. Measuring it directly and
+     writing it as a CSS custom property removes the guesswork entirely. */
+  (function syncMarqueeHeight() {
+    var marquee = document.querySelector('.site-marquee');
+    if (!marquee) return;
+    function sync() {
+      document.documentElement.style.setProperty('--marquee-h', marquee.getBoundingClientRect().height + 'px');
+    }
+    sync();
+    window.addEventListener('resize', sync);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+  })();
+
   /* ---------------- Hero background video: respect reduced motion ---------------- */
   (function heroVideo() {
     var video = document.querySelector('.hero-bg video');
@@ -625,13 +643,20 @@
     if (!overlay) return;
 
     var closeBtn = overlay.querySelector('.popup-close');
+    var popupFormEl = overlay.querySelector('.lead-form');
     var lastFocused = null;
 
-    function openPopup() {
+    // sourceLabel identifies which trigger opened the popup (the 20s
+    // auto-timer, or a specific "scrolls to form" button elsewhere on the
+    // page) so the spreadsheet the form submits to can tell them apart —
+    // it's written onto the popup form's own data-source right before
+    // opening, since js/main.js reads that attribute at submit time.
+    function openPopup(sourceLabel) {
       // Don't interrupt someone who has already reached a real form or
       // is mid-way through submitting one.
       if (document.querySelector('.lead-form .msg-ok:not([hidden])')) return;
 
+      if (popupFormEl) popupFormEl.dataset.source = sourceLabel || 'Popup form (20s auto)';
       lastFocused = document.activeElement;
       overlay.hidden = false;
       document.body.style.overflow = 'hidden';
@@ -672,7 +697,18 @@
       });
     }
 
-    window.setTimeout(openPopup, 20000);
+    window.setTimeout(function () { openPopup('Popup form (20s auto)'); }, 20000);
+
+    // Any button marked data-open-popup (e.g. the mobile action bar's
+    // "Price sheet" button) opens this same popup instead of scrolling to
+    // a form section, and tags the source with its own visible label so
+    // it's distinguishable in the spreadsheet from the 20s auto-popup.
+    document.querySelectorAll('[data-open-popup]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var label = btn.textContent.trim();
+        openPopup('Popup form (via "' + label + '" button)');
+      });
+    });
   })();
 
   /* ---------------- Nav "Amenities" dropdown ---------------- */

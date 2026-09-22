@@ -105,11 +105,12 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 
 /* ---------- Buttons ---------- */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:.95rem;font-weight:600;letter-spacing:.01em;
+  display:inline-flex;align-items:center;justify-content:center;text-align:center;
+  font-family:inherit;font-size:.95rem;font-weight:600;letter-spacing:.01em;line-height:1.2;
   padding:15px 28px;border:1px solid transparent;border-radius:var(--radius);
   cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease;
 }
+button.btn{-webkit-appearance:none;appearance:none;}
 .btn-gold{background:var(--marigold);color:#16262B;}
 .btn-gold:hover{background:var(--marigold-lt);}
 .btn-line{border-color:rgba(233,226,214,.34);color:var(--text-light);}
@@ -156,13 +157,10 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 
 /* ---------- Header ---------- */
 .site-head{
-  position:sticky;top:36px;z-index:80;
+  position:sticky;top:var(--marquee-h,36px);z-index:80;
   background:rgba(16,28,34,.93);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--slate-line);
-}
-@media (max-width:640px){
-  .site-head{top:31px;}
 }
 /* Full-width header bar (deliberately NOT wrapped in .wrap like the rest
    of the page) — the brand logo sits close to the true left edge with
@@ -212,7 +210,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    losing navigation entirely on phones/small tablets. */
 .menu-toggle{
   display:none;flex-direction:column;justify-content:center;gap:5px;
-  width:36px;height:36px;padding:0;margin-left:auto;
+  width:36px;height:36px;padding:0;margin-left:auto;margin-right:14px;
   background:none;border:0;cursor:pointer;flex-shrink:0;
 }
 .menu-toggle span{
@@ -388,8 +386,9 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .price-drop{display:inline-flex;align-items:baseline;gap:.5em;flex-wrap:wrap;}
 .price-drop del{
   font-family:var(--body);font-size:.56em;font-weight:600;
-  color:var(--text-faint);text-decoration:line-through;text-decoration-thickness:1.5px;
+  color:var(--marigold-lt);text-decoration:line-through;text-decoration-thickness:1.5px;
 }
+.dark .price-drop del{color:var(--teal-lt);}
 .price-drop strong{
   font-family:var(--display);font-weight:400;font-size:1.22em;line-height:1;
   color:var(--marigold-lt);text-shadow:0 0 24px rgba(227,169,40,.35);
@@ -398,6 +397,10 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 .hero-stats dd.price-drop{font-size:2.1rem;}
 .hero-stats dd.price-drop strong{font-size:1.22em;}
 .hero-stats dd.price-drop del{font-size:.46em;}
+@media (max-width:640px){
+  .price-drop del{font-size:.7em;}
+  .hero-stats dd.price-drop del{font-size:.6em;}
+}
 
 /* one orchestrated entrance, hero only */
 .hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) backwards;}
@@ -578,14 +581,15 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
    floor plan, right after pricing/amenities) — deliberately not full forms,
    just a nudge toward the nearest existing lead-capture section. */
 .cta-inline{margin-top:4px;}
-.cta-inline a{
+.cta-inline a,.cta-inline .link-btn{
   display:inline-flex;align-items:center;gap:6px;
   font-size:.88rem;font-weight:600;color:var(--marigold-lt);
   border-bottom:1px solid rgba(227,169,40,.4);padding-bottom:2px;
   transition:border-color .16s ease,color .16s ease,gap .16s ease;
 }
-.dark .cta-inline a{color:var(--teal-lt);border-bottom-color:rgba(127,194,183,.4);}
-.cta-inline a:hover{gap:10px;border-color:currentColor;}
+.link-btn{background:none;border:0;border-bottom:1px solid rgba(227,169,40,.4);padding:0 0 2px;cursor:pointer;font-family:inherit;}
+.dark .cta-inline a,.dark .cta-inline .link-btn{color:var(--teal-lt);border-bottom-color:rgba(127,194,183,.4);}
+.cta-inline a:hover,.cta-inline .link-btn:hover{gap:10px;border-color:currentColor;}
 .cta-inline-media{margin-top:16px;text-align:center;}
 
 /* ---------- Why choose (persuasive narrative) ----------
@@ -741,12 +745,14 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
   grid-template-columns:1fr 1fr 1fr;
   background:var(--slate);border-top:1px solid var(--slate-line);
 }
-.mobile-bar a{
-  padding:14px 6px;text-align:center;font-size:.86rem;font-weight:600;
+.mobile-bar a,.mobile-bar button{
+  display:flex;align-items:center;justify-content:center;
+  padding:14px 6px;text-align:center;font-size:.86rem;font-weight:600;font-family:inherit;
   color:var(--text-light);border-right:1px solid var(--slate-line);
+  background:none;border-top:0;border-bottom:0;border-left:0;cursor:pointer;
 }
-.mobile-bar a:last-child{border-right:0;}
-.mobile-bar a.primary{background:var(--marigold);color:#16262B;}
+.mobile-bar a:last-child,.mobile-bar button:last-child{border-right:0;}
+.mobile-bar a.primary,.mobile-bar button.primary{background:var(--marigold);color:#16262B;}
 @media (max-width:900px){.mobile-bar{display:grid;}}
 
 /* Floating WhatsApp button: always visible bottom-right on desktop/tablet.

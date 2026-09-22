@@ -121,7 +121,7 @@
    instead of jumping at a single breakpoint. */
 @media (max-width:900px){
   .rera-badge--fixed{
-    position:static;margin:14px auto 0;
+    position:static;margin:14px auto;
     flex-direction:column;align-items:center;
     padding:clamp(8px,2.6vw,12px) clamp(10px,3.4vw,16px);
     width:max-content;max-width:92vw;
@@ -153,6 +153,14 @@
 .focus-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start;}
 
 .specs-table{width:100%;border-collapse:collapse;font-size:.92rem;}
+@media (max-width:640px){
+  /* .price-drop's del+strong pair used to wrap inconsistently between
+     table rows depending on how long the specific price text happened to
+     be (e.g. "₹1.96 Crore ₹1.82 Cr" wraps, "₹92 Lakh ₹1.22 Cr" doesn't) —
+     forcing them onto their own stacked line always keeps every row the
+     same shape. */
+  .specs-table .price-drop{display:flex;flex-direction:column;align-items:flex-start;gap:2px;}
+}
 .specs-table th,.specs-table td{
   text-align:left;padding:9px 10px 9px 0;border-bottom:1px solid var(--slate-line-soft);
   font-weight:400;
@@ -368,7 +376,8 @@
 
 /* ---------- Animated stat counters (glance strip) ---------- */
 .glance{background:var(--slate-soft);border-bottom:1px solid var(--slate-line);padding:48px 0;}
-.glance-in{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.glance-in{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;align-items:end;}
+.glance-stat{display:flex;flex-direction:column;justify-content:flex-end;height:100%;}
 .glance-stat dd{font-family:var(--display);font-size:clamp(2rem,3.8vw,2.8rem);color:var(--marigold-lt);}
 .glance-stat dt{font-size:.78rem;color:var(--text-mute);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;}
 .glance-remaining{
@@ -388,7 +397,7 @@
   70%{box-shadow:0 0 0 7px rgba(255,90,40,0);}
   100%{box-shadow:0 0 0 0 rgba(255,90,40,0);}
 }
-.glance-stat dd.is-struck{color:var(--text-faint);}
+.glance-stat dd.is-struck{color:var(--marigold-lt);}
 .glance-stat dd.is-struck del{text-decoration-thickness:1.5px;}
 @media (prefers-reduced-motion: reduce){
   .glance-remaining-dot{animation:none;}
