@@ -19,18 +19,30 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------------- Sticky marquee height sync ---------------- */
+  /* ---------------- Sticky header stack height sync ---------------- */
   /* .site-head's sticky `top` needs to exactly equal the marquee's real
-     rendered height so the two sit flush with no gap or overlap — but
-     that height varies by device (font rendering, text wrapping at very
-     narrow widths, browser zoom) so a single hardcoded pixel value in CSS
-     can drift out of sync on some phones. Measuring it directly and
-     writing it as a CSS custom property removes the guesswork entirely. */
-  (function syncMarqueeHeight() {
+     rendered height so the two sit flush with no gap or overlap, and (on
+     mobile) .view-toggle needs to sit sticky right below both of them —
+     but those heights vary by device (font rendering, text wrapping at
+     very narrow widths, browser zoom) so hardcoded pixel values in CSS
+     can drift out of sync on some phones. Measuring them directly and
+     writing them as CSS custom properties removes the guesswork. */
+  (function syncStickyStackHeight() {
     var marquee = document.querySelector('.site-marquee');
-    if (!marquee) return;
+    var head = document.querySelector('.site-head');
+    var toggle = document.querySelector('.view-toggle');
+    if (!marquee || !head) return;
     function sync() {
-      document.documentElement.style.setProperty('--marquee-h', marquee.getBoundingClientRect().height + 'px');
+      var marqueeH = marquee.getBoundingClientRect().height;
+      var headStackH = marqueeH + head.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--marquee-h', marqueeH + 'px');
+      document.documentElement.style.setProperty('--head-stack-h', headStackH + 'px');
+      // On mobile .view-toggle is sticky too (see css/enhancements.css),
+      // so anchor-jump targets need the extra height it adds on top of
+      // the marquee+header stack, not just that stack alone.
+      if (toggle) {
+        document.documentElement.style.setProperty('--sticky-stack-h', (headStackH + toggle.getBoundingClientRect().height) + 'px');
+      }
     }
     sync();
     window.addEventListener('resize', sync);

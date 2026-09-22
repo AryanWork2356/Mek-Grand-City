@@ -11,9 +11,9 @@
 #homes,#offices,#distances,#corridor,#gallery,#questions,#enquire{
   scroll-margin-top:167px;
 }
-@media (max-width:640px){
+@media (max-width:940px){
   #homes,#offices,#distances,#corridor,#gallery,#questions,#enquire{
-    scroll-margin-top:141px;
+    scroll-margin-top:var(--sticky-stack-h,177px);
   }
 }
 
@@ -29,6 +29,13 @@
   display:flex;gap:2px;justify-content:center;
   background:var(--slate-deep);border-top:1px solid var(--slate-line);
   padding:8px var(--gutter);
+}
+/* On mobile, keep this row visible alongside the marquee and header while
+   scrolling instead of letting it scroll away — sticks directly below
+   the marquee+header stack using the height JS measures into
+   --head-stack-h (see syncStickyStackHeight in js/enhancements.js). */
+@media (max-width:940px){
+  .view-toggle{position:sticky;top:var(--head-stack-h,110px);z-index:79;}
 }
 .view-btn{
   background:transparent;border:1px solid transparent;border-radius:100px;
