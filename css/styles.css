@@ -192,28 +192,31 @@ button.btn{-webkit-appearance:none;appearance:none;}
    range (a 360px phone and a 428px phone both fit correctly) instead of
    jumping at one fixed breakpoint. */
 @media (max-width:940px){
-  .head-in{height:auto;min-height:64px;padding-top:8px;padding-bottom:8px;}
-  .brand-name{font-size:clamp(.86rem,4vw,1.1rem);}
-  .brand-sub{font-size:clamp(.6rem,2.6vw,.72rem);}
+  .head-in{height:auto;min-height:64px;padding-top:8px;padding-bottom:8px;padding-right:16px;gap:6px;}
+  .brand-mark{width:clamp(24px,7vw,30px);height:clamp(24px,7vw,30px);}
+  .brand-name{font-size:clamp(.72rem,3.6vw,1.1rem);}
+  .brand-sub{font-size:clamp(.5rem,2.2vw,.72rem);}
   .brand-loc{display:none;}
   /* .nav (which normally carries margin-left:auto) is display:none at this
      width, so .head-cta needs its own margin-left:auto to push itself and
      the hamburger after it over to the right edge, leaving the brand on
-     the left with proper space between the two groups. Sized down a
-     little further than before so it and the hamburger don't crowd each
-     other on narrow phones. */
+     the left with proper space between the two groups. The phone number
+     itself is never truncated or shrunk below a legible size — it's the
+     one thing in the header a visitor might actually need to read/copy —
+     so on the narrowest phones the WhatsApp icon drops instead to free up
+     room, rather than risking the number becoming unreadable or cut off. */
   .head-cta{
     margin-left:auto;
-    padding:clamp(5px,1.6vw,7px) clamp(7px,2.2vw,11px);
-    font-size:clamp(.62rem,2.2vw,.74rem);gap:4px;
+    padding:clamp(4px,1.4vw,7px) clamp(6px,2vw,11px);
+    font-size:clamp(.62rem,2.2vw,.74rem);gap:clamp(3px,1vw,4px);
   }
   .head-cta span{white-space:nowrap;}
-  .whatsapp-ico{width:13px;height:13px;}
+  .whatsapp-ico{width:clamp(11px,3vw,13px);height:clamp(11px,3vw,13px);flex-shrink:0;}
+  .menu-toggle{margin-left:0;flex-shrink:0;}
 }
 @media (max-width:400px){
-  .head-in{gap:8px;padding-right:10px;}
   .brand-sub{display:none;}
-  .menu-toggle{margin-left:8px;}
+  .whatsapp-ico{display:none;}
 }
 
 /* ---------- Mobile menu (hamburger + slide-down panel) ----------
