@@ -400,7 +400,7 @@ button.btn{-webkit-appearance:none;appearance:none;}
    a same-weight inline word next to its strikethrough. */
 .price-drop{display:inline-flex;align-items:baseline;gap:.5em;flex-wrap:wrap;}
 .price-drop del{
-  font-family:var(--body);font-size:.68em;font-weight:600;
+  font-family:var(--body);font-size:.8em;font-weight:600;
   color:var(--text-light);text-decoration:line-through;
   text-decoration-color:var(--text-faint);text-decoration-thickness:1.5px;
 }
@@ -411,11 +411,7 @@ button.btn{-webkit-appearance:none;appearance:none;}
 .dark .price-drop strong{color:var(--teal-lt);text-shadow:0 0 24px rgba(127,194,183,.35);}
 .hero-stats dd.price-drop{font-size:2.1rem;}
 .hero-stats dd.price-drop strong{font-size:1.22em;}
-.hero-stats dd.price-drop del{font-size:.46em;}
-@media (max-width:640px){
-  .price-drop del{font-size:.82em;}
-  .hero-stats dd.price-drop del{font-size:.72em;}
-}
+.hero-stats dd.price-drop del{font-size:.56em;}
 
 /* one orchestrated entrance, hero only */
 .hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) backwards;}
@@ -561,7 +557,7 @@ button.btn{-webkit-appearance:none;appearance:none;}
 .dark .pricing th{border-bottom-color:var(--slate-line);}
 .pricing td{padding:13px 8px 13px 0;border-bottom:1px solid var(--slate-line-soft);}
 .dark .pricing td{border-bottom-color:var(--slate-line);}
-.pricing th:last-child,.pricing td:last-child{text-align:right;padding-right:0;}
+.pricing th:last-child,.pricing td:last-child{text-align:right;padding-right:0;width:42%;}
 .pricing td:last-child{font-family:var(--display);font-size:1.2rem;color:var(--text-light);}
 .pricing td:last-child.price-drop{justify-content:flex-end;width:100%;}
 .pricing tr:last-child td{border-bottom:0;}
@@ -777,9 +773,10 @@ button.btn{-webkit-appearance:none;appearance:none;}
 .mobile-bar a.primary,.mobile-bar button.primary{background:var(--marigold);color:#16262B;}
 @media (max-width:900px){.mobile-bar{display:grid;}}
 
-/* Floating WhatsApp button: always visible bottom-right on desktop/tablet.
-   Hidden under 900px since .mobile-bar already has its own WhatsApp entry
-   there and the two would otherwise overlap in the same corner. */
+/* Floating WhatsApp button: always visible bottom-right, on every screen
+   size. On mobile it's raised above .mobile-bar (which occupies the full
+   bottom strip with its own Call/WhatsApp/Price sheet buttons) and sized
+   down, so the two don't overlap or compete for the same corner. */
 .whatsapp-float{
   position:fixed;right:20px;bottom:24px;z-index:88;
   width:56px;height:56px;border-radius:50%;
@@ -788,7 +785,9 @@ button.btn{-webkit-appearance:none;appearance:none;}
   transition:transform .15s ease;
 }
 .whatsapp-float:hover{transform:scale(1.08);}
-@media (max-width:900px){.whatsapp-float{display:none;}}
+@media (max-width:900px){
+  .whatsapp-float{width:44px;height:44px;right:12px;bottom:78px;}
+}
 
 /* ---------- Pull-quote / stat callout ----------
    A full-bleed break between the residential and commercial sections:

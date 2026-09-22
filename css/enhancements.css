@@ -44,9 +44,10 @@
 
 
 /* ---------- RERA verification badge ----------
-   One card, two stacked rows: each row is a QR code with its MahaRERA
-   number and project label underneath (residential on top, commercial
-   below). True position:fixed against the browser window, as a sibling
+   One card, two rows side by side: each row is a QR code with its
+   MahaRERA number and project label underneath (residential on the
+   left, commercial on the right). True position:fixed against the
+   browser window, as a sibling
    of .identity-banner (not a descendant), so it stays visible in the
    same spot the entire time you scroll the page, not just while the
    identity banner is in view. .identity-banner has no backdrop-filter/
@@ -77,7 +78,7 @@
   letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);
   margin:0 0 5px;
 }
-.rera-badge-rows{display:flex;flex-direction:column;align-items:center;}
+.rera-badge-rows{display:flex;flex-direction:row;align-items:flex-start;gap:14px;}
 .rera-badge-row{
   display:flex;flex-direction:column;align-items:center;gap:2px;
 }
@@ -99,26 +100,18 @@
 .rera-badge-label--home{color:var(--marigold-lt);background:rgba(227,169,40,.14);}
 .rera-badge-label--office{color:var(--teal-lt);background:rgba(62,139,130,.16);}
 .rera-badge-divider{
-  width:100%;height:1px;margin:6px 0;
-  background:linear-gradient(90deg,transparent,var(--slate-line),transparent);
+  width:1px;height:auto;align-self:stretch;margin:0;
+  background:linear-gradient(180deg,transparent,var(--slate-line),transparent);
 }
-/* Mobile: laid out horizontally (heading on top, the two QR rows
-   side by side) instead of the desktop vertical stack. A vertically
-   stacked badge is roughly twice as tall as it is wide, and phone
-   screens are short enough that a fixed badge of that shape reliably
-   lands on top of hero text/buttons no matter where it's pinned — going
-   wide instead of tall keeps its footprint low and out of the way. Sized
-   with clamp()/vw so it scales smoothly across small-to-large phones
-   instead of jumping at a fixed breakpoint. */
 /* Below 900px the badge stops floating altogether: a fixed badge of any
    shape/position reliably lands on top of hero text or buttons on a
    screen this short, no matter where it's pinned. Instead it drops into
    normal document flow right after the identity banner — scrolled past
-   once, like any other section, never overlapping anything. Laid out
-   horizontally (the two QR rows side by side) rather than the desktop
-   vertical stack purely because it reads better as a wide low strip in
-   the page flow. clamp()/vw sizing scales smoothly across phone widths
-   instead of jumping at a single breakpoint. */
+   once, like any other section, never overlapping anything. Both rows
+   already lay out side by side at every width (see .rera-badge-rows
+   above), so only sizing/positioning changes here, not orientation.
+   clamp()/vw sizing scales smoothly across phone widths instead of
+   jumping at a single breakpoint. */
 @media (max-width:900px){
   .rera-badge--fixed{
     position:static;margin:14px auto;
@@ -127,12 +120,11 @@
     width:max-content;max-width:92vw;
   }
   .rera-badge-heading{font-size:clamp(.5rem,2.6vw,.62rem);margin-bottom:6px;}
-  .rera-badge-rows{display:flex;flex-direction:row;gap:clamp(10px,4vw,20px);align-items:flex-start;}
-  .rera-badge-row{flex-direction:column;align-items:center;gap:3px;}
+  .rera-badge-rows{gap:clamp(10px,4vw,20px);}
+  .rera-badge-row{gap:3px;}
   .rera-badge img{width:clamp(38px,11vw,52px);height:clamp(38px,11vw,52px);padding:3px;}
   .rera-badge-num{font-size:clamp(.5rem,2.2vw,.6rem);}
   .rera-badge-label{font-size:clamp(.46rem,2vw,.56rem);padding:1px 6px;white-space:nowrap;}
-  .rera-badge-divider{width:1px;height:auto;align-self:stretch;margin:0;background:linear-gradient(180deg,transparent,var(--slate-line),transparent);}
 }
 
 /* ---------- Focused detail blocks (specs table + timeline) ----------
