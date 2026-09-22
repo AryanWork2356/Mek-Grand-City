@@ -204,6 +204,38 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
   .head-in{gap:8px;}
   .brand-sub{display:none;}
 }
+
+/* ---------- Mobile menu (hamburger + slide-down panel) ----------
+   .nav is display:none below 940px (rule above) since it doesn't fit as
+   a horizontal bar at that width — this replaces it with a button that
+   reveals the same links as a full-width dropdown panel instead of
+   losing navigation entirely on phones/small tablets. */
+.menu-toggle{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;padding:0;margin-left:auto;
+  background:none;border:0;cursor:pointer;flex-shrink:0;
+}
+.menu-toggle span{
+  display:block;width:100%;height:2px;border-radius:2px;
+  background:var(--text-light);transition:transform .2s ease,opacity .2s ease;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{
+  flex-direction:column;
+  background:var(--slate-deep);border-top:1px solid var(--slate-line);
+  padding:6px var(--gutter) 10px;
+}
+.mobile-menu:not([hidden]){display:flex;}
+.mobile-menu a{
+  padding:12px 4px;font-size:.94rem;color:var(--text-light);
+  border-bottom:1px solid var(--slate-line-soft);
+}
+.mobile-menu a:last-child{border-bottom:0;}
+@media (max-width:940px){
+  .menu-toggle{display:flex;}
+}
 .nav{display:flex;align-items:center;gap:26px;margin-left:auto;font-size:.92rem;color:var(--text-mute);}
 .nav a{white-space:nowrap;}
 .nav a:hover{color:var(--marigold-lt);}
@@ -240,7 +272,7 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
 }
 @media (max-width:940px){
   .nav{display:none;}
-  .head-in{height:62px;gap:16px;}
+  .head-in{gap:16px;}
 }
 
 /* ---------- Hero ----------
@@ -392,6 +424,31 @@ h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;
      strong cover since the copy spans the full width on this layout rather
      than sitting only on the left third as it does on desktop. */
   .hero-bg::after{background:linear-gradient(180deg,rgba(10,17,20,.62),rgba(10,17,20,.54));}
+}
+/* Below 640px the hero's stacked content (headline, paragraph, buttons,
+   stats, then the full form card) is far taller than one screen, which
+   used to force the wide (1920x916) landscape video to stretch into an
+   extremely tall, narrow crop — only a thin cropped sliver of it was ever
+   visible, unrecognisable as the actual walkthrough. Instead the video
+   now gets its own capped-height band at a normal video aspect ratio
+   using object-fit:contain (so the whole frame is visible, never
+   cropped), and the copy/form flow in normal, non-overlaid dark section
+   below it rather than being layered on top of the video. Kept as a
+   separate breakpoint from the 900px one above (which only handles the
+   two-column-to-one-column stacking) since this is a structural change
+   to how the video itself renders, needed specifically once the stacked
+   content gets tall enough to distort the video this badly. */
+@media (max-width:640px){
+  .hero{display:flex;flex-direction:column;}
+  .hero-bg{
+    position:relative;inset:auto;
+    aspect-ratio:16/9;width:100%;height:auto;max-height:56vh;
+    background:var(--slate-black);
+  }
+  .hero-bg img,.hero-bg video{object-fit:contain;animation:none;}
+  .hero-bg::after{display:none;}
+  .hero-sweep,.hero-grain{display:none;}
+  .hero-in{padding-top:32px;}
 }
 
 /* ---------- Form card ----------

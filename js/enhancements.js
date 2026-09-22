@@ -77,6 +77,11 @@
   /* ---------------- Subtle hero parallax ---------------- */
   (function parallax() {
     if (reduceMotion) return;
+    // Below 640px the hero video renders full-frame via object-fit:contain
+    // in a capped-height band (see css/styles.css) specifically so the
+    // whole video is always visible — the scale(1.08) zoom this parallax
+    // effect applies would crop back into it, so it's skipped there.
+    if (window.matchMedia('(max-width:640px)').matches) return;
     var bg = document.querySelector('[data-parallax] img, [data-parallax] video');
     var wrap = document.querySelector('[data-parallax]');
     if (!bg || !wrap) return;
@@ -697,6 +702,38 @@
     });
     dropdown.querySelectorAll('.nav-dropdown-menu a').forEach(function (link) {
       link.addEventListener('click', close);
+    });
+  })();
+
+  /* ---------------- Mobile hamburger menu ---------------- */
+  (function mobileMenu() {
+    var toggle = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+
+    function close() {
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    function open() {
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    toggle.addEventListener('click', function () {
+      if (menu.hidden) open(); else close();
+    });
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') close();
+    });
+    // Closing the mobile viewport back out past 940px (rotate to landscape,
+    // resize) shouldn't leave the panel stuck open under the now-visible
+    // desktop nav.
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 940 && !menu.hidden) close();
     });
   })();
 
