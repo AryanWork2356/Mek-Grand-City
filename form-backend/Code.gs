@@ -17,12 +17,22 @@ const TAB    = 'Leads';             // sheet tab name. Created automatically.
 
 const HEADERS = ['Received', 'Name', 'Mobile', 'Email', 'Interest', 'Form', 'Page'];
 
+/** TEMPORARY DIAGNOSTIC BUILD. Logs a timestamp at every step so the
+ *  Executions panel (Apps Script editor -> Executions, click the run,
+ *  expand the log) shows exactly which step is actually slow, instead of
+ *  guessing. Once the real bottleneck is known, this gets replaced with
+ *  a real fix targeted at that step. */
 function doPost(e) {
+  const t0 = Date.now();
+  function mark(label) { console.log(label + ': +' + (Date.now() - t0) + 'ms'); }
+
   const lock = LockService.getScriptLock();
 
   try {
+    mark('start');
     // Two people submitting at the same instant would otherwise overwrite a row
     lock.waitLock(20000);
+    mark('lock acquired');
 
     const p = (e && e.parameter) ? e.parameter : {};
 
@@ -39,24 +49,20 @@ function doPost(e) {
     ];
 
     const tab = sheet();
+    mark('sheet() returned');
     // A leading apostrophe forces Sheets to store this as literal text,
     // otherwise "+91 ..." gets parsed as the start of a formula (#ERROR!).
     tab.appendRow(row);
+    mark('row appended');
     tab.getRange(tab.getLastRow(), 3).setValue(phone ? "'" + phone : '');
+    mark('phone cell formatted');
 
-    // The website waits for this reply before it shows "Thank you" — and
-    // a visitor was seeing "Sending…" for 10+ seconds after their row was
-    // already in the sheet, because MailApp.sendEmail() used to run
-    // (synchronously, taking several seconds) before this function could
-    // return. Apps Script has no true fire-and-forget within one
-    // execution, so the fix is a real one-off trigger: queueNotification()
-    // schedules notify() to run moments from now, in its own separate
-    // execution, and this function returns immediately after — the
-    // website sees success right after the write that actually matters,
-    // and the email still goes out on its own a few seconds later.
-    queueNotification(row);
+    notify(row);
+    mark('notify() returned (email sent)');
 
-    return reply({ ok: true });
+    const result = reply({ ok: true });
+    mark('reply object built, about to return');
+    return result;
 
   } catch (err) {
     // Logged under Executions in the Apps Script editor
@@ -65,6 +71,7 @@ function doPost(e) {
 
   } finally {
     try { lock.releaseLock(); } catch (ignored) {}
+    mark('lock released, function ending');
   }
 }
 
@@ -97,51 +104,6 @@ function sheet() {
   return tab;
 }
 
-/** Schedules notify(row) to run a few seconds from now, in a separate
- *  execution, so doPost can return to the website immediately instead of
- *  waiting for MailApp.sendEmail() to finish. The row is stashed in
- *  ScriptProperties (keyed by the trigger's own id, so concurrent
- *  submissions never collide) and runNotification below reads it back
- *  when the trigger fires, then deletes both the property and the
- *  trigger — Apps Script does not clean up one-off triggers on its own,
- *  and a leaked trigger would silently stop new ones from being created
- *  after enough submissions pile up. */
-function queueNotification(row) {
-  const trigger = ScriptApp.newTrigger('runNotification')
-    .timeBased()
-    .after(1000)
-    .create();
-
-  PropertiesService.getScriptProperties()
-    .setProperty('notify_' + trigger.getUniqueId(), JSON.stringify(row));
-}
-
-/** Fired by the one-off trigger queueNotification() creates. Never called
- *  directly, and never called with no matching trigger left to identify
- *  itself by — Apps Script passes the firing trigger's id in the event
- *  object for time-based triggers. */
-function runNotification(e) {
-  const props = PropertiesService.getScriptProperties();
-  const triggerId = e && e.triggerUid ? String(e.triggerUid) : null;
-
-  try {
-    if (triggerId) {
-      const stored = props.getProperty('notify_' + triggerId);
-      if (stored) notify(JSON.parse(stored));
-    }
-  } finally {
-    if (triggerId) props.deleteProperty('notify_' + triggerId);
-    // Remove this one-off trigger so it cannot fire again and so Apps
-    // Script's per-project trigger quota does not fill up over time.
-    ScriptApp.getProjectTriggers().forEach(function (t) {
-      if (t.getHandlerFunction() === 'runNotification' &&
-          (!triggerId || t.getUniqueId() === triggerId)) {
-        ScriptApp.deleteTrigger(t);
-      }
-    });
-  }
-}
-
 function notify(row) {
   if (!NOTIFY || NOTIFY === 'you@example.com') return;
 
@@ -163,12 +125,14 @@ function notify(row) {
     'WhatsApp : https://wa.me/' + phone.replace(/[^0-9]/g, '') + '\n\n' +
     'Full list: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl();
 
+  const emailStart = Date.now();
   MailApp.sendEmail({
     to: NOTIFY,
     subject: 'New enquiry — ' + name + ' — ' + interest,
     body: body,
     replyTo: email || undefined
   });
+  console.log('MailApp.sendEmail took: ' + (Date.now() - emailStart) + 'ms');
 }
 
 /** Indian mobiles arrive in several shapes. Store one consistent format. */
