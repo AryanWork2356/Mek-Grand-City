@@ -194,9 +194,19 @@ button.btn{-webkit-appearance:none;appearance:none;}
   .brand-name{font-size:clamp(.86rem,4vw,1.1rem);}
   .brand-sub{font-size:clamp(.6rem,2.6vw,.72rem);}
   .brand-loc{display:none;}
-  .head-cta{padding:clamp(6px,2vw,9px) clamp(8px,2.6vw,14px);font-size:clamp(.68rem,2.6vw,.82rem);gap:5px;}
+  /* .nav (which normally carries margin-left:auto) is display:none at this
+     width, so .head-cta needs its own margin-left:auto to push itself and
+     the hamburger after it over to the right edge, leaving the brand on
+     the left with proper space between the two groups. Sized down a
+     little further than before so it and the hamburger don't crowd each
+     other on narrow phones. */
+  .head-cta{
+    margin-left:auto;
+    padding:clamp(5px,1.6vw,7px) clamp(7px,2.2vw,11px);
+    font-size:clamp(.62rem,2.2vw,.74rem);gap:4px;
+  }
   .head-cta span{white-space:nowrap;}
-  .whatsapp-ico{width:14px;height:14px;}
+  .whatsapp-ico{width:13px;height:13px;}
 }
 @media (max-width:400px){
   .head-in{gap:8px;}
@@ -210,7 +220,7 @@ button.btn{-webkit-appearance:none;appearance:none;}
    losing navigation entirely on phones/small tablets. */
 .menu-toggle{
   display:none;flex-direction:column;justify-content:center;gap:5px;
-  width:36px;height:36px;padding:0;margin-left:auto;margin-right:14px;
+  width:36px;height:36px;padding:0;margin-left:14px;
   background:none;border:0;cursor:pointer;flex-shrink:0;
 }
 .menu-toggle span{
@@ -445,10 +455,17 @@ button.btn{-webkit-appearance:none;appearance:none;}
   .hero{display:flex;flex-direction:column;}
   .hero-bg{
     position:relative;inset:auto;
-    aspect-ratio:16/9;width:100%;height:auto;max-height:56vh;
+    /* Matches the source video's real 1920x916 frame (~2.096:1) rather
+       than a generic 16:9 (1.78:1) box — with object-fit:contain, a box
+       shaped differently from the video's own aspect ratio letterboxes
+       it and leaves visible empty bars on whichever axis is "too wide"
+       for the box (here: empty space left/right). Matching the box to
+       the video's real shape means the video always fills its container
+       edge-to-edge with no gap on either side. */
+    aspect-ratio:1920/916;width:100%;height:auto;max-height:56vh;
     background:var(--slate-black);
   }
-  .hero-bg img,.hero-bg video{object-fit:contain;animation:none;}
+  .hero-bg img,.hero-bg video{object-fit:cover;animation:none;}
   .hero-bg::after{display:none;}
   .hero-sweep,.hero-grain{display:none;}
   .hero-in{padding-top:32px;}
