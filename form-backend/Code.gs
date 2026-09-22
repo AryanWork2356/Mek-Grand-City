@@ -43,6 +43,14 @@ function doPost(e) {
     // otherwise "+91 ..." gets parsed as the start of a formula (#ERROR!).
     tab.appendRow(row);
     tab.getRange(tab.getLastRow(), 3).setValue(phone ? "'" + phone : '');
+
+    // The website waits for this reply before it shows "Thank you", so
+    // the sheet write above (the part that actually matters to a visitor)
+    // is already done and confirmed by the time notify() runs. A slow
+    // email here still delays the reply a little, but that's expected —
+    // a visitor should never see a success message before their row is
+    // genuinely in the sheet, and the email lagging a few seconds behind
+    // that is not a problem worth adding complexity to avoid.
     notify(row);
 
     return reply({ ok: true });

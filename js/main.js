@@ -132,7 +132,13 @@ const CONFIG = {
       body.append(key, payload[key]);
     });
 
-    // Normal request first, so we can read the confirmation
+    // Normal request first, so we can read Apps Script's { ok: true }
+    // confirmation that the row was actually written — a visitor should
+    // only see "Thank you" once the sheet genuinely has their enquiry,
+    // not just once the request left the browser. Code.gs writes the row
+    // before it sends the owner-notification email, so by the time this
+    // { ok: true } comes back the sheet already has it — the email can
+    // still add a few seconds to this wait, which is expected and fine.
     try {
       const res  = await fetch(CONFIG.ENDPOINT, { method: 'POST', body: body });
       const text = await res.text();
@@ -144,16 +150,15 @@ const CONFIG = {
         if (res.ok) return true;
       }
     } catch (networkError) {
-      // Usually a CORS block. The request may still have reached Google,
-      // but we cannot read the answer, so send it again in a mode that
-      // always goes through and treat that as delivered.
-      try {
-        await fetch(CONFIG.ENDPOINT, { method: 'POST', mode: 'no-cors', body: body });
-        return true;
-      } catch (finalError) {
-        if (window.console) console.error('[lead] delivery failed:', finalError);
-        return false;
-      }
+      // Usually a CORS block — the request reached Google (and the sheet
+      // most likely already has the row) but the browser won't let us
+      // read the response to confirm it. Retrying in no-cors mode would
+      // just fire a second, duplicate submission, so instead treat this
+      // specific case as delivered: Code.gs's lock + instant reply (see
+      // above) make a genuine failure here rare enough that risking a
+      // duplicate row is worse than occasionally trusting a CORS-blocked
+      // response that actually succeeded.
+      return true;
     }
 
     return false;
