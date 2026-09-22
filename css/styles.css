@@ -385,10 +385,10 @@ button.btn{-webkit-appearance:none;appearance:none;}
    a same-weight inline word next to its strikethrough. */
 .price-drop{display:inline-flex;align-items:baseline;gap:.5em;flex-wrap:wrap;}
 .price-drop del{
-  font-family:var(--body);font-size:.56em;font-weight:600;
-  color:var(--marigold-lt);text-decoration:line-through;text-decoration-thickness:1.5px;
+  font-family:var(--body);font-size:.68em;font-weight:600;
+  color:var(--text-light);text-decoration:line-through;
+  text-decoration-color:var(--text-faint);text-decoration-thickness:1.5px;
 }
-.dark .price-drop del{color:var(--teal-lt);}
 .price-drop strong{
   font-family:var(--display);font-weight:400;font-size:1.22em;line-height:1;
   color:var(--marigold-lt);text-shadow:0 0 24px rgba(227,169,40,.35);
@@ -398,8 +398,8 @@ button.btn{-webkit-appearance:none;appearance:none;}
 .hero-stats dd.price-drop strong{font-size:1.22em;}
 .hero-stats dd.price-drop del{font-size:.46em;}
 @media (max-width:640px){
-  .price-drop del{font-size:.7em;}
-  .hero-stats dd.price-drop del{font-size:.6em;}
+  .price-drop del{font-size:.82em;}
+  .hero-stats dd.price-drop del{font-size:.72em;}
 }
 
 /* one orchestrated entrance, hero only */
