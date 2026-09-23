@@ -791,7 +791,7 @@ button.btn{-webkit-appearance:none;appearance:none;}
   position:fixed;right:20px;bottom:24px;z-index:88;
   width:56px;height:56px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);
+  background:#25D366;box-shadow:0 8px 24px rgba(0,0,0,.35);
   transition:transform .15s ease;
 }
 .whatsapp-float:hover{transform:scale(1.08);}
