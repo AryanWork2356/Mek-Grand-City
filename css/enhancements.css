@@ -53,19 +53,15 @@
 /* ---------- RERA verification badge ----------
    One card, two rows side by side: each row is a QR code with its
    MahaRERA number and project label underneath (residential on the
-   left, commercial on the right). True position:fixed against the
-   browser window, as a sibling
-   of .identity-banner (not a descendant), so it stays visible in the
-   same spot the entire time you scroll the page, not just while the
-   identity banner is in view. .identity-banner has no backdrop-filter/
-   transform, so it does not create a containing block and position:fixed
-   still resolves against the real viewport — the same bug that broke
-   earlier placements when the badge sat inside <header> (which does use
-   backdrop-filter). Dual-glow gradient background + marigold/teal top
-   accent bar mirror the identity-banner's own visual language instead of
-   a flat slate card, so the badge reads as designed rather than bolted on. */
+   left, commercial on the right). Sits in normal document flow (not
+   position:fixed) so it stays put at one spot on the page and scrolls
+   away with the rest of the content, instead of floating over whatever
+   section happens to be in view. Dual-glow gradient background +
+   marigold/teal top accent bar mirror the identity-banner's own visual
+   language instead of a flat slate card, so the badge reads as designed
+   rather than bolted on. */
 .rera-badge--fixed{
-  position:fixed;top:167px;right:14px;z-index:85;
+  position:absolute;top:167px;right:14px;z-index:85;
   display:flex;flex-direction:column;align-items:center;gap:1px;
   padding:9px 9px;border-radius:9px;
   background:
