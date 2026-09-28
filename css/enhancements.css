@@ -375,17 +375,20 @@
    centered so it sits level with both rows at once rather than taking
    a row of its own. */
 .glance{background:var(--slate-soft);border-bottom:1px solid var(--slate-line);padding:48px 0;}
-.glance-in{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
-.glance-rows{display:flex;flex-direction:column;gap:36px;}
+.glance-in{display:grid;grid-template-columns:1fr auto;gap:40px;}
+.glance-rows{display:flex;flex-direction:column;gap:36px;justify-content:center;}
 .glance-row-label{
-  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--text-faint);text-align:center;margin:0 0 18px;
+  display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--marigold-lt);text-align:center;margin:0 auto 18px;padding:5px 14px;border-radius:999px;
+  background:rgba(227,169,40,.12);border:1px solid rgba(227,169,40,.35);
 }
+.glance-rows .glance-row-label:nth-of-type(2){color:var(--teal-lt);background:rgba(62,139,130,.14);border-color:rgba(62,139,130,.4);}
 .glance-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;align-items:end;}
 .glance-stat{display:flex;flex-direction:column;justify-content:flex-end;height:100%;}
 .glance-stat dd{font-family:var(--display);font-size:clamp(2rem,3.8vw,2.8rem);color:var(--marigold-lt);}
 .glance-stat dt{font-size:.78rem;color:var(--text-mute);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;}
 .glance-stat--shared{
+  display:flex;flex-direction:column;justify-content:center;
   text-align:center;padding-left:40px;border-left:1px solid var(--slate-line);
 }
 .glance-remaining{
