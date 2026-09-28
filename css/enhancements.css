@@ -370,22 +370,23 @@
 }
 
 /* ---------- Animated stat counters (glance strip) ----------
-   Two rows (residential, then commercial), each its own 3-column grid,
-   with the shared "combined land" stat as one centered row between
-   them since it applies to both projects rather than either alone. */
+   Left column: residential row stacked directly above the commercial
+   row. Right column: the shared "combined land" stat, vertically
+   centered so it sits level with both rows at once rather than taking
+   a row of its own. */
 .glance{background:var(--slate-soft);border-bottom:1px solid var(--slate-line);padding:48px 0;}
+.glance-in{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.glance-rows{display:flex;flex-direction:column;gap:36px;}
 .glance-row-label{
   font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text-faint);text-align:center;margin:0 0 18px;
 }
-.glance-row-label:not(:first-child){margin-top:36px;}
 .glance-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;align-items:end;}
 .glance-stat{display:flex;flex-direction:column;justify-content:flex-end;height:100%;}
 .glance-stat dd{font-family:var(--display);font-size:clamp(2rem,3.8vw,2.8rem);color:var(--marigold-lt);}
 .glance-stat dt{font-size:.78rem;color:var(--text-mute);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;}
 .glance-stat--shared{
-  margin:32px auto 0;padding-top:28px;max-width:280px;
-  border-top:1px solid var(--slate-line);
+  text-align:center;padding-left:40px;border-left:1px solid var(--slate-line);
 }
 .glance-remaining{
   display:inline-flex;align-items:center;gap:6px;
@@ -409,7 +410,11 @@
 @media (prefers-reduced-motion: reduce){
   .glance-remaining-dot{animation:none;}
 }
-@media (max-width:820px){.glance-row{grid-template-columns:1fr 1fr;}.glance-stat--shared{grid-column:1/-1;}}
+@media (max-width:820px){
+  .glance-in{grid-template-columns:1fr;gap:32px;}
+  .glance-row{grid-template-columns:1fr 1fr;}
+  .glance-stat--shared{padding-left:0;border-left:none;padding-top:28px;border-top:1px solid var(--slate-line);}
+}
 @media (max-width:480px){.glance-row{grid-template-columns:1fr;gap:32px;}}
 
 /* ---------- Micro-interactions ---------- */
