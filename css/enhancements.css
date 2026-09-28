@@ -61,7 +61,7 @@
    language instead of a flat slate card, so the badge reads as designed
    rather than bolted on. */
 .rera-badge--fixed{
-  position:absolute;top:167px;right:14px;z-index:85;
+  position:absolute;top:calc(167px + var(--offer-banner-h, 0px));right:14px;z-index:85;
   display:flex;flex-direction:column;align-items:center;gap:1px;
   padding:9px 9px;border-radius:9px;
   background:
@@ -1118,4 +1118,43 @@
 @media (hover:hover){
   .h-tile:hover .h-icon{color:var(--marigold-lt);border-color:var(--marigold);}
   .hallmarks--office .h-tile:hover .h-icon{color:var(--teal-lt);border-color:var(--teal);}
+}
+
+/* ---------- Investor offer banner ----------
+   Sits between the header and the rest of the page, not part of the
+   sticky stack, so it scrolls away normally rather than competing with
+   the marquee/header for permanent screen space. Delete this whole
+   block (and the matching <section class="investor-offer-banner"> in
+   index.html) to fully revert. */
+.investor-offer-banner{
+  background:linear-gradient(90deg,var(--marigold-dim),var(--marigold) 45%,var(--teal) 65%,var(--teal-dim));
+  background-size:200% 100%;
+  animation:investor-offer-shift 8s ease-in-out infinite;
+}
+@keyframes investor-offer-shift{
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+}
+.investor-offer-in{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;
+  padding:14px var(--gutter);text-decoration:none;color:#16262B;
+}
+.investor-offer-tag{
+  flex-shrink:0;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 11px;border-radius:999px;background:rgba(22,38,43,.16);
+}
+.investor-offer-msg{flex:1 1 380px;font-size:.92rem;line-height:1.4;}
+.investor-offer-msg strong{font-weight:800;}
+.investor-offer-cta{
+  flex-shrink:0;font-size:.86rem;font-weight:800;white-space:nowrap;
+  padding:8px 16px;border-radius:999px;background:#16262B;color:var(--marigold-lt);
+  transition:transform .15s ease;
+}
+.investor-offer-banner:hover .investor-offer-cta{transform:translateX(3px);}
+@media (max-width:700px){
+  .investor-offer-in{padding:12px var(--gutter);}
+  .investor-offer-msg{font-size:.84rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  .investor-offer-banner{animation:none;}
 }

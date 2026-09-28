@@ -152,6 +152,25 @@
   </nav>
 </header>
 
+<!-- ================= INVESTOR OFFER BANNER =================
+     Time-boxed investor-only offer, separate from the general launch
+     pricing shown throughout the rest of the page. Links to a
+     dedicated page (investor-offer.html) with the full breakdown, so
+     this banner stays a short teaser-with-numbers rather than
+     repeating every T&C inline. Remove this whole <section> (and its
+     matching CSS block in css/enhancements.css, search
+     "investor-offer-banner") to fully revert this addition. -->
+<section class="investor-offer-banner">
+  <a class="wrap investor-offer-in" href="investor-offer.html">
+    <span class="investor-offer-tag">Investor-only &middot; Limited period</span>
+    <span class="investor-offer-msg">
+      <strong>30% below website pricing</strong> on select Commercial &amp; Residential units &mdash;
+      minimum ticket size &#8377;3 Cr, transaction must complete before <strong>31 Oct 2026</strong>.
+    </span>
+    <span class="investor-offer-cta">View investor offer &rarr;</span>
+  </a>
+</section>
+
 <!-- ================= ENQUIRY POPUP (opens automatically after 20s on
      every visit — see js/enhancements.js. Reuses the exact same
      .lead-form markup/classes as the hero and closing forms, so

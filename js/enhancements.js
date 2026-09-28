@@ -31,6 +31,7 @@
     var marquee = document.querySelector('.site-marquee');
     var head = document.querySelector('.site-head');
     var toggle = document.querySelector('.view-toggle');
+    var offerBanner = document.querySelector('.investor-offer-banner');
     if (!marquee || !head) return;
     function sync() {
       var marqueeH = marquee.getBoundingClientRect().height;
@@ -43,6 +44,11 @@
       if (toggle) {
         document.documentElement.style.setProperty('--sticky-stack-h', (headStackH + toggle.getBoundingClientRect().height) + 'px');
       }
+      // The RERA badge is position:absolute with a hardcoded top offset
+      // tuned for the header alone — if the investor-offer banner is
+      // present it adds extra height above the badge's usual position,
+      // so its own height needs to be added to that offset too.
+      document.documentElement.style.setProperty('--offer-banner-h', offerBanner ? offerBanner.getBoundingClientRect().height + 'px' : '0px');
     }
     sync();
     window.addEventListener('resize', sync);
