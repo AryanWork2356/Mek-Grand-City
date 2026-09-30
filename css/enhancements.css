@@ -402,7 +402,8 @@
   text-align:center;padding-left:40px;border-left:1px solid var(--slate-line);
 }
 .glance-remaining{
-  display:inline-flex;align-items:center;gap:6px;
+  display:inline-flex;align-items:center;gap:6px;align-self:center;
+  width:max-content;max-width:100%;
   font-size:.76rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
   color:#ffb020;margin-bottom:8px;padding:5px 12px;border-radius:999px;
   background:rgba(255,90,40,.14);border:1px solid rgba(255,140,40,.4);
