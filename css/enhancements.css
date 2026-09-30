@@ -53,15 +53,18 @@
 /* ---------- RERA verification badge ----------
    One card, two rows side by side: each row is a QR code with its
    MahaRERA number and project label underneath (residential on the
-   left, commercial on the right). Sits in normal document flow (not
-   position:fixed) so it stays put at one spot on the page and scrolls
-   away with the rest of the content, instead of floating over whatever
-   section happens to be in view. Dual-glow gradient background +
-   marigold/teal top accent bar mirror the identity-banner's own visual
-   language instead of a flat slate card, so the badge reads as designed
-   rather than bolted on. */
+   left, commercial on the right). Plain static flow, floated to the
+   right with margin — no position:absolute/fixed/sticky at all — so it
+   sits once right after the header, scrolls away normally, and can
+   never drift out of sync with the sticky header stack above it (that
+   drift is exactly what happened with the old top:calc() approach:
+   the badge's offset was measured against the page, not the viewport,
+   so it ended up overlapping the header once you scrolled). Dual-glow
+   gradient background + marigold/teal top accent bar mirror the
+   identity-banner's own visual language instead of a flat slate card,
+   so the badge reads as designed rather than bolted on. */
 .rera-badge--fixed{
-  position:absolute;top:calc(167px + var(--offer-banner-h, 0px));right:14px;z-index:85;
+  position:absolute;top:20px;right:14px;z-index:5;
   display:flex;flex-direction:column;align-items:center;gap:1px;
   padding:9px 9px;border-radius:9px;
   background:
@@ -106,15 +109,16 @@
   width:1px;height:auto;align-self:stretch;margin:0;
   background:linear-gradient(180deg,transparent,var(--slate-line),transparent);
 }
-/* Below 900px the badge stops floating altogether: a fixed badge of any
-   shape/position reliably lands on top of hero text or buttons on a
-   screen this short, no matter where it's pinned. Instead it drops into
-   normal document flow right after the identity banner — scrolled past
-   once, like any other section, never overlapping anything. Both rows
-   already lay out side by side at every width (see .rera-badge-rows
-   above), so only sizing/positioning changes here, not orientation.
-   clamp()/vw sizing scales smoothly across phone widths instead of
-   jumping at a single breakpoint. */
+/* Below 900px the badge stops overlaying the hero image altogether: an
+   absolutely-positioned badge of any size reliably lands on top of hero
+   text or buttons on a screen this short, no matter where it's pinned.
+   Instead it drops into normal document flow as the very first thing
+   inside .hero (see its position in index.html) — scrolled past once,
+   like any other piece of hero content, never overlapping anything.
+   Both rows already lay out side by side at every width (see
+   .rera-badge-rows above), so only sizing/positioning changes here, not
+   orientation. clamp()/vw sizing scales smoothly across phone widths
+   instead of jumping at a single breakpoint. */
 @media (max-width:900px){
   .rera-badge--fixed{
     position:static;margin:14px auto;

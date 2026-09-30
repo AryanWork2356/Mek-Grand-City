@@ -176,7 +176,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a class="wrap investor-offer-in" href="investor-offer.html">
     <span class="investor-offer-tag">Investor-only &middot; Limited period</span>
     <span class="investor-offer-msg">
-      <strong>30% below website pricing</strong> on select Commercial &amp; Residential units &mdash;
+      <strong>30% below website pricing</strong> on selected Commercial &amp; Residential units &mdash;
       minimum ticket size &#8377;3 Cr, transaction must be completed before <strong>31 Oct 2026</strong>.
     </span>
     <span class="investor-offer-cta">View investor offer &rarr;</span>
@@ -261,30 +261,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </p>
 </div>
 
-<!-- MahaRERA verification badge: two QR codes, one per project, each with
-     its own label to the right, stacked in one card. True position:fixed
-     against the browser window so it stays visible in the same spot no
-     matter how far down the page you scroll — see .rera-badge--fixed.
-     .identity-banner has no backdrop-filter/transform, so it does not
-     create a containing block and position:fixed still resolves against
-     the real viewport. -->
-<div class="rera-badge rera-badge--fixed">
-  <p class="rera-badge-heading">Scan to verify</p>
-  <div class="rera-badge-rows">
-    <div class="rera-badge-row">
-      <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
-      <span class="rera-badge-num">PR1330002600936</span>
-      <span class="rera-badge-label rera-badge-label--home">Residential - RERA</span>
-    </div>
-    <div class="rera-badge-divider" aria-hidden="true"></div>
-    <div class="rera-badge-row">
-      <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
-      <span class="rera-badge-num">PC1330002600951</span>
-      <span class="rera-badge-label rera-badge-label--office">Commercial - RERA</span>
-    </div>
-  </div>
-</div>
-
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-bg" id="heroBg" data-parallax>
@@ -310,6 +286,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        css/styles.css and the prefers-reduced-motion guard there. -->
   <div class="hero-sweep" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
+
+  <!-- MahaRERA verification badge: two QR codes, one per project, each
+       with its own label to the right, stacked in one card. Absolutely
+       positioned against .hero (given position:relative) rather than
+       the page or the viewport — scoped permanently to the hero section
+       itself, so it can never drift into the sticky header above or
+       bleed into whatever section follows, which is what happened with
+       earlier approaches (position:fixed drifted over content while
+       scrolling; position:absolute against the page overlapped the
+       sticky header once the page height changed; float:right leaked
+       into the hero's own grid layout). Scrolls away normally with the
+       hero, once, like any other piece of hero content. -->
+  <div class="rera-badge rera-badge--fixed">
+    <p class="rera-badge-heading">Scan to verify</p>
+    <div class="rera-badge-rows">
+      <div class="rera-badge-row">
+        <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
+        <span class="rera-badge-num">PR1330002600936</span>
+        <span class="rera-badge-label rera-badge-label--home">Residential - RERA</span>
+      </div>
+      <div class="rera-badge-divider" aria-hidden="true"></div>
+      <div class="rera-badge-row">
+        <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
+        <span class="rera-badge-num">PC1330002600951</span>
+        <span class="rera-badge-label rera-badge-label--office">Commercial - RERA</span>
+      </div>
+    </div>
+  </div>
 
   <div class="wrap hero-in">
     <div class="hero-copy">
