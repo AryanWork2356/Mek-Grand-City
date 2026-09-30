@@ -290,12 +290,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-bg" id="heroBg" data-parallax>
     <!-- Silent, looping background video (AI-generated architectural
          walkthrough, cropped to remove source letterboxing and
-         compressed for web delivery — ~8MB down from a 90MB source).
+         re-encoded at 1280px/crf28/no-audio for web delivery — 3.3MB,
+         down from a 17MB source that had crept back up over time).
+         preload="none" stops it competing with the rest of the page's
+         initial load; the poster frame covers that gap visually.
          autoplay+muted+playsinline is required for browsers to allow
          autoplay at all; poster shows a real frame while it loads, and
          is also what prefers-reduced-motion users effectively see since
          the video is paused for them via JS (see js/enhancements.js). -->
-    <video autoplay muted loop playsinline
+    <video autoplay muted loop playsinline preload="none"
            poster="ImgVids/hero-video-poster.jpg"
            aria-hidden="true">
       <source src="ImgVids/hero-bg-video.mp4" type="video/mp4">
