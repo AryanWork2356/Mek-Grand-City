@@ -245,20 +245,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      here is already established elsewhere on the page (hero-sub, project
      section titles) — this is presentation, not a new claim. -->
 <div class="identity-banner" data-reveal>
-  <p class="identity-eyebrow">One address, two ways in</p>
-  <p class="identity-row">
-    <span class="identity-term">
-      <span class="identity-part identity-part--home">Grand Meridian City</span>
-      <span class="identity-tag identity-tag--home">(Residential)</span>
-    </span>
-    <span class="identity-op" aria-hidden="true">+</span>
-    <span class="identity-term">
-      <span class="identity-part identity-part--office">MEK Grand Central</span>
-      <span class="identity-tag identity-tag--office">(Commercial)</span>
-    </span>
-    <span class="identity-op" aria-hidden="true">=</span>
-    <span class="identity-part identity-part--sum">MEK Grand City</span>
-  </p>
+  <div class="identity-banner-in">
+    <div class="identity-banner-text">
+      <p class="identity-eyebrow">One address, two ways in</p>
+      <p class="identity-row">
+        <span class="identity-term">
+          <span class="identity-part identity-part--home">Grand Meridian City</span>
+          <span class="identity-tag identity-tag--home">(Residential)</span>
+        </span>
+        <span class="identity-op" aria-hidden="true">+</span>
+        <span class="identity-term">
+          <span class="identity-part identity-part--office">MEK Grand Central</span>
+          <span class="identity-tag identity-tag--office">(Commercial)</span>
+        </span>
+        <span class="identity-op" aria-hidden="true">=</span>
+        <span class="identity-part identity-part--sum">MEK Grand City</span>
+      </p>
+    </div>
+
+    <!-- MahaRERA verification badge: two QR codes, one per project, each
+         with its own label to the right, stacked in one card. Sits in
+         normal document flow as the right-hand column of this banner's
+         flex row — no position:absolute/fixed at all — so it scrolls
+         away together with this whole row and can never drift out of
+         sync with the sticky header above it (that drift is exactly
+         what happened with every earlier absolute/fixed/float attempt:
+         its offset was measured against something other than this row,
+         so it eventually landed somewhere it shouldn't). -->
+    <div class="rera-badge rera-badge--fixed">
+      <p class="rera-badge-heading">Scan to verify</p>
+      <div class="rera-badge-rows">
+        <div class="rera-badge-row">
+          <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
+          <span class="rera-badge-num">PR1330002600936</span>
+          <span class="rera-badge-label rera-badge-label--home">Residential - RERA</span>
+        </div>
+        <div class="rera-badge-divider" aria-hidden="true"></div>
+        <div class="rera-badge-row">
+          <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
+          <span class="rera-badge-num">PC1330002600951</span>
+          <span class="rera-badge-label rera-badge-label--office">Commercial - RERA</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ================= HERO ================= -->
@@ -286,34 +316,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        css/styles.css and the prefers-reduced-motion guard there. -->
   <div class="hero-sweep" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
-
-  <!-- MahaRERA verification badge: two QR codes, one per project, each
-       with its own label to the right, stacked in one card. Absolutely
-       positioned against .hero (given position:relative) rather than
-       the page or the viewport — scoped permanently to the hero section
-       itself, so it can never drift into the sticky header above or
-       bleed into whatever section follows, which is what happened with
-       earlier approaches (position:fixed drifted over content while
-       scrolling; position:absolute against the page overlapped the
-       sticky header once the page height changed; float:right leaked
-       into the hero's own grid layout). Scrolls away normally with the
-       hero, once, like any other piece of hero content. -->
-  <div class="rera-badge rera-badge--fixed">
-    <p class="rera-badge-heading">Scan to verify</p>
-    <div class="rera-badge-rows">
-      <div class="rera-badge-row">
-        <img src="assets/img/rera-qr-residential.jpeg" alt="Scan to verify Grand Meridian City on the MahaRERA portal">
-        <span class="rera-badge-num">PR1330002600936</span>
-        <span class="rera-badge-label rera-badge-label--home">Residential - RERA</span>
-      </div>
-      <div class="rera-badge-divider" aria-hidden="true"></div>
-      <div class="rera-badge-row">
-        <img src="assets/img/rera-qr-commercial.jpg" alt="Scan to verify MEK Grand Central on the MahaRERA portal">
-        <span class="rera-badge-num">PC1330002600951</span>
-        <span class="rera-badge-label rera-badge-label--office">Commercial - RERA</span>
-      </div>
-    </div>
-  </div>
 
   <div class="wrap hero-in">
     <div class="hero-copy">
