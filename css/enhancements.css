@@ -1169,3 +1169,55 @@
 @media (prefers-reduced-motion:reduce){
   .investor-offer-banner{animation:none;}
 }
+
+/* ---------- Payment plan (commercial) ----------
+   Construction-linked schedule, styled to match .specs-table's borders
+   and .why-invest's section spacing rather than introducing a new table
+   language. Horizontally scrollable on narrow screens instead of
+   letting a 4-column table squeeze illegibly — the milestone names are
+   long, so a min-width plus overflow-x is simpler and more legible
+   than wrapping every cell. */
+.payment-plan{
+  position:relative;z-index:1;margin-top:48px;padding-top:36px;
+  border-top:1px solid var(--slate-line-soft);
+}
+.dark .payment-plan{border-top-color:var(--slate-line);}
+.payment-plan h3{margin-bottom:22px;max-width:34ch;}
+.payment-plan-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:22px;}
+.payment-table{width:100%;min-width:640px;border-collapse:collapse;font-size:.9rem;}
+.payment-table th,.payment-table td{
+  padding:12px 14px;text-align:left;border-bottom:1px solid var(--slate-line-soft);
+}
+.dark .payment-table th,.dark .payment-table td{border-bottom-color:var(--slate-line);}
+.payment-table th{
+  color:var(--text-mute);font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.payment-table td{color:var(--text-light);}
+.payment-table td:first-child,.payment-table th:first-child{width:8%;text-align:center;}
+.payment-table td:first-child{color:var(--text-mute);}
+.payment-table td:nth-child(3),.payment-table th:nth-child(3),
+.payment-table td:nth-child(4),.payment-table th:nth-child(4){
+  width:15%;text-align:right;font-family:var(--display);color:var(--teal-lt);
+}
+.payment-table tr:last-child th,.payment-table tr:last-child td{border-bottom:0;}
+.payment-table tr:last-child td:nth-child(3),.payment-table tr:last-child td:nth-child(4){
+  color:var(--marigold-lt);font-weight:700;
+}
+.payment-halal{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.92rem;font-weight:600;color:var(--teal-lt);
+  padding:12px 20px;border-radius:999px;
+  background:rgba(62,139,130,.12);border:1px solid rgba(62,139,130,.4);
+}
+.payment-halal-ico{width:20px;height:20px;flex-shrink:0;}
+.payment-halal a{color:inherit;font-weight:800;text-decoration:underline;text-underline-offset:2px;}
+@media (max-width:640px){
+  .payment-plan{margin-top:36px;padding-top:28px;}
+  .payment-halal{
+    display:flex;align-items:flex-start;gap:12px;
+    width:100%;border-radius:14px;
+    font-size:.84rem;line-height:1.5;padding:14px 16px;text-align:left;
+  }
+  .payment-halal-ico{flex-shrink:0;margin-top:2px;}
+}
