@@ -1204,6 +1204,23 @@
 .payment-table tr:last-child td:nth-child(3),.payment-table tr:last-child td:nth-child(4){
   color:var(--marigold-lt);font-weight:700;
 }
+/* Below 560px the table drops the horizontal scroll entirely: the
+   milestone column wraps across multiple lines instead, and the Sr.No
+   + both percentage columns shrink to just fit their content, so the
+   whole table — milestone text AND both percentages — is visible at
+   once with no swipe needed. */
+@media (max-width:560px){
+  .payment-plan-scroll{overflow-x:visible;}
+  .payment-table{min-width:0;font-size:.78rem;table-layout:fixed;}
+  .payment-table th,.payment-table td{padding:10px 6px;white-space:normal;word-break:break-word;}
+  .payment-table td:first-child,.payment-table th:first-child{width:9%;padding-left:0;}
+  .payment-table td:nth-child(2),.payment-table th:nth-child(2){width:46%;}
+  .payment-table td:nth-child(3),.payment-table th:nth-child(3),
+  .payment-table td:nth-child(4),.payment-table th:nth-child(4){
+    width:22%;font-size:.76rem;padding-right:4px;
+  }
+  .payment-table th{font-size:.6rem;letter-spacing:.02em;}
+}
 .payment-halal{
   display:inline-flex;align-items:center;gap:10px;
   font-size:.92rem;font-weight:600;color:var(--teal-lt);
