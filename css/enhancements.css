@@ -8,11 +8,11 @@
 
 /* Compensate anchor-jump targets for the sticky header+marquee stack
    (~167px tall at desktop: 36px marquee + ~131px header/toggle). */
-#homes,#offices,#distances,#corridor,#gallery,#questions,#enquire{
+#homes,#offices,#distances,#corridor,#gallery,#questions,#enquire,#payment-plan{
   scroll-margin-top:167px;
 }
 @media (max-width:940px){
-  #homes,#offices,#distances,#corridor,#gallery,#questions,#enquire{
+  #homes,#offices,#distances,#corridor,#gallery,#questions,#enquire,#payment-plan{
     scroll-margin-top:var(--sticky-stack-h,177px);
   }
 }
