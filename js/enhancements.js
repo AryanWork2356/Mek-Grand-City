@@ -791,4 +791,48 @@
     });
   })();
 
+  /* ---------------- Self-correcting anchor-link scroll ---------------- */
+  /* Below-the-fold images are loading="lazy", so clicking a nav link near
+     the top of the page (e.g. "Payment plan") before those images have
+     loaded can land short of the real target: the browser's native anchor
+     jump uses the page's height at that instant, then images further down
+     finish loading and push the target section lower, leaving the visitor
+     scrolled to wherever the section used to be rather than where it now
+     is. The Home/Offices view-toggle buttons already solve this with a
+     re-align loop (see scrollToView above) — this applies the same fix to
+     every plain in-page "#id" link site-wide, not just those two buttons. */
+  (function () {
+    var correctionToken = 0;
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      var id = link.getAttribute('href').slice(1);
+      if (!id) return;
+      link.addEventListener('click', function (event) {
+        var target = document.getElementById(id);
+        if (!target) return;
+        event.preventDefault();
+        if (history.pushState) history.pushState(null, '', '#' + id);
+
+        var myToken = ++correctionToken;
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+
+        var attempts = 0, lastTop = null, stableCount = 0;
+        function correct() {
+          if (myToken !== correctionToken) return;
+          var top = Math.round(target.getBoundingClientRect().top);
+          if (top !== lastTop) {
+            target.scrollIntoView({ behavior: 'auto', block: 'start' });
+            stableCount = 0;
+          } else {
+            stableCount++;
+          }
+          lastTop = top;
+          attempts++;
+          if (stableCount >= 2 || attempts >= 8) return;
+          window.setTimeout(correct, 200);
+        }
+        window.setTimeout(correct, 200);
+      });
+    });
+  })();
+
 })();
