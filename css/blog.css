@@ -1,0 +1,127 @@
+/* =========================================================================
+   MEK GRAND CITY — blog system stylesheet
+   Shared by blog.html (listing) and every /blog/<slug>.html article page.
+   Additive only: layers on top of css/styles.css's tokens, same as
+   css/enhancements.css does for the main site.
+   ========================================================================= */
+
+/* ---------- Shared header bits (article pages use position:static,
+   same pattern as investor-offer.html) ---------- */
+.blog-hero{
+  padding:64px 0 48px;text-align:center;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(227,169,40,.12), transparent 60%),
+    var(--slate-deep);
+  border-bottom:1px solid var(--slate-line);
+}
+.blog-hero .eyebrow{justify-content:center;display:flex;}
+.blog-hero h1{font-size:clamp(2.1rem,5vw,3.2rem);color:var(--limestone);margin:10px 0 16px;}
+.blog-hero p{color:var(--text-mute);max-width:62ch;margin:0 auto;font-size:1.05rem;}
+
+/* ---------- Listing grid ---------- */
+.blog-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:32px;padding:56px 0;
+}
+.blog-card{
+  background:var(--slate-soft);border:1px solid var(--slate-line);border-radius:14px;
+  overflow:hidden;display:flex;flex-direction:column;text-decoration:none;
+  transition:transform .18s ease,border-color .18s ease;
+}
+.blog-card:hover{transform:translateY(-3px);border-color:var(--marigold-dim);}
+.blog-card-img{width:100%;height:200px;object-fit:cover;display:block;}
+.blog-card-body{padding:24px 24px 28px;display:flex;flex-direction:column;flex:1;}
+.blog-tag{
+  display:inline-block;align-self:flex-start;font-size:.7rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--marigold-lt);
+  background:rgba(227,169,40,.12);border:1px solid rgba(227,169,40,.35);
+  padding:4px 12px;border-radius:999px;margin-bottom:14px;
+}
+.blog-tag--mek{color:var(--teal-lt);background:rgba(62,139,130,.14);border-color:rgba(62,139,130,.4);}
+.blog-card h2{font-size:1.3rem;color:var(--limestone);margin:0 0 12px;line-height:1.25;}
+.blog-card .blog-lede{color:var(--text-mute);font-size:.92rem;line-height:1.6;margin-bottom:18px;}
+.blog-read-link{
+  margin-top:auto;display:inline-flex;align-items:center;gap:6px;
+  color:var(--teal-lt);font-weight:700;font-size:.9rem;
+}
+.blog-card:hover .blog-read-link{color:var(--marigold-lt);}
+
+@media (max-width:640px){
+  .blog-grid{padding:40px 0;gap:24px;}
+  .blog-card-body{padding:20px 20px 24px;}
+}
+
+/* ---------- Article page ---------- */
+.article-hero{
+  position:relative;height:340px;overflow:hidden;
+  border-bottom:1px solid var(--slate-line);
+}
+.article-hero img{width:100%;height:100%;object-fit:cover;display:block;}
+.article-hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(10,17,20,.15) 0%, rgba(10,17,20,.9) 100%);
+}
+.article-hero-text{
+  position:absolute;left:0;right:0;bottom:0;padding:32px var(--gutter);
+  z-index:1;max-width:var(--wrap);margin:0 auto;
+}
+.article-breadcrumb{font-size:.82rem;color:var(--text-mute);margin-bottom:12px;}
+.article-breadcrumb a{color:var(--teal-lt);text-decoration:none;}
+.article-breadcrumb a:hover{text-decoration:underline;}
+.article-hero-text h1{font-size:clamp(1.7rem,4vw,2.6rem);color:var(--limestone);line-height:1.2;max-width:46ch;}
+
+.article-body{max-width:74ch;margin:0 auto;padding:48px var(--gutter) 8px;}
+.article-body h2{font-size:1.4rem;color:var(--marigold-lt);margin:34px 0 14px;}
+.article-body h2:first-child{margin-top:0;}
+.article-body h3{font-size:1.1rem;color:var(--limestone);margin:24px 0 10px;}
+.article-body p{color:var(--text-mute);font-size:1rem;line-height:1.78;margin-bottom:16px;}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:22px;color:var(--text-mute);font-size:1rem;line-height:1.75;}
+.article-body li{margin-bottom:8px;}
+.article-body strong{color:var(--text-light);}
+.article-body a{color:var(--teal-lt);text-decoration:underline;text-underline-offset:2px;}
+.article-body a:hover{color:var(--marigold-lt);}
+.article-body table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:.92rem;}
+.article-body th,.article-body td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--slate-line-soft);color:var(--text-mute);}
+.article-body th{color:var(--text-faint);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;}
+.article-body blockquote{
+  margin:20px 0;padding:16px 20px;border-left:3px solid var(--marigold);
+  background:rgba(227,169,40,.07);color:var(--text-light);font-style:italic;border-radius:0 8px 8px 0;
+}
+
+.article-cta{
+  max-width:74ch;margin:12px auto 48px;padding:22px 26px;border-radius:12px;
+  background:rgba(62,139,130,.1);border:1px solid rgba(62,139,130,.35);
+  font-size:.96rem;color:var(--teal-lt);line-height:1.6;
+}
+.article-cta a{color:inherit;font-weight:800;}
+.article-cta .btn{margin-top:12px;}
+
+.article-meta{
+  max-width:74ch;margin:0 auto;padding:0 var(--gutter);
+  display:flex;gap:10px;align-items:center;color:var(--text-faint);font-size:.85rem;
+}
+
+/* ---------- Related articles strip (horizontal scroll) ---------- */
+.related-wrap{padding:56px 0 64px;border-top:1px solid var(--slate-line);}
+.related-wrap h2{color:var(--limestone);margin-bottom:22px;}
+.related-scroll{
+  display:flex;gap:20px;overflow-x:auto;padding-bottom:12px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+}
+.related-card{
+  flex:0 0 260px;scroll-snap-align:start;
+  background:var(--slate-soft);border:1px solid var(--slate-line);border-radius:12px;
+  overflow:hidden;text-decoration:none;display:block;
+  transition:transform .18s ease,border-color .18s ease;
+}
+.related-card:hover{transform:translateY(-2px);border-color:var(--marigold-dim);}
+.related-card img{width:100%;height:130px;object-fit:cover;display:block;}
+.related-card-body{padding:16px 18px 20px;}
+.related-card-body .blog-tag{margin-bottom:10px;font-size:.64rem;padding:3px 10px;}
+.related-card h3{font-size:.98rem;color:var(--limestone);margin:0;line-height:1.35;}
+
+@media (max-width:640px){
+  .article-hero{height:260px;}
+  .article-body{padding:36px var(--gutter) 8px;}
+  .related-card{flex-basis:220px;}
+}

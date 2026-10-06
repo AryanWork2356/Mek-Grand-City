@@ -759,7 +759,7 @@ button.btn{-webkit-appearance:none;appearance:none;}
 .site-foot{background:var(--slate-black);padding:56px 0 110px;font-size:.9rem;color:var(--text-mute);}
 .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:38px;margin-bottom:36px;}
 .foot-brand{font-family:var(--display);font-size:1.3rem;color:var(--text-light);margin-bottom:8px;}
-.site-foot h3{font-size:1.02rem;color:var(--text-light);margin-bottom:12px;}
+.site-foot h3,.foot-label{font-size:1.02rem;color:var(--text-light);margin-bottom:12px;font-weight:700;}
 .site-foot li{padding:4px 0;}
 .site-foot a:hover{color:var(--marigold-lt);}
 .legal{border-top:1px solid var(--slate-line);padding-top:22px;font-size:.76rem;line-height:1.66;color:#7E8F8D;max-width:95ch;}
