@@ -33,6 +33,31 @@ const CONFIG = {
     });
   });
 
+  /* ---------------- Country code dropdowns ---------------- */
+  /* COUNTRIES comes from js/countries.js, loaded before this file. Each
+     row is [ISO code, name, calling code, min digits, max digits] for
+     the national number. India is listed first in that file and is the
+     default selection for every form on this India-focused site. */
+  function populateCountryDropdown(select) {
+    if (!select || typeof COUNTRIES === 'undefined') return;
+    COUNTRIES.forEach(function (row) {
+      const option = document.createElement('option');
+      option.value = row[0];
+      option.textContent = row[1] + ' (+' + row[2] + ')';
+      select.appendChild(option);
+    });
+    select.value = 'IN';
+  }
+  document.querySelectorAll('select.phone-country').forEach(populateCountryDropdown);
+
+  function countryByIso(iso) {
+    if (typeof COUNTRIES === 'undefined') return null;
+    for (let i = 0; i < COUNTRIES.length; i++) {
+      if (COUNTRIES[i][0] === iso) return COUNTRIES[i];
+    }
+    return null;
+  }
+
   /* ---------------- Forms ---------------- */
   document.querySelectorAll('form.lead-form').forEach(setupForm);
 
@@ -61,9 +86,13 @@ const CONFIG = {
       hide(okBox);
       hide(errBox);
 
+      const countryRow = form.country ? countryByIso(form.country.value) : null;
+      const callingCode = countryRow ? countryRow[2] : '91';
+      const digitsOnly  = form.phone.value.trim().replace(/[^0-9]/g, '');
+
       const payload = {
         name:     form.name.value.trim(),
-        phone:    form.phone.value.trim(),
+        phone:    '+' + callingCode + ' ' + digitsOnly,
         email:    form.email.value.trim(),
         interest: form.interest.value,
         source:   form.dataset.source,
@@ -71,9 +100,30 @@ const CONFIG = {
         sentAt:   new Date().toISOString()
       };
 
-      const sent = await send(payload);
+      // Fire the request, but do not make the visitor wait on Google's
+      // reply to confirm it — Apps Script's own redirect chain
+      // (script.google.com -> script.googleusercontent.com) is
+      // unreliable and can hang or 404 for 30-60+ seconds even when the
+      // row was written in 1-2 seconds, confirmed directly against the
+      // Sheet during testing. send() still runs fully in the background
+      // so a genuine failure is still caught (falls back to WhatsApp),
+      // it just doesn't hold up the visitor's "Thank you" message.
+      const sendPromise = send(payload);
+      const minWait = new Promise(function (resolve) { setTimeout(function () { resolve('timeout'); }, 2000); });
 
-      if (sent) {
+      const result = await Promise.race([sendPromise, minWait]);
+
+      if (result === 'timeout') {
+        // 2 seconds have passed without Google answering either way —
+        // treat it as delivered (matches what's actually true almost
+        // every time) and let the real request keep running unattended.
+        form.reset();
+        show(okBox);
+        okBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        sendPromise.then(function (sent) {
+          if (!sent) openWhatsApp(payload);
+        });
+      } else if (result) {
         form.reset();
         show(okBox);
         okBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -98,9 +148,21 @@ const CONFIG = {
   function validate(form) {
     let firstBad = null;
 
+    // Phone digit count must match the selected country's real national
+    // numbering-plan length (e.g. 10 for India, 7-9 for the UAE) rather
+    // than one loose 10-15 range for every country.
+    let phoneValid = false;
+    if (form.phone) {
+      const digits = form.phone.value.trim().replace(/[^0-9]/g, '');
+      const countryRow = form.country ? countryByIso(form.country.value) : null;
+      const minLen = countryRow ? countryRow[3] : 10;
+      const maxLen = countryRow ? countryRow[4] : 10;
+      phoneValid = digits.length >= minLen && digits.length <= maxLen;
+    }
+
     const checks = [
       [form.name,  form.name.value.trim().length >= 2],
-      [form.phone, /^[0-9+ ]{10,15}$/.test(form.phone.value.trim())],
+      [form.phone, phoneValid],
       [form.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())]
     ];
 

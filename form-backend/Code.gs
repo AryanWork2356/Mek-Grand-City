@@ -135,9 +135,15 @@ function notify(row) {
   console.log('MailApp.sendEmail took: ' + (Date.now() - emailStart) + 'ms');
 }
 
-/** Indian mobiles arrive in several shapes. Store one consistent format. */
+/** The form now sends an already-correct "+<country code> <digits>"
+ *  string (see js/countries.js / js/main.js) — this just trims it and
+ *  falls back to treating a bare digit string as an Indian number for
+ *  any older/direct submission that didn't go through the country
+ *  dropdown. */
 function normalisePhone(value) {
-  let digits = String(value || '').replace(/[^0-9]/g, '');
+  const raw = String(value || '').trim();
+  if (raw.indexOf('+') === 0) return raw;
+  let digits = raw.replace(/[^0-9]/g, '');
   if (digits.length === 12 && digits.indexOf('91') === 0) digits = digits.slice(2);
   if (digits.length === 11 && digits.indexOf('0') === 0)  digits = digits.slice(1);
   return digits ? '+91 ' + digits : '';

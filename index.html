@@ -217,8 +217,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input id="p-name" name="name" type="text" autocomplete="name" required placeholder="Full name">
 
         <label for="p-phone">Mobile number</label>
-        <input id="p-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
-               pattern="[0-9+ ]{10,15}" required placeholder="Mobile Number">
+        <div class="phone-group">
+          <select id="p-country" name="country" class="phone-country" aria-label="Country code"></select>
+          <input id="p-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
+                 required placeholder="Mobile Number">
+        </div>
 
         <label for="p-email">Email</label>
         <input id="p-email" name="email" type="email" autocomplete="email" required placeholder="you@email.com">
@@ -366,8 +369,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input id="h-name" name="name" type="text" autocomplete="name" required placeholder="Full name">
 
         <label for="h-phone">Mobile number</label>
-        <input id="h-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
-               pattern="[0-9+ ]{10,15}" required placeholder="Mobile Number">
+        <div class="phone-group">
+          <select id="h-country" name="country" class="phone-country" aria-label="Country code"></select>
+          <input id="h-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
+                 required placeholder="Mobile Number">
+        </div>
 
         <label for="h-email">Email</label>
         <input id="h-email" name="email" type="email" autocomplete="email" required placeholder="you@email.com">
@@ -1470,8 +1476,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input id="c-name" name="name" type="text" autocomplete="name" required placeholder="Full name">
 
         <label for="c-phone">Mobile number</label>
-        <input id="c-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
-               pattern="[0-9+ ]{10,15}" required placeholder="Mobile Number">
+        <div class="phone-group">
+          <select id="c-country" name="country" class="phone-country" aria-label="Country code"></select>
+          <input id="c-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
+                 required placeholder="Mobile Number">
+        </div>
 
         <label for="c-email">Email</label>
         <input id="c-email" name="email" type="email" autocomplete="email" required placeholder="you@email.com">
@@ -1576,6 +1585,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </svg>
 </a>
 
+<script src="js/countries.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/enhancements.js" defer></script>
 
