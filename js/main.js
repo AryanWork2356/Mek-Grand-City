@@ -137,11 +137,19 @@ const CONFIG = {
     });
 
     // Clear the invalid state as soon as they start fixing it
+    const phoneError = form.querySelector('.field-error');
     form.querySelectorAll('input').forEach(function (field) {
       field.addEventListener('input', function () {
         field.removeAttribute('aria-invalid');
+        if (field === form.phone && phoneError) phoneError.hidden = true;
       });
     });
+    if (form.country && phoneError) {
+      form.country.addEventListener('change', function () {
+        if (form.phone) form.phone.removeAttribute('aria-invalid');
+        phoneError.hidden = true;
+      });
+    }
   }
 
   /* ---------------- Validation ---------------- */
@@ -151,13 +159,31 @@ const CONFIG = {
     // Phone digit count must match the selected country's real national
     // numbering-plan length (e.g. 10 for India, 7-9 for the UAE) rather
     // than one loose 10-15 range for every country.
+    const countryRow  = form.country ? countryByIso(form.country.value) : null;
+    const countryName = countryRow ? countryRow[1] : 'India';
+    const minLen = countryRow ? countryRow[3] : 10;
+    const maxLen = countryRow ? countryRow[4] : 10;
+
     let phoneValid = false;
     if (form.phone) {
       const digits = form.phone.value.trim().replace(/[^0-9]/g, '');
-      const countryRow = form.country ? countryByIso(form.country.value) : null;
-      const minLen = countryRow ? countryRow[3] : 10;
-      const maxLen = countryRow ? countryRow[4] : 10;
       phoneValid = digits.length >= minLen && digits.length <= maxLen;
+    }
+
+    // Phone gets its own visible message (not just a red border) since a
+    // colour change alone doesn't tell anyone what's actually wrong —
+    // the required length is different for every country, so it has to
+    // be spelled out rather than left for the visitor to guess.
+    const phoneError = form.querySelector('.field-error');
+    if (phoneError) {
+      if (phoneValid) {
+        phoneError.hidden = true;
+        phoneError.textContent = '';
+      } else {
+        const lenPhrase = (minLen === maxLen) ? (minLen + ' digits') : (minLen + '–' + maxLen + ' digits');
+        phoneError.textContent = 'Please enter a valid mobile number for ' + countryName + ' (' + lenPhrase + ').';
+        phoneError.hidden = false;
+      }
     }
 
     const checks = [

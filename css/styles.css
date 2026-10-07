@@ -502,6 +502,11 @@ button.btn{-webkit-appearance:none;appearance:none;}
 .lead-form input::placeholder{color:#8A9391;}
 .lead-form input:focus,.lead-form select:focus{border-color:var(--marigold);outline:none;box-shadow:0 0 0 3px rgba(227,169,40,.18);}
 .lead-form input[aria-invalid="true"]{border-color:#B3402F;background:#FEF5F4;}
+.field-error{
+  margin:-10px 0 15px;font-size:.8rem;font-weight:600;color:#B3402F;
+  display:flex;align-items:center;gap:6px;
+}
+.field-error::before{content:"\26A0";font-size:.85rem;line-height:1;}
 .phone-group{display:flex;gap:8px;}
 .phone-group .phone-country{
   flex:0 0 auto;width:auto;max-width:132px;padding-left:10px;padding-right:6px;
