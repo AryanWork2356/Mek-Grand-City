@@ -26,6 +26,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <style>
   /* Page-specific only — everything else reuses the main site's tokens. */
+  /* This page has no .site-marquee banner above the header (unlike the
+     homepage), so the header's sticky top offset must be 0 instead of
+     the 36px default built for sitting below that marquee. */
+  :root{ --marquee-h:0px; }
   .io-hero{
     padding:64px 0 56px;text-align:center;
     background:radial-gradient(ellipse 120% 80% at 50% 0%,rgba(227,169,40,.14),transparent 60%),var(--slate-deep);
