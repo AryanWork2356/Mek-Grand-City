@@ -103,6 +103,11 @@ table{border-collapse:collapse;width:100%;}
    uppercase, wide-tracked — for contrast against the display type. */
 h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em;}
 h1{font-size:clamp(2.6rem,5.6vw,5.4rem);line-height:1.02;letter-spacing:-.02em;}
+/* The H1's tagline half reads as a quieter, smaller continuation rather
+   than carrying equal visual weight to the project names leading it —
+   keeps the real headline (used for the Grand Meridian City / MEK Grand
+   Central branded-search H1 fix) from looking like one giant run-on line. */
+.hero-h1-sub{font-size:0.45em;letter-spacing:-.01em;color:#CBD6D4;display:block;margin-top:.15em;}
 h2{font-size:clamp(2rem,3.8vw,3.6rem);line-height:1.06;letter-spacing:-.015em;}
 h3{font-size:clamp(1.3rem,2.3vw,1.7rem);line-height:1.18;letter-spacing:-.005em;}
 
