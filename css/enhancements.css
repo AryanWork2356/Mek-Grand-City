@@ -1238,3 +1238,12 @@
   }
   .payment-halal-ico{flex-shrink:0;margin-top:2px;}
 }
+
+/* ---------- Links to the dedicated project pages ----------
+   .proj-link: inline link on a project name (hero copy, identity banner) —
+   keeps the surrounding colour and just underlines, so it reads as a link
+   without changing the established marigold/teal colour coding.
+   .project-page-link: the "Explore …" button under each project lede. */
+.proj-link{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;}
+.proj-link:hover{text-decoration-thickness:2px;}
+.project-page-link{margin:22px 0 30px;}
